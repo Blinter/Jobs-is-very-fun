@@ -1,0 +1,134 @@
+{% extends 'general/navigation_base.html' %}
+
+{% block title %}
+Registration | Jobs.is-very.fun
+{% endblock %}
+
+{% block header %}
+{{ super() }}
+{% endblock %}
+
+{% block body %}
+{{ super() }}
+
+
+<div class="container bg-none">
+    <div
+         class="d-flex mx-auto mx-md-5 mt-md-3 justify-content-center align-items-center text-nowrap">
+        <p class="userControlsTitleText">Getting Started</p>
+    </div>
+    <ul class="userControlsText3">
+        <li>
+            You can create multiple profiles. These profiles are used to save
+            and organize your saved jobs and companies, and store your own
+            personal notes for each collection.
+        </li>
+        <!-- <li>
+            You can create multiple profiles, which may contain one or more
+            resumes.
+        </li>
+        <li>
+            Each profile can only have one active filter rule set.
+        </li>
+        <li>
+            Each profile can only have one active survey.
+        </li>
+        <li>
+            These resumes are specifically used to track keyword matches.
+        </li> -->
+    </ul>
+
+    <hr class="mx-5" style="color:white;" />
+    <!-- <p class="userControlsText3" style="text-indent:30px;">
+        If you have different resumes that can be sent,
+        crucial time can be saved from reading through an entire job listing
+        and tailoring it to their description.<br />
+        Our system will automatically process applicable job matches using
+        your data.
+    </p> -->
+    
+    <p class="userControlsText3" style="text-indent:30px;">
+        Profile-specific surveys, resume parsing, ATS tools, and other features such as keyword matching will
+        be added in a future release. 
+
+        Stay tuned!
+    </p>
+    <hr class="mx-5" style="color:white;" />
+    <p class="userControlsText3">
+        *We do not receive any type of compensation from
+        employers/recruiters.</p>
+    <p class="userControlsText3" style="text-indent:30px;"> Any data on this
+        website can be
+        incorrect or may be missing essential information. Please verify that
+        the data is correct first before making any career choices based on our
+        data.</p>
+    <hr class="mx-5" style="color:white;" />
+    <p class="userControlsText3" style="text-indent:30px;">
+        In order to use our free job tools and access our jobs database, we
+        request that you sign in or register by using one of the buttons
+        located below.
+        <br /><br />
+        Registering is free and easy. 
+        <br />
+        By registering, you may view up to 32 jobs or companies per page.
+    </p>
+    <hr class="mx-5" style="color:white;" />
+    <div
+         class="userControlsText1 row mx-auto mx-5 my-5 justify-content-center align-text-center text-wrap">
+        {% if user %}
+        {% with user_dashboard = url_for('user.user_dashboard') %}
+        <button class="btn-logged-in mx-auto mt-1"
+                onclick="location.href='{{user_dashboard}}'">
+            Signed in
+            as {{user}}</button><br />
+        <div></div>
+        {% endwith %}
+        {% else %}
+        {% with google_link = url_for('sso_google.sso_google',
+        _external=True)
+        %}
+        <!-- <button class="btn-google mx-auto"
+                onclick="location.href='{{google_link}}'">
+            {% endwith %}
+            <i class="fa-brands fa-google fa-bounce"></i> Sign in with
+            Google</button><br />
+        <div></div> -->
+        {% with github_link = url_for('sso_github.sso_github',
+        _external=True)
+        %}
+        <button class="btn-github mx-auto mt-1"
+                onclick="location.href='{{github_link}}'">
+            {% endwith %}
+            <i class="fa-brands fa-github fa-beat"></i> Sign in with
+            GitHub</button><br />
+        <div></div>
+        {% with email_link = url_for('user.register',
+        _external=True)
+        %}
+        <button class="btn-email mx-auto mt-1"
+                onclick="location.href='{{email_link}}'">
+            {% endwith %}
+            <i class="fa-regular fa-envelope fa-fade"></i> Register with
+            Email</button><br />
+        <div></div>
+        {% with login = url_for('user.login',
+        _external=True)
+        %}
+        <button class="btn-email-login mx-auto mt-1"
+                onclick="location.href='{{login}}'">
+            {% endwith %}
+            <i class="fa-solid fa-key fa-flip"></i> Login
+            by User/Email</button><br />
+        {% endif %}
+    </div>
+    <hr class="mx-5" style="color:white;" />
+    <p class="userControlsText2" style="text-indent:30px;">
+        We have just recently launched, and our methods of retrieving the most
+        recent jobs data is still in its early stages.
+    </p>
+</div>
+{% endblock %}
+
+{% block javascript %}
+{{ super() }}
+{% endblock %}

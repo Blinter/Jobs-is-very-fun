@@ -1,0 +1,85 @@
+{% extends 'general/navigation_base.html' %}
+
+{% block title %}
+User Dashboard | {{ super() }}
+{% endblock %}
+
+{% block header %}
+{{ super() }}
+{% endblock %}
+
+{% block body %}
+{{ super() }}
+
+
+<div class="container bg-none">
+    <div
+         class="d-flex mx-auto mx-md-5 mt-md-3 justify-content-center align-items-center text-nowrap">
+        <p class="userControlsTitleText">User Dashboard</p>
+    </div>
+
+    <div class="userProfilesListTitle">
+        Your Profiles <br />
+    </div>
+    <hr class="mx-5" style="color:white;" />
+
+    <ul class="userProfilesList">
+    </ul>
+    <hr class="mx-5" style="color:white;" />
+    <div class="container homePageSpacer"></div>
+
+    <div
+         class="userDashboardAccountActions row mx-auto justify-content-center align-text-center text-wrap">
+        Account Actions
+    </div>
+    <hr class="smallDivider mx-auto" style="color:white;" />
+    {% with logout_link = url_for('user.logout', _external=False) %}
+    <div
+         class="userControlsText1 row mx-auto justify-content-center align-text-center text-wrap">
+        <button class="btnUserLogOut mx-auto mt-1 rounded"
+                onclick="location.href='{{logout_link}}'">
+            Log Out</button>
+    </div>
+    {% endwith %}
+    {% if email %}
+    <hr class="smallerDivider mx-auto" style="color:white;" />
+    {% with change_password_link = url_for('user.change_password',
+    _external=False) %}
+    <div
+         class="userControlsText1 row mx-auto mx-5 justify-content-center align-text-center text-wrap">
+        <button class="btnChangePassword mx-auto mt-1 rounded"
+                onclick="location.href='{{change_password_link}}'">
+            change password</button>
+    </div>
+    {% endwith %}
+    {% endif %}
+    <hr class="smallerDivider mx-auto" style="color:white;" />
+    <div
+         class="userControlsText1 row mx-auto mx-5 justify-content-center align-text-center text-wrap">
+        {% with user_feedback = "console.log('TODO')" %}
+        <button class="btnFeedback mx-auto mt-1 rounded"
+                onclick="{{user_feedback}}">
+            send feedback</button><br />
+        {% endwith %}
+    </div>
+    <hr class="smallestDivider mx-auto" style="color:white;" />
+    <div
+         class="userControlsText1 row mx-auto mx-5 justify-content-center align-text-center text-wrap">
+        {% with user_delete = delete_link %}
+        <button class="btnUserDelete mx-auto mt-1 rounded"
+                onclick="location.href='{{user_delete}}'">
+            delete account</button><br />
+        {% endwith %}
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+{{ super() }}
+<script src="{{ url_for('user.static', filename='scripts/profiles_rest.js') }}"
+        type="text/javascript"></script>
+
+<script src="{{ url_for('user.static', filename='scripts/profiles_script.js') }}"
+        type="text/javascript"></script>
+
+{% endblock %}

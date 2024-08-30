@@ -1,0 +1,952 @@
+#logoTextMainFont {
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  font-size: 36px;
+  letter-spacing: -2px;
+  font-weight: 800;
+  text-decoration: rgb(232, 230, 227);
+  font-variant: small-caps;
+  text-transform: capitalize;
+}
+
+#logoTextSecondaryFont {
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  font-size: 16px;
+  letter-spacing: -1.5px;
+  font-weight: 700;
+  text-decoration: rgb(232, 230, 227);
+  font-style: italic;
+}
+
+#navBarLinkDefault {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 24px;
+  letter-spacing: -1.0px;
+  word-spacing: -1.4px;
+  font-weight: 700;
+  text-decoration: rgb(232, 230, 227);
+  font-variant: small-caps;
+  text-transform: lowercase;
+}
+
+#homePageTextMake {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-size: 36px;
+  color: #EFB034;
+  font-weight: 700;
+  text-decoration: none solid rgb(231, 230, 229);
+  font-style: normal;
+  margin-right: 8px;
+  font-variant: small-caps;
+  text-transform: capitalize;
+}
+
+#homePageTextJobSearch {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 36px;
+  color: #1DD75B;
+  font-weight: 700;
+  text-decoration: none solid rgb(231, 230, 229);
+  font-style: normal;
+  letter-spacing: -3.8px;
+  word-spacing: -9px;
+  text-transform: capitalize;
+}
+
+#homePageTextEasy {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-size: 36px;
+  color: #F9623E;
+  font-weight: 700;
+  margin-left: 8px;
+  text-decoration: none solid rgb(231, 230, 229);
+  font-style: normal;
+  font-variant: small-caps;
+  text-transform: capitalize;
+}
+
+.homePageSpacer {
+  height: 30px;
+  max-height: 10%;
+}
+
+.homePageLeadText {
+  color: #ffffff;
+  font-family: "Shantell Sans", cursive;
+  font-optical-sizing: auto;
+  font-variant: small-caps;
+  letter-spacing: -1px;
+  word-spacing: -2px;
+  font-size: 24px;
+  font-weight: 300;
+  font-style: normal;
+  font-variation-settings:
+    "BNCE" 0,
+    "INFM" 100,
+    "SPAC" 0;
+}
+
+.getStartedButtonText {
+  color: #ffffff;
+  font-family: "Alumni Sans", sans-serif;
+  font-optical-sizing: auto;
+  text-transform: lowercase;
+  letter-spacing: -1px;
+  word-spacing: -2px;
+  font-size: 48px;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.userControlsTitleText {
+  padding: 0;
+  list-style-type: none;
+  color: #ffffff;
+  font-family: "Alumni Sans", sans-serif;
+  font-optical-sizing: auto;
+  letter-spacing: -1px;
+  word-spacing: -2px;
+  font-size: 64px;
+  font-weight: 400;
+  font-style: normal;
+  margin-bottom: -20px;
+}
+
+.userControlsText1 {
+  padding: 0;
+  list-style-type: none;
+  color: #ffffff;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-optical-sizing: auto;
+  letter-spacing: -1px;
+  word-spacing: -2px;
+  font-size: 24px;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+.userControlsText2 {
+  padding: 0;
+  list-style-type: none;
+  color: #ffffff;
+  font-family: "Courier New", Courier, monospace;
+  font-optical-sizing: auto;
+  letter-spacing: -2px;
+  font-size: 24px;
+  font-style: italic;
+}
+
+.userControlsText3 {
+  padding: 0;
+  list-style-type: none;
+  color: #ffffff;
+  font-family: "Book Antiqua", Palatino, serif;
+  font-optical-sizing: auto;
+  letter-spacing: 0px;
+  word-spacing: 0px;
+  font-size: 24px;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.userProfilesList {
+  padding: 0;
+  list-style-type: none;
+  color: #ffffff;
+  font-family: "Book Antiqua", Palatino, serif;
+  font-optical-sizing: auto;
+  letter-spacing: 0px;
+  word-spacing: 0px;
+  font-size: 24px;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.userProfileData {
+  padding: 0;
+  list-style-type: none;
+  color: #ffffff;
+  font-family: "Book Antiqua", Palatino, serif;
+  font-optical-sizing: auto;
+  letter-spacing: 0px;
+  word-spacing: 0px;
+  font-size: 24px;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.userProfilesListTitle {
+  padding: 0;
+  list-style-type: none;
+  color: cyan;
+  text-align: center;
+  list-style-type: none;
+  font-family: "Book Antiqua", Palatino, serif;
+  font-optical-sizing: auto;
+  letter-spacing: 0px;
+  word-spacing: 0px;
+  font-size: 24px;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.userProfilesListLink {
+  padding: 0;
+  list-style-type: none;
+  text-align: center;
+}
+
+.userProfilesControls {
+  text-align: center;
+  padding: 0;
+  list-style-type: none;
+}
+
+.userProfilesEditControls {
+  text-align: center;
+  padding: 0;
+  list-style-type: none;
+}
+
+.userDashboardAccountActions {
+  color: lightyellow;
+  text-align: center;
+  list-style-type: none;
+  font-family: "Book Antiqua", Palatino, serif;
+  font-optical-sizing: auto;
+  letter-spacing: 0px;
+  word-spacing: 0px;
+  font-size: 24px;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.mediumDivider {
+  text-align: center;
+  max-width: 50%;
+}
+
+.smallDivider {
+  text-align: center;
+  max-width: 30%;
+}
+
+.smallerDivider {
+  text-align: center;
+  max-width: 20%;
+}
+
+.smallestDivider {
+  text-align: center;
+  max-width: 10%;
+}
+
+.alertTest {
+  animation: glow 0.20s infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 10pm -10px #ff4000;
+  }
+
+  to {
+    box-shadow: 0 0 10px 10px #ff4000;
+  }
+}
+
+.infotest {
+  animation: glow 1.2s infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 50pm -50px #0976dc;
+  }
+
+  to {
+    box-shadow: 0 0 50px 50px #0976dc;
+  }
+}
+
+.newlyLaunched {
+  animation-duration: 3s;
+  animation-delay: 6s;
+  animation-name: glow;
+  animation-fill-mode: both;
+  animation-timing-function: linear;
+  animation-delay: 3s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 30pm -10px #deee46;
+  }
+
+  to {
+    box-shadow: 0 0 30px 10px #deee46;
+  }
+}
+
+body {
+  background-image: url("assets/background-black-textile/klim-musalimov-rDMacl1FDjw-unsplash_2400x3600_compressed_180.jpg");
+  /* background-image: url("assets/background-black-textile/original/klim-musalimov-rDMacl1FDjw-unsplash_original_4000x6000.jpg"); */
+  background-size: cover;
+  background-position: top;
+}
+
+.disabledTextInput {
+  cursor: not-allowed;
+}
+
+.getStartedLinks {
+  max-width: 300px;
+}
+
+.btn-logged-in {
+  color: rgb(231, 230, 229);
+  background: rgb(53, 55, 56);
+  width: auto;
+  text-wrap: stable;
+}
+
+.btn-link {
+  color: rgb(231, 230, 229);
+  background: rgb(53, 55, 56);
+  width: 125px;
+  text-wrap: nowrap;
+  margin-top: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-decoration: none;
+  font-weight: bolder;
+}
+
+.btn-link:hover,
+.btn-link:focus {
+  color: rgb(0, 0, 120);
+  background: rgb(0, 128, 0);
+}
+
+.btn-link-edit {
+  color: rgb(231, 230, 229);
+  background: rgb(53, 55, 56);
+  width: 125px;
+  text-wrap: nowrap;
+  margin-top: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-decoration: none;
+  font-weight: bolder;
+}
+
+.btn-link-edit:hover,
+.btn-link-edit:focus {
+  color: rgb(255, 255, 255);
+  background: rgb(40, 184, 59);
+}
+
+.btn-link-delete {
+  color: rgb(231, 230, 229);
+  background: rgb(53, 55, 56);
+  width: 125px;
+  text-wrap: nowrap;
+  margin-top: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-weight: bolder;
+}
+
+.btn-link-delete:hover,
+.btn-link-delete:focus {
+  color: rgb(0, 0, 0);
+  background: rgb(138, 138, 138);
+  font-weight: bolder;
+  font-size: 24px;
+}
+
+.btn-link-ActivatedProfile {
+  color: rgb(231, 230, 229);
+  background: rgb(12, 139, 44);
+  width: 135px;
+  text-wrap: nowrap;
+  margin-top: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-decoration: none;
+  font-weight: bolder;
+}
+
+.btn-link-ActivatedProfile:hover,
+.btn-link-ActivatedProfile:focus {
+  color: rgb(2, 2, 78);
+  background: rgb(255, 98, 8);
+}
+
+.btn-link-DeactivatedProfile {
+  color: rgb(231, 230, 229);
+  background: rgb(53, 55, 56);
+  width: 135px;
+  text-wrap: nowrap;
+  margin-top: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-decoration: none;
+  font-weight: bolder;
+}
+
+.btn-link-DeactivatedProfile:hover,
+.btn-link-DeactivatedProfile:focus {
+  color: rgb(0, 0, 120);
+  background: rgb(0, 128, 0);
+}
+
+.btnAction {
+  color: rgb(255, 255, 255);
+  background: teal;
+  width: 200px;
+  max-width: 200px;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.btnAction:hover,
+.btnAction:focus {
+  color: gray;
+  background: cyan;
+}
+
+.btn-github {
+  color: rgb(231, 230, 229);
+  background: rgb(53, 55, 56);
+  max-width: 300px;
+}
+
+.btnUserLogOut {
+  color: rgb(231, 230, 229);
+  background: rgb(3, 143, 213);
+  max-width: 300px;
+  color: #ffffff;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-size: 24px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.btnUserLogOut:hover,
+.btnUserLogOut:focus {
+  color: rgb(255, 255, 255);
+  background: rgb(1, 201, 78);
+  font-weight: 700;
+}
+
+.btnChangePassword {
+  color: rgb(231, 230, 229);
+  background: rgb(53, 55, 56);
+  max-width: 300px;
+  color: #ffffff;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-size: 24px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.btnChangePassword:hover,
+.btnChangePassword:focus {
+  color: rgb(255, 255, 255);
+  background: rgb(128, 128, 128);
+  font-weight: 700;
+}
+
+.btnUserDelete {
+  color: rgb(255, 255, 255);
+  background: rgb(255, 0, 0);
+  max-width: 300px;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-size: 24px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.btnUserDelete:hover,
+.btnUserDelete:focus {
+  color: rgb(0, 0, 0);
+  background: rgb(255, 255, 255);
+  font-weight: 700;
+}
+
+.btnFeedback {
+  color: rgb(255, 255, 255);
+  background: teal;
+  max-width: 300px;
+  font-family: "Sedan SC", serif;
+  font-size: 24px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.btnFeedback:hover,
+.btnFeedback:focus {
+  color: gray;
+  background: cyan;
+}
+
+.btnRefreshProfile {
+  color: rgb(255, 255, 255);
+  background: rgb(8, 130, 61);
+  max-width: 300px;
+  font-family: "Sedan SC", serif;
+  font-size: 24px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.btnRefreshProfile:hover,
+.btnRefreshProfile:focus {
+  color: rgb(90, 92, 49);
+  background: rgb(72, 246, 147);
+}
+
+.btnEditProfileName {
+  color: rgb(255, 255, 255);
+  background: teal;
+  max-width: 300px;
+  font-family: "Sedan SC", serif;
+  font-size: 24px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.btnEditProfileName:hover,
+.btnEditProfileName:focus {
+  color: rgb(63, 67, 8);
+  background: rgb(0, 174, 255);
+}
+
+.btnActivateProfile {
+  color: rgb(132, 8, 8);
+  background: rgb(191, 195, 88);
+  max-width: 300px;
+  font-family: "Sedan SC", serif;
+  font-size: 24px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.btnActivateProfile:hover,
+.btnActivateProfile:focus {
+  color: rgb(255, 255, 255);
+  background: rgb(68, 79, 160)
+}
+
+.btnDeactivateProfile {
+  color: rgb(255, 255, 255);
+  background: rgb(240, 141, 29);
+  max-width: 300px;
+  font-family: "Sedan SC", serif;
+  font-size: 24px;
+  font-weight: 200;
+  text-transform: uppercase;
+}
+
+.btnDeactivateProfile:hover,
+.btnDeactivateProfile:focus {
+  color: rgb(0, 255, 234);
+  font-weight: bolder;
+  background: rgb(255, 0, 0)
+}
+
+.btnCreateSurvey {
+  color: rgb(255, 255, 255);
+  background: rgb(0, 67, 13);
+  max-width: 300px;
+  font-family: "Sedan SC", serif;
+  font-size: 24px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.btnCreateSurvey:hover,
+.btnCreateSurvey:focus {
+  color: rgb(12, 60, 203);
+  background: rgb(199, 212, 16);
+}
+
+.btnCreateResume {
+  color: rgb(255, 255, 255);
+  background: rgb(116, 0, 108);
+  max-width: 300px;
+  font-family: "Sedan SC", serif;
+  font-size: 24px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.btnCreateResume:hover,
+.btnCreateResume:focus {
+  color: rgb(255, 255, 255);
+  background: rgb(224, 191, 79);
+}
+
+.btn-google {
+  color: rgb(231, 230, 229);
+  background-color: rgb(115, 55, 48);
+  max-width: 300px;
+}
+
+.btn-email {
+  background-color: #3498db;
+  color: #ffffff;
+  max-width: 300px;
+}
+
+.btn-email-login {
+  background-color: darkgreen;
+  color: #ffffff;
+  max-width: 300px;
+}
+
+.btn-email-login:hover,
+.btn-email-login:focus {
+  background-color: darkgrey;
+}
+
+.btn-email:hover,
+.btn-email:focus {
+  background-color: #382121;
+}
+
+.btn-github:hover,
+.btn-github:focus,
+.btn-google:hover,
+.btn-google:focus {
+  border-bottom-color: #2a65a0;
+  color: white;
+  background-color: #599bdc;
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#599bdc), to(#3072b3));
+  background-image: -webkit-linear-gradient(#599bdc, #3072b3);
+  background-image: -moz-linear-gradient(#599bdc, #3072b3);
+  background-image: -ms-linear-gradient(#599bdc, #3072b3);
+  background-image: -o-linear-gradient(#599bdc, #3072b3);
+  background-image: linear-gradient(#599bdc, #3072b3);
+}
+
+.newProfileInput {
+  font-size: 18px;
+  width: 300px;
+  text-align: center;
+  border: 0px white;
+  padding-left: 3px;
+  padding-right: 3px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.btn-ProfileSubmit {
+  margin-top: 10px;
+  color: rgb(231, 230, 229);
+  padding-left: 10px;
+  padding-right: 10px;
+  text-decoration: none;
+  font-weight: bolder;
+  max-width: 100%;
+  height: 50px;
+}
+
+.editProfileInput {
+  font-size: 18px;
+  width: 300px;
+  text-align: center;
+  border: 0px white;
+  padding-left: 3px;
+  padding-right: 3px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.btn-EditProfileSubmit {
+  justify-content: center;
+  align-items: center;
+  margin-top: 2px;
+  color: rgb(231, 230, 229);
+  padding-left: 10px;
+  padding-right: 10px;
+  text-decoration: none;
+  font-weight: bolder;
+  max-width: 100%;
+  height: 40px;
+}
+
+.btn-EditProfileCancel {
+  justify-content: center;
+  align-items: center;
+  margin-top: 2px;
+  color: rgb(231, 230, 229);
+  padding-left: 10px;
+  padding-right: 10px;
+  text-decoration: none;
+  font-weight: bolder;
+  max-width: 100%;
+  height: 40px;
+}
+
+.userControlsTitleTextProfileDashboard {
+  padding: 0;
+  list-style-type: none;
+  color: #ffffff;
+  font-family: "Alumni Sans", sans-serif;
+  font-optical-sizing: auto;
+  letter-spacing: -1px;
+  word-spacing: -2px;
+  font-size: 64px;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.editProfileInputFromProfileDash {
+  letter-spacing: -1px;
+  word-spacing: -2px;
+  font-size: 24px;
+  width: 385px;
+  text-align: center;
+  border: 0px white;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  list-style-type: none;
+  color: rgb(0, 0, 0);
+  font-family: "Book Antiqua", Palatino, serif;
+  font-optical-sizing: auto;
+  letter-spacing: 0px;
+  word-spacing: 0px;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.btn-EditProfileSubmitFromProfileDashboard {
+  color: rgb(231, 230, 229);
+  background: blue;
+  justify-content: center;
+  align-items: center;
+  margin-top: -15px;
+  margin-bottom: -15px;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-decoration: none;
+  font-weight: bolder;
+  height: 40px;
+  font-size: 24px;
+}
+
+.btn-EditProfileCancelFromProfileDashboard {
+  color: rgb(231, 230, 229);
+  background: red;
+  justify-content: center;
+  align-items: center;
+  margin-top: -15px;
+  margin-bottom: -15px;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-decoration: none;
+  font-weight: bolder;
+  height: 40px;
+  font-size: 24px;
+}
+
+.btn-ProfileSubmit:hover,
+.btn-ProfileSubmit:focus,
+.btn-EditProfileSubmit:hover,
+.btn-EditProfileSubmit:focus,
+.btn-EditProfileCancel:hover,
+.btn-EditProfileCancel:focus {
+  color: rgb(0, 0, 0);
+  background: rgb(255, 255, 255) !important;
+}
+
+.btn-ProfileCancel {
+  margin-top: 10px;
+  color: rgb(231, 230, 229);
+  padding-left: 10px;
+  padding-right: 10px;
+  text-decoration: none;
+  font-weight: bolder;
+  max-width: 100%;
+  height: 50px;
+}
+
+.btn-ProfileCancel:hover,
+.btn-ProfileCancel:focus {
+  color: rgb(0, 0, 0);
+  background: rgb(255, 255, 255) !important;
+}
+
+
+.userJobList {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  list-style-type: none;
+  color: #ffffff;
+  font-family: "Book Antiqua", Palatino, serif;
+  font-optical-sizing: auto;
+  letter-spacing: 0px;
+  word-spacing: 0px;
+  font-size: 20px;
+  font-style: normal;
+}
+
+
+.userCompanyList {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  list-style-type: none;
+  color: #ffffff;
+  font-family: "Book Antiqua", Palatino, serif;
+  font-optical-sizing: auto;
+  letter-spacing: 0px;
+  word-spacing: 0px;
+  font-size: 20px;
+  font-style: normal;
+}
+
+.userJobListLink {
+  text-align: center;
+  padding: 0;
+  list-style-type: none;
+  text-wrap: pretty;
+  margin: auto;
+  max-width: 350px;
+  width: 350px;
+}
+
+.userCompanyListLink {
+  text-align: center;
+  padding: 0;
+  list-style-type: none;
+  text-wrap: pretty;
+  margin: auto;
+  max-width: 350px;
+  width: 350px;
+}
+
+.btn-linkUserMini {
+  color: rgb(231, 230, 229);
+  background: rgb(53, 55, 56);
+  width: 55px;
+  text-wrap: nowrap;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-decoration: none;
+  font-weight: bolder;
+  font-size: 14px;
+}
+
+.btn-linkUserMini:hover,
+.btn-linkAUserMini:focus {
+  color: rgb(0, 0, 120);
+  background: rgb(0, 128, 0);
+}
+
+.btn-linkUserMini-longer {
+  color: rgb(231, 230, 229);
+  background: rgb(53, 55, 56);
+  width: 85px;
+  text-wrap: nowrap;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-decoration: none;
+  font-weight: bolder;
+  font-size: 14px;
+}
+
+.btn-linkUserMini-longer:hover,
+.btn-linkUserMini-longer:focus {
+  color: rgb(0, 0, 120);
+  background: rgb(0, 128, 0);
+}
+
+.fluidUserLongTextFlex {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-wrap: pretty;
+  word-break: break-all;
+  font-size: 15px;
+  padding: 0;
+  margin: 0;
+}
+
+.manualQueryFormTextBody {
+  color: black;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-wrap: wrap;
+  font-size: 16px;
+  padding: auto;
+  margin: 0;
+}
+
+.page-item:hover,
+.page-item:focus {
+  cursor: pointer !important;
+}
+
+.viewJobSingle {
+  padding: 0;
+  list-style-type: none;
+  color: #ffffff;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-optical-sizing: auto;
+  letter-spacing: -1px;
+  word-spacing: -2px;
+  font-size: 32px;
+  font-weight: 400;
+  font-style: normal;
+  text-wrap: balance;
+  word-break: keep-all;
+}
+
+.viewCompanySingle {
+  padding: 0;
+  list-style-type: none;
+  color: #ffffff;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-optical-sizing: auto;
+  letter-spacing: -1px;
+  word-spacing: -2px;
+  font-size: 32px;
+  font-weight: 400;
+  font-style: normal;
+  text-wrap: balance;
+  word-break: keep-all;
+}
+
+.fluidJobSingleDescription {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-wrap: balance;
+  word-break: keep-all;
+  font-size: 15px;
+  padding: 0;
+  margin: 0;
+}
+
+.fluidCompanySingleDescription {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-wrap: balance;
+  word-break: keep-all;
+  font-size: 15px;
+  padding: 0;
+  margin: 0;
+}
+
+
+.hidden-text {
+  visibility: hidden;
+  white-space: nowrap;
+  position: absolute;
+  top: -9999px;
+}

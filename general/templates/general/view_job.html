@@ -1,0 +1,225 @@
+{% extends 'general/navigation_base.html' %}
+
+{% block title %}
+{% if job %}
+Job Details | {{job.name}} | {{ super() }}
+{% else %}
+Job Details | {{ super() }}
+{% endif %}
+{% endblock %}
+
+{% block header %}
+{{ super() }}
+{% endblock %}
+
+{% block body %}
+{{ super() }}
+<script>
+      let activeProfile = {{ "true" if profile else "false"}};
+</script>
+
+<div class="container-fluid bg-none">
+      <div
+           class="d-flex mx-auto mx-md-5 mt-md-3 justify-content-center align-items-center text-nowrap">
+            <p class="viewJobSingle">{{job.name}}</p>
+      </div>
+      <hr class="mediumDivider mx-auto" style="color:white;" />
+      <div class="userJobList mx-auto mx-lg-3 mx-xl-5">
+            {% if job %}
+            <div
+                 class="fluidJobSingleDescription mx-auto figure rounded bg-dark px-lg-1 px-xl-2 px-xxl-3 py-1 py-lg-2">
+                  {% if location %}
+                  <span class="text-primary"
+                        style="font-size:16px;">Location</span>
+                  <br />
+                  <span class="fluidUserLongTextFlex text-info"
+                        style="font-size:18px">{{location}}</span>
+                  <br />
+                  <hr class="smallestDivider mx-auto" style="color:white;" />
+                  {% endif %}
+
+                  {% if job.company and job.company.name|length != 0 %}
+                  <span class="text-primary"
+                        style="font-size:16px;">Company</span>
+                  <br />
+                  <span class="fluidUserLongTextFlex text-info"
+                        style="font-size:18px">{{job.company.name}}</span>
+                  <br />
+                  {% if job.company.id %}
+                  <button class="btn-linkUserMini rounded bg-primary"
+                          data-id={{job.company.id}}
+                          onclick="viewCompany(event);">View</button>
+
+                  {% if not saved_company %}
+                  <button class="btn-linkUserMini rounded bg-primary"
+                          data-action="viewJobSingle"
+                          data-id={{job.company.id}}
+                          onclick="toggleCompany(event);">Save</button>
+                  {% else %}
+                  <button class="btn-linkUserMini-longer rounded bg-danger"
+                          data-action="viewJobSingle"
+                          data-id={{job.company.id}}
+                          onclick="toggleCompany(event);">Un-save</button>
+                  {% endif %}
+
+                  {% endif %}
+                  <hr class="mediumDivider mx-auto" style="color:white;" />
+                  {% endif %}
+
+                  {% if job.salary_currency != None and
+                  job.salary_currency|length != 0 and (job.min_salary != None or
+                  job.max_salary != None) %}
+                  <span class="text-info"
+                        style="font-size:15px;font-weight: bolder;">Salary:</span>
+                  <span class="fluidLongTextFlex" style="font-size:15px;">
+                        {% if job.salary_currency|length != 0 %}
+
+                        {% if job.salary_currency != None and job.min_salary !=
+                        None and job.min_salary != 0 and job.max_salary != None
+                        and job.max_salary != 0 %}
+                        {% with salary = "~" + job.salary_currency +
+                        ((job.max_salary + job.min_salary) / 2 )|commafy %}
+                        {{salary}}
+                        {% endwith %}
+                        {% elif job.min_salary != 0 and job.max_salary == 0 %}
+                        {% with salary = job.salary_currency +
+                        job.min_salary|commafy %}
+                        {{salary}}+
+                        {% endwith %}
+                        {% else %}
+                        {% with salary = "up to " + job.salary_currency +
+                        job.max_salary|commafy %}
+                        {{salary}}
+                        {% endwith %}
+                        {% endif %}
+
+                        {% endif %}
+                  </span>
+                  <br />
+                  <hr class="mx-5" style="color:white;" />
+                  {% endif %}
+
+                  <span class="text-primary" style="font-size:16px;">Description
+                  </span>
+                  <br />
+                  <span class="fluidJobSingleDescription text-white"
+                        style="font-size:16px;">
+                        {% if not job.description or
+                        job.description|length == 0%}
+
+                        No Job Description
+
+                        {% else %}
+
+                        {{job.description}}
+
+                        {% endif %}
+                  </span>
+                  <br />
+                  <hr class="smallestDivider mx-auto" style="color:white;" />
+                  <span class="text-primary" style="font-size:16px;">API
+                        Source</span>
+                  <br />
+                  <span class="text-info"
+                        style="font-size:18px;">{{job.api_source.name}}</span>
+
+                  <br />
+                  <hr class="smallestDivider mx-auto" style="color:white;" />
+                  <span class="fluidUserLongTextFlex text-primary"
+                        style="font-size:16px;">Original Source (or
+                        Apply Link)</span>
+                  <br />
+                  {% if job.apply_link %}
+                  <input id="jobApplyLink" type="text" class=""
+                         style="color:gold;background-color: teal;font-size:12px;width: 100%;text-align:center;"
+                         value="{{job.apply_link}}" onclick="copyToClipboard()"
+                         data-bs-toggle="tooltip" data-bs-placement="bottom"
+                         data-bs-custom-class="custom-tooltip"
+                         data-bs-title="Click to copy to clipboard" />
+                  <div id="hiddenText" class="hidden-text"></div>
+                  <hr class="smallestDivider mx-auto" style="color:white;" />
+                  {% endif %}
+                  <span class="fluidUserLongTextFlex text-primary">Posted
+                        Time</span>
+                  <br />
+                  <span
+                        class="fluidUserLongTextFlex text-info">{{job.posted_time_utc}}</span>
+                  <br />
+                  <span class="fluidUserLongTextFlex text-primary">Expire
+                        Time</span>
+                  <br />
+                  <span
+                        class="fluidUserLongTextFlex text-info">{{job.expiration_time_utc}}</span>
+                  <br />
+                  <hr class="mx-5" style="color:white;" />
+
+                  {% if not saved_job %}
+                  <button class="btnAction rounded bg-success"
+                          data-action="toggleJobExtra"
+                          style="margin-top: 5px;" data-id={{job.id}}
+                          onclick="toggleJob(event);">Save</button>
+                  {% else %}
+                  <button class="btnAction rounded bg-danger"
+                          data-action="toggleJobExtra"
+                          style="margin-top: 5px;" data-id={{job.id}}
+                          onclick="toggleJob(event);">Un-save</button>
+                  {% endif %}
+                  <br />
+
+                  {% if todo %}
+                  {% if job %}
+                  <button class="btnAction rounded bg-danger"
+                          style="margin-top: 5px;" 
+                          onclick="hideJob(event);"
+                          data-id={{job.id}}>Hide</button>
+                  {% else %}
+                  <button class="btnAction rounded bg-success"
+                          style="margin-top: 5px;" 
+                          onclick="hideJob(event);"
+                          data-id={{job.id}}>Show</button>
+                  {% endif %}
+                  {% endif %}
+
+                  <hr class="mx-5" style="color:white;" />
+
+                  <span data-bs-title="Scraped data may be difficult to read!" 
+                        id="scrapedDataLabelText" class="text-primary"
+                        style="font-size:18px;" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom"
+                        data-bs-custom-class="custom-tooltip">Scraped Data</span>
+                        <br />
+                  <button id="scrapedDataButton"
+                          class='btnAction rounded bg-muted px-4'
+                          onClick="toggleRawScrapedData(event);"
+                          data-bs-toggle="tooltip" data-bs-placement="top"
+                          data-bs-custom-class="custom-tooltip"
+                          data-bs-title="Scraped data may be difficult to read!">Show</button>
+                  <br />
+                  <span id="rawScrapedData" class="fluidJobSingleDescription"
+                        style="font-size:18px;"></span>
+                  <br />
+            </div>
+            {% endif %}
+      </div>
+</div>
+<hr class="smallestDivider mx-auto" style="color:white;" />
+
+<div
+     class="d-flex mx-auto mx-md-5 mt-md-3 justify-content-center align-items-center text-nowrap">
+      <button class="btnAction rounded bg-danger text-center justify-content-center mx-auto mb-5 placeholder-wave"
+              style="margin-top: 5px;" onclick="window.close();">Close
+      </button>
+</div>
+{% endblock %}
+{% block javascript %}
+{{ super() }}
+<script src="{{ url_for('general.static', filename='scripts/jobs.js') }}"
+        type="text/javascript"></script>
+
+<script src="{{ url_for('general.static', filename='scripts/jobs_rest.js') }}"
+        type="text/javascript"></script>
+
+<script type="text/javascript">
+      const rawScrapedDataText = {{ job_scraped| tojson }};
+</script>
+{% endblock %}

@@ -1,0 +1,166 @@
+{% extends 'admin/admin_navigation.html' %}
+
+{% block title %}
+Mongo Storage | {{ super() }}
+{% endblock %}
+
+{% block header %}
+{{ super() }}
+{% endblock %}
+
+{% block body %}
+{{ super() }}
+
+<div
+     class="d-flex mx-auto mx-md-5 mt-md-3 justify-content-center align-items-center text-nowrap">
+    <p class="adminControlsTitleText">Mongo Storage</p>
+</div>
+<hr class="mediumDivider mx-auto" style="color:white;" />
+<div class="adminLargeTable table-responsive mx-3">
+    <table
+           class="table table-dark table-sm table-bordered table-hover text-light justify-content-center align-items-center text-nowrap">
+        <thead class="table-dark border-bottom border-success">
+            <tr class="row mx-auto adminLargeTableTextItem">
+                <th class="col border-top border-end">
+                    ID
+                </th>
+                <th class="col border-top border-end">
+                    Query ID
+                </th>
+                <th class="col border-top border-end">
+                    Time
+                </th>
+                <th class="col border-top border-end">
+                    Proxy
+                </th>
+                <th class="col border-top border-end">
+                    API
+                </th>
+                <th class="col border-top border-end">
+                    URL
+                </th>
+                <th class="col border-top border-end">
+                    Length
+                </th>
+                <th class="col border-top border-end">
+                    Code
+                </th>
+                <th class="col border-top border-end">
+                    Metadata
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="row mx-auto adminLargeTableTextItem">
+                <td class="col border-top">1000000
+                </td>
+                <td class="col border-top">2000000
+                </td>
+                <td class="col border-top">06-01
+                    15:03:56</td>
+                <td class="col border-top">
+                    255.255.255.255:65535</td>
+                <td class="col border-top">
+                    <button
+                            class="btn-TableButtonItem align-middle">Show</button>
+                </td>
+                <td class="col border-top">
+                    https://google.com/test/test/test/test</td>
+                <td class="col border-top">646000
+                </td>
+                <td class="col border-top">400</td>
+                <td class="col border-top">
+                    Sed ut perspiciatis unde omnis iste natus error sit<br />
+                    <button
+                            class="btn-TableButtonItem align-middle">More</button>
+                    <!-- Sed ut perspiciatis unde omnis iste natus error sit
+                    voluptatem accusantium doloremque laudantium, totam rem
+                    aperiam, eaque ipsa quae ab illo inventore veritatis et
+                    quasi architecto beatae vitae dicta sunt explicabo. Nemo
+                    enim ipsam voluptatem quia volupta<br />
+                    <button
+                            class="btn-TableButtonItem align-middle">Less</button> -->
+                </td>
+            </tr>
+            <tr class="row mx-auto adminLargeTableTextItem">
+                <td class="col border-top">1000000
+                </td>
+                <td class="col border-top">2000000
+                </td>
+                <td class="col border-top">06-01
+                    15:03:56</td>
+                <td class="col border-top">
+                    255.255.255.255:65535</td>
+                <td class="col border-top">
+                    <button
+                            class="btn-TableButtonItem align-middle">Show</button>
+                </td>
+                <td class="col border-top">
+                    https://google.com/test/test/test/test</td>
+                <td class="col border-top">646000
+                </td>
+                <td class="col border-top">400</td>
+                <td class="col border-top">
+                    Sed ut perspiciatis unde omnis iste natus error sit<br />
+                    <button
+                            class="btn-TableButtonItem align-middle">More</button>
+                    <!-- Sed ut perspiciatis unde omnis iste natus error sit
+                    voluptatem accusantium doloremque laudantium, totam rem
+                    aperiam, eaque ipsa quae ab illo inventore veritatis et
+                    quasi architecto beatae vitae dicta sunt explicabo. Nemo
+                    enim ipsam voluptatem quia volupta<br />
+                    <button
+                            class="btn-TableButtonItem align-middle">Less</button> -->
+                </td>
+            </tr>
+        </tbody>
+        <tfoot class="table-dark border-top border-success">
+            <tr class="row mx-auto adminLargeTableTextItem">
+                <th class="col border-top border-end">
+                    ID
+                </th>
+                <th class="col border-top border-end">
+                    Query ID
+                </th>
+                <th class="col border-top border-end">
+                    Time
+                </th>
+                <th class="col border-top border-end">
+                    Proxy
+                </th>
+                <th class="col border-top border-end">
+                    API
+                </th>
+                <th class="col border-top border-end">
+                    URL
+                </th>
+                <th class="col border-top border-end">
+                    Length
+                </th>
+                <th class="col border-top border-end">
+                    Code
+                </th>
+                <th class="col border-top border-end">
+                    Metadata
+                </th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+<hr class="smallestDivider mx-auto" style="color:white;" />
+{% with admin_dash = url_for('admin.admin') %}
+<div
+     class="d-flex mx-auto mx-md-5 mt-md-3 justify-content-center align-items-center text-nowrap">
+    <button id="cancel" name="cancel" type="button"
+            class="adminDashButton btn-primary bg-success text-light py-1 mb-5 placeholder-wave"
+            onclick="location.href='{{admin_dash}}'">
+        Home
+    </button>
+</div>
+{% endwith %}
+{% endblock %}
+
+{% block javascript %}
+{{ super() }}
+{% endblock %}

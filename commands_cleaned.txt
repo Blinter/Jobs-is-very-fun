@@ -1,0 +1,43 @@
+# DEBUG WEB SERVER
+PYTHONPATH=/home/jobs/jobs python3 /home/jobs/jobs/run.py
+
+# GUNICORN LAUNCH
+PYTHONPATH=/home/jobs/jobs gunicorn -c gunicorn.conf.py
+
+# LOGS
+tail -f /home/jobs/gunicorn_error.log
+tail -f /home/jobs/gunicorn_access.log
+
+# DEBUG
+
+# OTHER ROUTINES
+PYTHONPATH=/home/jobs/jobs python3 /home/jobs/jobs/routines/parsing/location/x_locations/lundehund_twitter_x_locations.py
+PYTHONPATH=/home/jobs/jobs python3 /home/jobs/jobs/routines/parsing/location/x_locations/check_invalid_x_locations.py
+PYTHONPATH=/home/jobs/jobs python3 /home/jobs/jobs/routines/parsing/location/glassdoor_locations/mantiks_glassdoor_locations.py
+
+PYTHONPATH=/home/jobs/jobs python3 /home/jobs/jobs/routines/process_queries.py
+
+
+# OTHER DEBUGGING
+PYTHONPATH=/home/jobs/jobs python3 /home/jobs/jobs/routines/debug/parse_company_list.py
+PYTHONPATH=/home/jobs/jobs python3 /home/jobs/jobs/routines/debug/debug_auto_parsing.py
+PYTHONPATH=/home/jobs/jobs python3 /home/jobs/jobs/routines/debug/debug_sandbox.py
+
+# AUTO SQL INSERTS
+PYTHONPATH=/home/jobs/jobs python3 /home/jobs/jobs/routines/debug/debug_auto_insert.py
+
+
+# ROUTINES
+PYTHONPATH=/home/jobs/jobs python3 /home/jobs/jobs/routines/process_companies.py
+PYTHONPATH=/home/jobs/jobs python3 /home/jobs/jobs/routines/process_scrape.py
+PYTHONPATH=/home/jobs/jobs python3 /home/jobs/jobs/routines/process_jobs.py
+PYTHONPATH=/home/jobs/jobs python3 /home/jobs/jobs/routines/process_companies.py
+
+PYTHONPATH=/home/jobs/jobs python3 /home/jobs/jobs/routines/update_expired_job_count.py
+PYTHONPATH=/home/jobs/jobs python3 /home/jobs/jobs/routines/generate_timegraph_jobs.py
+
+
+# OTHER
+
+# Drops all non-geographic Postgres Tables
+PYTHONPATH=/home/jobs/jobs python3 /home/jobs/jobs/seeds/postgres/drop_non_geo.py

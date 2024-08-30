@@ -1,0 +1,283 @@
+{% extends 'admin/admin_navigation.html' %}
+
+{% block title %}
+API Endpoint Details | {{api_endpoint.nice_name}} | {{ super() }}
+{% endblock %}
+
+{% block header %}
+{{ super() }}
+{% endblock %}
+
+{% block body %}
+{{ super() }}
+
+<div class="container-fluid bg-none">
+      <div
+           class="d-flex mx-auto mx-md-5 mt-md-3 justify-content-center align-items-center text-nowrap">
+            <p class="adminControlsTitleText">{{api_endpoint.nice_name}}</p>
+      </div>
+      <div
+           class="row justify-content-center row-cols-auto gx-1 gx-lg-2 gx-xl-3 gx-xxl-4 gy-1 gy-xl-2 gy-xxl-3">
+      </div>
+      <hr class="mediumDivider mx-auto" style="color:white;" />
+      <div class="adminAPIEndpointList mx-auto mx-lg-3 mx-xl-5">
+            <div
+                 class="row justify-content-center row-cols-auto gx-1 gx-lg-2 gx-xl-3 gx-xxl-4 gy-1 gy-xl-2 gy-xxl-3">
+                  {% if api_endpoint %}
+                  <div class="col-auto">
+                        <div
+                             class="adminAPIEndpointFull figure rounded bg-dark px-lg-1 px-xl-2 px-xxl-3 py-1 py-lg-2">
+                              <span class="text-info"
+                                    style="font-size:16px;">{{api_endpoint.api.nice_name}}</span><br />
+                              <span class="fluidLongTextFlex"
+                                    style="font-size:14px;font-weight: bolder;">{{api_endpoint.nice_name}}</span><br />
+                              <span class="fluidLongTextFlex text-info"
+                                    style="font-size:14px">{{api_endpoint.get_nice_type()}}</span><br />
+                              <hr class="mx-5" style="color:white;" />
+
+                              <span class="text-info"
+                                    style="font-size:14px;">ID:</span>
+                              <span class="fluidLongTextFlex"
+                                    style="font-size:18px;">
+                                    {{api_endpoint.id}}</span><br />
+
+                              <span class="text-info"
+                                    style="font-size:14px;">API
+                                    ID:</span><span class="fluidLongTextFlex"
+                                    style="font-size:18px;">
+                                    {{api_endpoint.api_id}}</span><br />
+                              <hr class="mx-5" style="color:white;" />
+                              {% if api_endpoint.nice_description %}
+                              {% if api_endpoint.nice_description|length == 0 %}
+                              {% else %}
+                              <span class="text-info"
+                                    style="font-size:14px;">Description
+                              </span><br />
+                              <span class="fluidLongTextFlex"
+                                    style="font-size:12px;">{{api_endpoint.nice_description}}</span><br />
+                              <hr class="mx-5" style="color:white;" />
+                              {% endif %}
+                              {% endif %}
+                              <span class="text-info"
+                                    style="font-size:14px;">HTTP
+                                    Method: </span><span
+                                    class="fluidLongTextFlex"
+                                    style="font-size:12px;">{{api_endpoint.http_method}}</span><br />
+
+                              <span class="text-info"
+                                    style="font-size:14px;">HTTP
+                                    Path: </span><span class="fluidLongTextFlex"
+                                    style="font-size:12px;">{{api_endpoint.http_path}}</span><br />
+                              {% if api_endpoint.http_path_suffix %}
+                              <span class="text-info"
+                                    style="font-size:14px;">HTTP
+                                    Path Suffix: </span><span
+                                    class="fluidLongTextFlex"
+                                    style="font-size:12px;">{{api_endpoint.http_path_suffix}}</span><br />
+                              {% endif %}
+
+                              {% if api_endpoint.nice_category %}
+                              <span class="text-info"
+                                    style="font-size:14px;">Nice
+                                    Category: </span><span
+                                    class="fluidLongTextFlex"
+                                    style="font-size:12px;">{{api_endpoint.nice_category}}</span><br />
+                              {% endif %}
+
+                              {% if api_endpoint.disabled == 0 %}
+                              <button class="btn-linkAdminMini rounded bg-danger"
+                                      onclick="toggleEndpoint(event, {{api_endpoint.id}});">Disable
+                              </button>
+                              {% else %}
+                              <button class="btn-linkAdminMini rounded bg-success"
+                                      onclick="toggleEndpoint(event, {{api_endpoint.id}});">Enable
+                              </button>
+                              {% endif %}
+                              <br />
+                              <span
+                                    class="fluidLongTextFlex text-info">{{api_endpoint.api.host}}</span>
+                              <hr class="mx-5" style="color:white;" />
+
+                              {% if api_endpoint.endpoint_headers|length != 0 %}
+                              <span class="text-info"
+                                    style="font-size:16px;">Headers</span><br />
+
+                              {% for i in api_endpoint.endpoint_headers %}
+                              <span class="text-info"
+                                    style="font-size:12px;">Name:
+                              </span><span class="fluidLongTextFlex"
+                                    style="font-size:12px;">{{i.header}}</span><br />
+                              <span class="text-info"
+                                    style="font-size:12px;">Value:
+                              </span><span class="fluidLongTextFlex"
+                                    style="font-size:12px;">{{i.value}}</span><br />
+                              {% if i.required == 0 %}
+                              {% if i.disabled == 0 %}
+                              <button class="btn-linkAdminMini rounded bg-danger"
+                                      onclick="toggleEndpointHeader(event, {{i.id}});">Disable
+                              </button>
+                              {% else %}
+                              <button class="btn-linkAdminMini rounded bg-success"
+                                      onclick="toggleEndpointHeader(event, {{i.id}});">Enable
+                              </button>
+                              {% endif %}
+                              {% endif %}
+                              <hr class="smallestDivider mx-auto"
+                                  style="color:white;" />
+                              {% endfor %}
+
+                              {% endif %}
+
+                              {% if api_endpoint.endpoint_params|length != 0 %}
+                              <span class="text-info"
+                                    style="font-size:16px;">Params</span><br />
+
+                              {% for i in api_endpoint.endpoint_params %}
+                              <span class="text-info"
+                                    style="font-size:12px;">Param ID:
+                              </span><span class="fluidLongTextFlex"
+                                    style="font-size:12px;">{{i.id}}</span><br />
+                              {% if i.path_param %}
+                              <span class="text-info"
+                                    style="font-size:12px;">Path Param
+                              </span><br />
+                              {% endif %}
+                              <span class="text-info"
+                                    style="font-size:12px;">Name:
+                              </span><span class="fluidLongTextFlex"
+                                    style="font-size:12px;">{{i.param}}</span><br />
+                              <span class="text-info"
+                                    style="font-size:12px;">Description:
+                              </span><span class="fluidLongTextFlex"
+                                    style="font-size:12px;">{{i.description}}</span><br />
+                              <span class="text-info"
+                                    style="font-size:12px;">Hint Type:
+                              </span><span class="fluidLongTextFlex"
+                                    style="font-size:12px;">{{i.hint_type}}</span><br />
+                              <span class="text-info"
+                                    style="font-size:12px;">Default Value:
+                              </span><span class="fluidLongTextFlex"
+                                    style="font-size:12px;">
+                                    {% if i.default_value|length != 0 %}
+                                    {{i.default_value}}
+                                    {% else %}
+                                    None
+                                    {% endif %}
+                              </span><br />
+                              {% if i.required == 0 %}
+                              {% if i.disabled == 0 %}
+                              <button class="btn-linkAdminMini rounded bg-danger"
+                                      onclick="toggleEndpointParam(event, {{i.id}});">Disable
+                              </button>
+                              {% else %}
+                              <button class="btn-linkAdminMini rounded bg-success"
+                                      onclick="toggleEndpointParam(event, {{i.id}});">Enable
+                              </button>
+                              {% endif %}
+                              {% endif %}
+                              <hr class="smallestDivider mx-auto"
+                                  style="color:white;" />
+                              {% endfor %}
+
+                              {% endif %}
+
+                              {% if api_endpoint.endpoint_bodies|length != 0 %}
+                              <span class="text-info"
+                                    style="font-size:16px;">Bodies</span><br />
+
+                              {% for i in api_endpoint.endpoint_bodies %}
+                              <span class="text-info"
+                                    style="font-size:12px;">Body ID:
+                              </span><span class="fluidLongTextFlex"
+                                    style="font-size:12px;">{{i.id}}</span><br />
+                              <span class="text-info"
+                                    style="font-size:12px;">Key Name:
+                              </span><span class="fluidLongTextFlex"
+                                    style="font-size:12px;">{{i.key}}</span><br />
+                              <span class="text-info"
+                                    style="font-size:12px;">Description:
+                              </span><span class="fluidLongTextFlex"
+                                    style="font-size:12px;">{{i.key_description}}</span><br />
+                              <span class="text-info"
+                                    style="font-size:12px;">Key Value:
+                              </span><span class="fluidLongTextFlex"
+                                    style="font-size:12px;">{{i.value}}</span><br />
+                              <span class="text-info"
+                                    style="font-size:12px;">Hint Type:
+                              </span><span class="fluidLongTextFlex"
+                                    style="font-size:12px;">{{i.value_hint_type}}</span><br />
+                              <span class="text-info"
+                                    style="font-size:12px;">Value Default:
+                              </span><span class="fluidLongTextFlex"
+                                    style="font-size:12px;">
+                              
+                                    {% if i.value_default|length != 0 %}
+                                    {{i.value_default}}
+                                    {% else %}
+                                    None
+                                    {% endif %}
+                              </span><br />
+                              {% if i.required == 0 %}
+                              {% if i.disabled == 0 %}
+                              <button class="btn-linkAdminMini rounded bg-danger"
+                                      onclick="toggleEndpointBody(event, {{i.id}});">Disable
+                              </button>
+                              {% else %}
+                              <button class="btn-linkAdminMini rounded bg-success"
+                                      onclick="toggleEndpointBody(event, {{i.id}});">Enable
+                              </button>
+                              {% endif %}
+                              {% endif %}
+                              <hr class="smallestDivider mx-auto"
+                                  style="color:white;" />
+                              {% endfor %}
+
+                              {% endif %}
+
+                              {% if api_endpoint.endpoint_extras|length != 0 %}
+                              <span class="text-info"
+                                    style="font-size:16px;">Extras</span><br />
+                              <hr class="smallestDivider mx-auto"
+                                  style="color:white;" />
+
+                              {% for i in api_endpoint.endpoint_extras %}
+                              <button class="btn-TableButtonItem px-4"
+                                      onclick="viewEndpointExtraDoc({{i.id}});">View Extra Doc
+                                    #{{i.id}}
+                              </button><br />
+                              {% endfor %}
+
+                              {% endif %}
+
+                              {% if api_endpoint.endpoint_extras|length != 0 %}
+                              <span class="text-info"
+                                    style="font-size:16px;">Notes</span><br />
+
+                              <span class="fluidLongTextFlex"
+                                    style="font-size:12px;">Notes
+                                    Textbox</span><br />
+                              {% endif %}
+                        </div>
+                  </div>
+                  {% endif %}
+            </div>
+      </div>
+</div>
+<hr class="smallestDivider mx-auto" style="color:white;" />
+{% with admin_dash = url_for('admin.admin') %}
+<div
+     class="d-flex mx-auto mx-md-5 mt-md-3 justify-content-center align-items-center text-nowrap">
+      <button class="d-flex btn-linkAdmin btn-primary bg-danger
+     text-light text-center justify-content-center mx-auto mb-5 placeholder-wave"
+              type="button" onclick="window.close();">Close</button>
+</div>
+{% endwith %}
+{% endblock %}
+
+{% block javascript %}
+{{ super() }}
+<script src="{{ url_for('admin.static',
+filename='scripts/api_endpoints.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('admin.static',
+filename='scripts/api_endpoints_rest.js') }}" type="text/javascript"></script>
+{% endblock %}

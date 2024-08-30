@@ -1,0 +1,32 @@
+{% extends 'admin/admin_navigation.html' %}
+
+{% block title %}
+Mongo Scrape Viewer #{{mongo_db_id}} | {{ super() }}
+{% endblock %}
+
+{% block header %}
+{{ super() }}
+{% endblock %}
+
+{% block body %}
+{{ super() }}
+
+<div class="container-fluid bg-none">
+    <hr class="smallDivider mx-auto" style="color:white;" />
+    <span class="extraDocumentationBody"></span>
+    <br />
+    <hr class="smallestDivider mx-auto" style="color:white;" />
+    <br />
+    <button class="d-flex btn-linkAdmin btn-primary bg-danger
+    text-light text-center justify-content-center mx-auto mb-5 placeholder-wave"
+            type="button" onclick="window.close();">Close</button>
+</div>
+{% endblock %}
+
+{% block javascript %}
+{{ super() }}
+<script src="{{ url_for('admin.static',
+filename='scripts/admin_mongo_scrape_storage.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('admin.static',
+filename='scripts/admin_mongo_scrape_storage_rest.js') }}" type="text/javascript"></script>
+{% endblock %}

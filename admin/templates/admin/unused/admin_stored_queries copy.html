@@ -1,0 +1,52 @@
+{% extends 'admin/admin_navigation.html' %}
+
+{% block title %}
+Mongo Storage | {{ super() }}
+{% endblock %}
+
+{% block header %}
+{{ super() }}
+{% endblock %}
+
+{% block body %}
+{{ super() }}
+
+<div class="container-fluid bg-none">
+    <div
+         class="d-flex mx-auto mx-md-5 mt-md-3 justify-content-center align-items-center text-nowrap">
+        <p class="adminControlsTitleText">Mongo Storage</p>
+    </div>
+    <hr class="mediumDivider mx-auto" style="color:white;" />
+    <div class="adminProxyList mx-auto mx-lg-3 mx-xl-5">
+        <div class="row row-cols-auto gx-1 gx-lg-2 gx-xl-3 gx-xxl-4 gy-1 gy-xl-2 gy-xxl-3">
+            {% if stored_queries %}
+            {% for i in stored_queries %}
+            <div class="col-auto">
+                <div
+                     class="adminProxyListLink figure rounded bg-dark px-lg-1 px-xl-2 px-xxl-3 py-1 py-lg-2">
+                    <span
+                          style="font-size:23px;">{{i.nice_name}}</span><br />
+                    <hr class="mx-5" style="color:white;" />
+                    <span style="font-size:18px;">Requests:
+                        None</span><br />
+                    <span style="font-size:16px;">None
+                        None</span><br />
+                    <span style="font-size:18px;">Last Access: {{i.last_access}}
+                    </span><br />                    
+                    <button class="btn-linkAdmin rounded bg-danger"
+                            onclick="location.href='{{proxy_list}}/{{i.id}}'">Disable
+                    </button> 
+                    <hr class="mx-5" style="color:white;" />
+                    <span class="fluidLongTextFlex">{{i.url}}</span>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+{{ super() }}
+{% endblock %}

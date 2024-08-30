@@ -1,0 +1,54 @@
+{% extends 'admin/admin_navigation.html' %}
+
+{% block title %}
+Confirm Delete for #{{mongo_scrape_db_id}} | {{ super() }}
+{% endblock %}
+
+{% block header %}
+{{ super() }}
+{% endblock %}
+
+{% block body %}
+{{ super() }}
+
+<div class="container-fluid bg-none">
+    <div
+         class="d-flex mx-auto mx-md-5 mt-md-3 justify-content-center align-items-center text-nowrap">
+        <p class="adminControlsTitleText">Confirm Delete for Scrape ID #{{mongo_scrape_db_id}}
+        </p>
+    </div>
+    <hr class="smallDivider mx-auto" style="color:white;" />
+    <span class="d-flex mx-auto mx-md-5 mt-md-3 justify-content-center align-items-center text-nowrap"
+          style="color:white;font-size:24px;" id="adminResponseDataText">Data</span>
+
+    <textarea class="extraDocumentationBodyOnDelete" id="mongoDataRaw"></textarea>
+    <br />
+    <hr class="smallestDivider mx-auto" style="color:white;" />
+    <br />
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="text-center" id="bottomControlDash">
+                    <button class="btn-linkAdmin btn-danger bg-danger
+    text-light text-center justify-content-center mx-auto mb-5 placeholder-wave"
+                            type="button"
+                            onclick="confirmedMongoScrapeDelete({{mongo_scrape_db_id}});">Delete</button>
+                    <button class="btn-linkAdmin btn-secondary bg-secondary
+    text-light text-center justify-content-center mx-auto mb-5" type="button"
+                            onclick="window.close();">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+{{ super() }}
+<script src="{{ url_for('admin.static',
+filename='scripts/admin_mongo_scrape_storage.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('admin.static',
+filename='scripts/admin_mongo_scrape_storage_rest.js') }}"
+        type="text/javascript"></script>
+{% endblock %}

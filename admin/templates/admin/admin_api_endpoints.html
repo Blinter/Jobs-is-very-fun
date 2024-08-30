@@ -1,0 +1,106 @@
+{% extends 'admin/admin_navigation.html' %}
+
+{% block title %}
+API Endpoints | {{ super() }}
+{% endblock %}
+
+{% block header %}
+{{ super() }}
+{% endblock %}
+
+{% block body %}
+{{ super() }}
+
+<div class="container-fluid bg-none">
+    <div
+         class="d-flex mx-auto mx-md-5 mt-md-3 justify-content-center align-items-center text-nowrap">
+        <p class="adminControlsTitleText">API Endpoints</p>
+    </div>
+    <div
+         class="row justify-content-center row-cols-auto gx-1 gx-lg-2 gx-xl-3 gx-xxl-4 gy-1 gy-xl-2 gy-xxl-3">
+        {% if api_endpoints_types %}
+        <button type="button" id="defaultFilterItem"
+                class="btn-EndpointMenuFilterItemActive bg-muted text-light"
+                data-type-id="-1">
+            All
+        </button>
+        {% for i in api_endpoints_types %}
+        <button type="button"
+                class="btn-EndpointMenuFilterItem bg-muted text-light"
+                data-type-id="{{i[0]}}">
+            {{i[1]}}
+        </button>
+        {% endfor %}
+        {% endif %}
+    </div>
+    <hr class="mediumDivider mx-auto" style="color:white;" />
+    <div class="adminAPIEndpointList mx-auto mx-lg-3 mx-xl-5">
+        <div
+             class="row justify-content-center row-cols-auto gx-1 gx-lg-2 gx-xl-3 gx-xxl-4 gy-1 gy-xl-2 gy-xxl-3">
+            {% if api_endpoints %}
+            {% for i in api_endpoints %}
+            <div class="col-auto">
+                <div
+                     class="adminAPIEndpointListLink figure rounded bg-dark px-lg-1 px-xl-2 px-xxl-3 py-1 py-lg-2">
+                    <span class="text-info"
+                          style="font-size:16px;">{{i.api.nice_name}}</span><br />
+                    <span class="fluidLongTextFlex"
+                          style="font-size:14px;font-weight: bolder;">{{i.nice_name}}</span><br />
+                    <span class="fluidLongTextFlex text-info"
+                          style="font-size:14px">{{i.get_nice_type()}}</span><br />
+                    <hr class="mx-5" style="color:white;" />
+                    {% if i.nice_description %}
+                    {% if i.nice_description|length > 80 %}
+                    <span class="fluidLongTextFlex"
+                          style="font-size:12px;">{{i.nice_description[0:80]}}...</span><br />
+                    <hr class="mx-5" style="color:white;" />
+                    {% elif i.nice_description|length == 0 %}
+                    {% else %}
+                    <span class="fluidLongTextFlex"
+                          style="font-size:12px;">{{i.nice_description}}</span><br />
+                    <hr class="mx-5" style="color:white;" />
+                    {% endif %}
+                    {% endif %}
+
+                    <button class="btn-linkAdminMini rounded bg-primary"
+                            onclick="viewEndpoint({{i.id}});">View
+                    </button>
+                    {% if i.disabled == 0 %}
+                    <button class="btn-linkAdminMini rounded bg-danger"
+                            onclick="toggleEndpoint(event, {{i.id}});">Disable
+                    </button>
+                    {% else %}
+                    <button class="btn-linkAdminMini rounded bg-success"
+                            onclick="toggleEndpoint(event, {{i.id}});">Enable
+                    </button>
+                    {% endif %}
+                    <br />
+                    <span
+                          class="fluidLongTextFlex text-info">{{i.api.host}}</span>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+<hr class="smallestDivider mx-auto" style="color:white;" />
+{% with admin_dash = url_for('admin.admin') %}
+<div
+     class="d-flex mx-auto mx-md-5 mt-md-3 justify-content-center align-items-center text-nowrap">
+    <button id="cancel" name="cancel" type="button"
+            class="adminDashButton btn-primary bg-success text-light py-1 mb-5 placeholder-wave"
+            onclick="location.href='{{admin_dash}}'">
+        Home
+    </button>
+</div>
+{% endwith %}
+{% endblock %}
+
+{% block javascript %}
+{{ super() }}
+<script src="{{ url_for('admin.static',
+filename='scripts/api_endpoints.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('admin.static',
+filename='scripts/api_endpoints_rest.js') }}" type="text/javascript"></script>
+{% endblock %}

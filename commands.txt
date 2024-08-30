@@ -1,0 +1,90 @@
+
+# OTHER ROUTINES
+PYTHONPATH=/home/jobs/jobs_is_very_fun python3 /home/jobs/jobs_is_very_fun_is_very_fun/routines/parsing/location/x_locations/lundehund_twitter_x_locations.py
+PYTHONPATH=/home/jobs/jobs_is_very_fun python3 /home/jobs/jobs_is_very_fun_is_very_fun/routines/parsing/location/x_locations/check_invalid_x_locations.py
+PYTHONPATH=/home/jobs/jobs_is_very_fun python3 /home/jobs/jobs_is_very_fun_is_very_fun/routines/parsing/location/glassdoor_locations/mantiks_glassdoor_locations.py
+
+PYTHONPATH=/home/jobs/jobs_is_very_fun python3 /home/jobs/jobs_is_very_fun_is_very_fun/routines/process_queries.py
+
+# DEBUG ENVIRONMENT
+PYTHONPATH=/home/jobs/jobs_is_very_fun python3 /home/jobs/jobs_is_very_fun_is_very_fun/run.py
+
+# OTHER DEBUGGING
+PYTHONPATH=/home/jobs/jobs_is_very_fun python3 /home/jobs/jobs_is_very_fun_is_very_fun/routines/debug/parse_company_list.py
+PYTHONPATH=/home/jobs/jobs_is_very_fun python3 /home/jobs/jobs_is_very_fun_is_very_fun/routines/debug/debug_auto_parsing.py
+PYTHONPATH=/home/jobs/jobs_is_very_fun python3 /home/jobs/jobs_is_very_fun_is_very_fun/routines/debug/debug_sandbox.py
+
+# AUTO SQL INSERTS
+PYTHONPATH=/home/jobs/jobs_is_very_fun python3 /home/jobs/jobs_is_very_fun_is_very_fun/routines/debug/debug_auto_insert.py
+
+
+# ROUTINES
+PYTHONPATH=/home/jobs/jobs_is_very_fun python3 /home/jobs/jobs_is_very_fun_is_very_fun/routines/process_companies.py
+PYTHONPATH=/home/jobs/jobs_is_very_fun python3 /home/jobs/jobs_is_very_fun_is_very_fun/routines/process_scrape.py
+PYTHONPATH=/home/jobs/jobs_is_very_fun python3 /home/jobs/jobs_is_very_fun_is_very_fun/routines/process_jobs.py
+PYTHONPATH=/home/jobs/jobs_is_very_fun python3 /home/jobs/jobs_is_very_fun_is_very_fun/routines/process_companies.py
+PYTHONPATH=/home/jobs/jobs_is_very_fun nice -n 19 python3 /home/jobs/jobs_is_very_fun_is_very_fun/routines/update_expired_job_count.py
+PYTHONPATH=/home/jobs/jobs_is_very_fun nice -n 19 python3 /home/jobs/jobs_is_very_fun_is_very_fun/routines/generate_timegraph_jobs.py
+
+
+# OTHER
+
+# Drops all non-geographic Postgres Tables
+PYTHONPATH=/home/jobs/jobs_is_very_fun python3 /home/jobs/jobs_is_very_fun_is_very_fun/seeds/postgres/drop_non_geo.py
+
+# GUNICORN
+screen -L -Logfile ~/screen_log/gunicorn -S 'gunicorn'
+PYTHONPATH=/home/jobs/jobs_is_very_fun gunicorn -c gunicorn.conf.py
+
+# DEBUG WEB SERVER
+screen -L -Logfile ~/screen_log/run -S 'run'
+PYTHONPATH=/home/jobs/jobs python3 /home/jobs/jobs/run.py
+
+# LOGS
+tail -f gunicorn_error.log
+tail -f gunicorn_access.log
+
+#
+# Running processes
+#
+
+# Queries
+# Process queries that are queued
+screen -L -Logfile ~/screen_log/routine_queries -S 'routine_queries'
+PYTHONPATH=/home/jobs/jobs_is_very_fun nice -n 19 python3 /home/jobs/jobs_is_very_fun/routines/handler_process_queries.py
+
+# Process Jobs/Companies
+# Process Jobs saved from API requests
+screen -L -Logfile ~/screen_log/routine_jobs -S 'routine_jobs'
+PYTHONPATH=/home/jobs/jobs_is_very_fun nice -n 19 python3 /home/jobs/jobs_is_very_fun/routines/handler_process_jobs.py
+
+# Process Companies and Company Descriptions
+# Grab Company Links and Descriptions
+screen -L -Logfile ~/screen_log/routine_companies -S 'routine_companies'
+PYTHONPATH=/home/jobs/jobs_is_very_fun nice -n 19 python3 /home/jobs/jobs_is_very_fun/routines/handler_process_companies.py
+
+# Process Timegraph Generation
+# Homepage Graph Statistics
+screen -L -Logfile ~/screen_log/routine_timegraph_gen -S 'routine_timegraph_gen'
+PYTHONPATH=/home/jobs/jobs_is_very_fun nice -n 19 python3 /home/jobs/jobs_is_very_fun/routines/handler_update_timegraph.py
+
+# Scraper Processes
+# Selenium + Chromium
+screen -L -Logfile ~/screen_log/routine_scraper -S 'routine_scraper'
+PYTHONPATH=/home/jobs/jobs_is_very_fun nice -n 19 python3 /home/jobs/jobs_is_very_fun/routines/handler_process_scrape.py
+
+# Count Expired Jobs
+# Company Jobs Pagination
+screen -L -Logfile ~/screen_log/routine_expired_jobs -S 'routine_expired_jobs_count'
+PYTHONPATH=/home/jobs/jobs_is_very_fun nice -n 19 python3 /home/jobs/jobs_is_very_fun/routines/handler_update_expired_job_count.py
+
+# External Proxy Checker
+# .NET 9.0 Preview
+screen -L -Logfile ~/screen_log/routine_proxy_check -S 'routine_proxy_check'
+~/jobs_is_very_fun/proxycheck/checker;
+nice -n 19 ~/jobs_is_very_fun/proxycheck/net/dotnet ~/jobs_is_very_fun/proxycheck/checker/ProxyCheck.dll;
+
+# Pelias Parser
+# Locations Parsing
+screen -L -Logfile ~/screen_log/pelias_parser -S 'pelias_parser'
+nice -n 19 node ./node_modules/pelias-parser/server/http.js

@@ -1,0 +1,136 @@
+{% extends 'general/navigation_base.html' %}
+
+{% block title %}
+Profile Dashboard | Jobs.is-very.fun
+{% endblock %}
+
+{% block header %}
+{{ super() }}
+{% endblock %}
+
+{% block body %}
+{{ super() }}
+
+
+<div class="container bg-none">
+    <div
+         class="d-flex userControlsTitleText justify-content-center align-items-center text-nowrap">
+        {{profile.name}}</div>
+    
+    <div class="d-flex justify-content-center" id="profileNameEditBody"></div>
+    <hr class="mediumDivider mx-auto" style="color:white;" />
+    <div class="userProfilesListTitle">
+        <div class="userProfilesListTitle">Saved Jobs</div>
+        <hr class="smallestDivider mx-auto" style="color:white;" />
+        <div id="profileJobsDashboard"></div>
+        <br />
+        <hr class="mx-5" style="color:white;" />
+        <div class="userProfilesListTitle">Saved Companies</div>
+        <hr class="mediumDivider mx-auto" style="color:white;" />
+        <div id="profileCompaniesDashboard"></div>
+        <br />
+
+    </div>
+    <ul class="userProfilesList mx-auto">
+    </ul>
+    <hr class="mx-5" style="color:white;" />
+    <div
+         class="userDashboardAccountActions row mx-auto justify-content-center align-text-center text-wrap">
+        Profile Actions
+    </div>
+    <hr class="smallDivider mx-auto" style="color:white;" />
+
+    <div
+         class="userControlsText1 row mx-auto justify-content-center align-text-center text-wrap rounded placeholder-wave">
+        <button class="btnRefreshProfile mx-auto mt-1 rounded"
+                onclick="refreshDashboard();">
+            refresh</button>
+    </div>
+
+    <hr class="smallerDivider mx-auto" style="color:white;"
+        id="dividerBeforeEditName" />
+    {% with profile_id = profile.id|string %}
+    {% with profile_name = profile.name %}
+    {% with javascript_edit_button =
+    "generateEditProfileControlsFromUserDash(event);" %}
+    <div
+         class="userControlsText1 row mx-auto justify-content-center align-text-center text-wrap">
+        <button class="btnEditProfileName mx-auto mt-1 rounded"
+                data-action="editProfileName" data-id="{{profile_id}}"
+                data-label="{{profile_name}}"
+                onclick="{{javascript_edit_button}}">
+            edit name</button>
+    </div>
+    <hr class="smallerDivider mx-auto" style="color:white;" />
+    {% endwith %}
+    {% endwith %}
+    {% endwith %}
+    {% with profile_id = profile.id|string %}
+    {% with profile_name = profile.name %}
+    {% if profile.active %}
+    <div
+         class="userControlsText1 row mx-auto mx-5 justify-content-center align-text-center text-wrap">
+        <button data-action="toggleProfile"
+                data-id="{{profile_id}}"
+                class="btnDeactivateProfile mx-auto mt-1 rounded"
+                onclick="toggleProfileFromUserDash();">
+            Deactivate</button>
+    </div>
+    {% else %}
+    <div
+         class="userControlsText1 row mx-auto mx-5 justify-content-center align-text-center text-wrap">
+        <button data-action="toggleProfile"
+                data-id="{{profile_id}}"
+                class="btnActivateProfile mx-auto mt-1 rounded"
+                onclick="toggleProfileFromUserDash();">
+            activate</button>
+    </div>
+    {% endif %}
+    <hr class="smallerDivider mx-auto" style="color:white;" />
+    {% endwith %}
+    {% endwith %}
+    {% if todo %}
+    <div
+         class="userControlsText1 row mx-auto mx-5 justify-content-center align-text-center text-wrap">
+        {% with user_feedback = "console.log('TODO')" %}
+        <button class="btnCreateSurvey mx-auto mt-1 rounded"
+                onclick="{{user_feedback}}">
+            new survey</button><br />
+        {% endwith %}
+    </div>
+    <hr class="smallerDivider mx-auto" style="color:white;" />
+    <div
+         class="userControlsText1 row mx-auto mx-5 justify-content-center align-text-center text-wrap">
+        {% with user_feedback = "console.log('TODO')" %}
+        <button class="btnCreateResume mx-auto mt-1 rounded"
+                onclick="{{user_feedback}}">
+            new resume</button><br />
+        {% endwith %}
+    </div>
+    <hr class="smallestDivider mx-auto" style="color:white;" />
+    {% endif %}
+    <div
+         class="userControlsText1 row mx-auto mx-5 justify-content-center align-text-center text-wrap">
+        {% with profile_id = profile.id|string %}
+        {% with javascript_delete_button =
+        "deleteProfileFromUserDash(" + profile_id + ");" %}
+        <button class="btnUserDelete mx-auto mt-1 rounded"
+                onclick="{{javascript_delete_button}}">
+            delete profile</button><br />
+        {% endwith %}
+        {% endwith %}
+    </div>
+
+</div>
+<div class="container homePageSpacer"></div>
+{% endblock %}
+
+{% block javascript %}
+{{ super() }}
+
+<script src="{{ url_for('user.static', filename='scripts/profiles_rest.js') }}"
+        type="text/javascript"></script>
+
+<script src="{{ url_for('user.static', filename='scripts/profiles_script.js') }}"
+        type="text/javascript"></script>
+{% endblock %}

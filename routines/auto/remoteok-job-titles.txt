@@ -1,0 +1,639 @@
+{
+  "skills": [
+    {
+      "id": 1,
+      "name": "AWS"
+    },
+    {
+      "id": 2,
+      "name": "Backend Development"
+    },
+    {
+      "id": 3,
+      "name": "Docker"
+    },
+    {
+      "id": 4,
+      "name": "GraphQL"
+    },
+    {
+      "id": 6,
+      "name": "Node.js"
+    },
+    {
+      "id": 7,
+      "name": "PHP"
+    },
+    {
+      "id": 8,
+      "name": "PostgreSQL"
+    },
+    {
+      "id": 10,
+      "name": "Project Management"
+    },
+    {
+      "id": 11,
+      "name": "Python"
+    },
+    {
+      "id": 12,
+      "name": "Software Development"
+    },
+    {
+      "id": 13,
+      "name": "SQL"
+    },
+    {
+      "id": 24,
+      "name": "Agile"
+    },
+    {
+      "id": 26,
+      "name": "Amazon FBA"
+    },
+    {
+      "id": 27,
+      "name": "Amazon RDS"
+    },
+    {
+      "id": 28,
+      "name": "Android"
+    },
+    {
+      "id": 29,
+      "name": "Apache Airflow"
+    },
+    {
+      "id": 34,
+      "name": "Apache Tomcat"
+    },
+    {
+      "id": 35,
+      "name": "Artificial Intelligence"
+    },
+    {
+      "id": 37,
+      "name": "ASP.NET"
+    },
+    {
+      "id": 38,
+      "name": "Autodesk Autocad"
+    },
+    {
+      "id": 39,
+      "name": "AWS EKS"
+    },
+    {
+      "id": 41,
+      "name": "Bash"
+    },
+    {
+      "id": 42,
+      "name": "Blockchain"
+    },
+    {
+      "id": 47,
+      "name": "Cisco"
+    },
+    {
+      "id": 48,
+      "name": "Citrix"
+    },
+    {
+      "id": 49,
+      "name": "Cloud Computing"
+    },
+    {
+      "id": 50,
+      "name": "Cybersecurity"
+    },
+    {
+      "id": 56,
+      "name": "Django"
+    },
+    {
+      "id": 59,
+      "name": "DynamoDB"
+    },
+    {
+      "id": 62,
+      "name": "ElasticSearch"
+    },
+    {
+      "id": 63,
+      "name": "Embedded Systems"
+    },
+    {
+      "id": 66,
+      "name": "Es6"
+    },
+    {
+      "id": 67,
+      "name": "Ethereum"
+    },
+    {
+      "id": 70,
+      "name": "Express.js"
+    },
+    {
+      "id": 75,
+      "name": "Flask"
+    },
+    {
+      "id": 77,
+      "name": "Fortran"
+    },
+    {
+      "id": 78,
+      "name": "Frontend Development"
+    },
+    {
+      "id": 79,
+      "name": "Fsharp"
+    },
+    {
+      "id": 80,
+      "name": "Full Stack Development"
+    },
+    {
+      "id": 81,
+      "name": "Game Design"
+    },
+    {
+      "id": 82,
+      "name": "Game Development"
+    },
+    {
+      "id": 84,
+      "name": "Git"
+    },
+    {
+      "id": 90,
+      "name": "HTML"
+    },
+    {
+      "id": 91,
+      "name": "CSS"
+    },
+    {
+      "id": 93,
+      "name": "iOS Development"
+    },
+    {
+      "id": 94,
+      "name": "IoT"
+    },
+    {
+      "id": 95,
+      "name": "Java"
+    },
+    {
+      "id": 100,
+      "name": "Javascript"
+    },
+    {
+      "id": 101,
+      "name": "Jenkins"
+    },
+    {
+      "id": 104,
+      "name": "jQuery"
+    },
+    {
+      "id": 105,
+      "name": "JUNIT"
+    },
+    {
+      "id": 106,
+      "name": "JVM"
+    },
+    {
+      "id": 114,
+      "name": "Kubernetes"
+    },
+    {
+      "id": 118,
+      "name": "Machine Learning"
+    },
+    {
+      "id": 119,
+      "name": "Mac OS X"
+    },
+    {
+      "id": 120,
+      "name": "Matlab"
+    },
+    {
+      "id": 121,
+      "name": "Microsoft Access"
+    },
+    {
+      "id": 122,
+      "name": "Microsoft Active Directory"
+    },
+    {
+      "id": 123,
+      "name": "Microsoft Azure"
+    },
+    {
+      "id": 126,
+      "name": "Microsoft .NET"
+    },
+    {
+      "id": 128,
+      "name": "Microsoft SQL Server"
+    },
+    {
+      "id": 130,
+      "name": "MongoDB"
+    },
+    {
+      "id": 131,
+      "name": "MySQL"
+    },
+    {
+      "id": 133,
+      "name": "Nginx"
+    },
+    {
+      "id": 135,
+      "name": "*Nix"
+    },
+    {
+      "id": 137,
+      "name": "Numpy"
+    },
+    {
+      "id": 138,
+      "name": "NUnit"
+    },
+    {
+      "id": 139,
+      "name": "OAuth"
+    },
+    {
+      "id": 140,
+      "name": "Objective-C"
+    },
+    {
+      "id": 143,
+      "name": "Oracle"
+    },
+    {
+      "id": 144,
+      "name": "Oracle EBS"
+    },
+    {
+      "id": 145,
+      "name": "Oracle ERP"
+    },
+    {
+      "id": 146,
+      "name": "Oracle RDBMS"
+    },
+    {
+      "id": 147,
+      "name": "Oracle RMAN"
+    },
+    {
+      "id": 150,
+      "name": "Product Management"
+    },
+    {
+      "id": 151,
+      "name": "PyTorch"
+    },
+    {
+      "id": 152,
+      "name": "QA"
+    },
+    {
+      "id": 153,
+      "name": "QA Automation"
+    },
+    {
+      "id": 158,
+      "name": "React.js"
+    },
+    {
+      "id": 159,
+      "name": "React Native"
+    },
+    {
+      "id": 160,
+      "name": "Ruby"
+    },
+    {
+      "id": 161,
+      "name": "Ruby on Rails"
+    },
+    {
+      "id": 169,
+      "name": "SCRUM"
+    },
+    {
+      "id": 171,
+      "name": "Shopify"
+    },
+    {
+      "id": 172,
+      "name": "Snowflake"
+    },
+    {
+      "id": 173,
+      "name": "Software Architecture"
+    },
+    {
+      "id": 174,
+      "name": "Spring"
+    },
+    {
+      "id": 175,
+      "name": "Spring Boot"
+    },
+    {
+      "id": 176,
+      "name": "Spring MVC"
+    },
+    {
+      "id": 177,
+      "name": "SQLite"
+    },
+    {
+      "id": 178,
+      "name": "Swift"
+    },
+    {
+      "id": 180,
+      "name": "TypeScript"
+    },
+    {
+      "id": 181,
+      "name": "UI Design"
+    },
+    {
+      "id": 182,
+      "name": "Unity3D"
+    },
+    {
+      "id": 183,
+      "name": "User Experience Design"
+    },
+    {
+      "id": 184,
+      "name": "VBA"
+    },
+    {
+      "id": 185,
+      "name": "VB.NET"
+    },
+    {
+      "id": 186,
+      "name": "Visual Basic"
+    },
+    {
+      "id": 187,
+      "name": "Vue.Js"
+    },
+    {
+      "id": 189,
+      "name": "Xamarin"
+    },
+    {
+      "id": 200,
+      "name": "C#"
+    },
+    {
+      "id": 201,
+      "name": "C++"
+    },
+    {
+      "id": 202,
+      "name": "C"
+    },
+    {
+      "id": 203,
+      "name": "JS"
+    },
+    {
+      "id": 207,
+      "name": "Jira"
+    },
+    {
+      "id": 212,
+      "name": "Tableau"
+    },
+    {
+      "id": 214,
+      "name": "Product Development"
+    },
+    {
+      "id": 225,
+      "name": "Algorithms"
+    },
+    {
+      "id": 226,
+      "name": "Amazon Web Services"
+    },
+    {
+      "id": 232,
+      "name": "Asp.NET"
+    },
+    {
+      "id": 233,
+      "name": "ASP.NET MVC"
+    },
+    {
+      "id": 234,
+      "name": "ASP.NET Web API"
+    },
+    {
+      "id": 235,
+      "name": "Axios"
+    },
+    {
+      "id": 236,
+      "name": "Azure"
+    },
+    {
+      "id": 240,
+      "name": "Blender"
+    },
+    {
+      "id": 245,
+      "name": "Cassandra"
+    },
+    {
+      "id": 247,
+      "name": "Content creation"
+    },
+    {
+      "id": 248,
+      "name": "Content management"
+    },
+    {
+      "id": 251,
+      "name": "Data analysis"
+    },
+    {
+      "id": 252,
+      "name": "Data engineering"
+    },
+    {
+      "id": 253,
+      "name": "Data mining"
+    },
+    {
+      "id": 254,
+      "name": "Data science"
+    },
+    {
+      "id": 255,
+      "name": "Data Structures"
+    },
+    {
+      "id": 258,
+      "name": "Elasticsearch"
+    },
+    {
+      "id": 259,
+      "name": "FastAPI"
+    },
+    {
+      "id": 261,
+      "name": "Firebase"
+    },
+    {
+      "id": 262,
+      "name": "Go"
+    },
+    {
+      "id": 263,
+      "name": "Golang"
+    },
+    {
+      "id": 268,
+      "name": "gRPC"
+    },
+    {
+      "id": 269,
+      "name": "Haskell"
+    },
+    {
+      "id": 272,
+      "name": "HTML5"
+    },
+    {
+      "id": 273,
+      "name": "Java Enterprise Edition"
+    },
+    {
+      "id": 281,
+      "name": ".NET"
+    },
+    {
+      "id": 282,
+      "name": ".NET core"
+    },
+    {
+      "id": 283,
+      "name": "Angular"
+    },
+    {
+      "id": 284,
+      "name": "CSS3"
+    },
+    {
+      "id": 285,
+      "name": "Manual testing"
+    },
+    {
+      "id": 287,
+      "name": "Mobile testing"
+    },
+    {
+      "id": 288,
+      "name": "Postgres"
+    },
+    {
+      "id": 289,
+      "name": "Product design"
+    },
+    {
+      "id": 291,
+      "name": "RDBMS"
+    },
+    {
+      "id": 292,
+      "name": "REST API"
+    },
+    {
+      "id": 293,
+      "name": "Redis"
+    },
+    {
+      "id": 294,
+      "name": "Redux"
+    },
+    {
+      "id": 295,
+      "name": "Regression testing"
+    },
+    {
+      "id": 301,
+      "name": "TestRail"
+    },
+    {
+      "id": 302,
+      "name": "Tomcat"
+    },
+    {
+      "id": 303,
+      "name": "Unreal engine"
+    },
+    {
+      "id": 304,
+      "name": "WebRTC"
+    },
+    {
+      "id": 306,
+      "name": "Next.js"
+    },
+    {
+      "id": 307,
+      "name": "Nosql"
+    },
+    {
+      "id": 308,
+      "name": "Pandas"
+    },
+    {
+      "id": 309,
+      "name": "React"
+    },
+    {
+      "id": 310,
+      "name": "RubyOnRails"
+    },
+    {
+      "id": 311,
+      "name": "Rust"
+    },
+    {
+      "id": 312,
+      "name": "Selenium"
+    },
+    {
+      "id": 313,
+      "name": "Spark"
+    },
+    {
+      "id": 314,
+      "name": "Tensorflow"
+    },
+    {
+      "id": 315,
+      "name": "Vue.js"
+    },
+}

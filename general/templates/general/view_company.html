@@ -1,0 +1,127 @@
+{% extends 'general/navigation_base.html' %}
+
+{% block title %}
+{% if company %}
+Company Details | {{company.name}} | {{ super() }}
+{% else %}
+Company Details | {{ super() }}
+{% endif %}
+{% endblock %}
+
+{% block header %}
+{{ super() }}
+{% endblock %}
+
+{% block body %}
+{{ super() }}
+<script>
+      let activeProfile = {{ "true" if profile else "false"}};
+</script>
+
+<div class="container-fluid bg-none">
+      <div
+           class="d-flex mx-auto mx-md-5 mt-md-3 justify-content-center align-items-center text-nowrap">
+            <p class="viewCompanySingle">{{company.name}}</p>
+      </div>
+      <div class="userJobList mx-auto mx-lg-3 mx-xl-5">
+            {% if company %}
+            <div
+                 class="row justify-content-center row-cols-auto gx-1 gx-lg-2 gx-xl-3 gx-xxl-4 gy-1 gy-xl-2 gy-xxl-3">
+                  <div class="col-auto">
+                        <div
+                             class="userProfilesListLink figure rounded bg-dark mb-2 px-lg-1 px-xl-2 px-xxl-3 py-1 py-lg-2">
+                              {% if company.description and
+                              company.description|length != 0 %}
+                              <span class="text-primary"
+                                    style="font-size:18px;">Description</span>
+                              <br />
+                              <hr class="smallestDivider mx-auto"
+                                  style="color:white;" />
+                              <span class="fluidCompanySingleDescription"
+                                    style="font-size:16px;">{{company.description}}</span>
+                              <br />
+
+                              <hr class="smallestDivider mx-auto"
+                                  style="color:white;" />
+                              {% endif %}
+
+                              {% if company.websites and
+                              company.websites|length != 0 %}
+                              <span class="text-primary"
+                                    style="font-size:18px;">Website</span>
+                              <br />
+                              <input id="companyWebsite" type="text" class=""
+                                     style="color:gold;background-color: teal;font-size:12px;width: 100%;text-align:center;"
+                                     value="{{company.websites}}"
+                                     onclick="copyToClipboard()"
+                                     data-bs-toggle="tooltip"
+                                     data-bs-placement="bottom"
+                                     data-bs-custom-class="custom-tooltip"
+                                     data-bs-title="Click to copy to clipboard" />
+                              <div id="hiddenText" class="hidden-text"></div>
+
+                              <hr class="smallestDivider mx-auto"
+                                  style="color:white;" />
+                              {% endif %}
+                              {% if not saved_company %}
+                              <button class="btnAction rounded bg-success"
+                                      data-action="toggleCompanyExtra"
+                                      data-id={{company.id}}
+                                      onclick="toggleCompany(event)">Save</button>
+                              {% else %}
+                              <button class="btnAction rounded bg-danger"
+                                      data-action="toggleCompanyExtra"
+                                      data-id={{company.id}}
+                                      onclick="toggleCompany(event);">Un-save</button>
+                              {% endif %}
+                              <br />
+                              <hr class="smallestDivider mx-auto"
+                                  style="color:white;" />
+                              <span class="fluidLongTextFlex"
+                                    style="font-size:15px;font-weight: bolder;">Job Count:</span>
+                                    <span class="fluidLongTextFlex text-info" 
+                                    id="listedJobCount">{{company.current_job_count}}</span>
+                              <br />
+
+                              <hr class="smallestDivider mx-auto"
+                                  style="color:white;" />
+                              <span style="font-size:15px;font-weight: bolder;"
+                                    class="fluidLongTextFlex">Last Updated</span>
+                              <br />
+                              <span
+                                    class="fluidUserLongTextFlex text-info">{{company.last_updated}}</span>
+                              <br />
+                              {% if company.current_job_count != 0 %}
+                              <hr class="smallestDivider mx-auto"
+                                  style="color:white;" />
+                              <button class='btnAction rounded bg-primary text-white px-4'
+                                      data-company-id="{{company.id}}"
+                                      id="showCompanyJobs">Show Jobs</button>
+                              <br />
+                              <input type="hidden" id="maxPagesCount"
+                                     data-max-pages="{{max_pages}}"></input>
+                              <div id="loadCompanyJobs"></div>
+                              {% endif %}
+                        </div>
+                  </div>
+            </div>
+            {% endif %}
+      </div>
+</div>
+<hr class="smallestDivider mx-auto" style="color:white;" />
+<div
+     class="d-flex mx-auto mx-md-5 mt-md-3 justify-content-center align-items-center text-nowrap">
+      <button class="btnAction rounded bg-danger text-center justify-content-center mx-auto mb-5 placeholder-wave"
+              style="margin-top: 5px;" onclick="window.close();">Close
+      </button>
+</div>
+{% endblock %}
+
+{% block javascript %}
+{{ super() }}
+<script src="{{ url_for('general.static', filename='scripts/companies.js') }}"
+        type="text/javascript"></script>
+
+<script src="{{ url_for('general.static', filename='scripts/companies_rest.js') }}"
+        type="text/javascript"></script>
+{% endblock %}

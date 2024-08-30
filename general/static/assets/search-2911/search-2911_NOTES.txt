@@ -1,0 +1,14 @@
+https://www.iconpacks.net/free-icon/search-2911.html
+
+Colors (1,2,3,4)
+#155e75
+#083344
+#d4d4d4
+#06b6d4
+
+Border/Background: None
+Scale: Max
+Centered:
+Rotate/Flip -> Handle Bottom Left. Left Down to Top right
+
+SVG + 16->1024 PNG

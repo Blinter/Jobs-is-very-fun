@@ -1,0 +1,421 @@
+.adminControlList {
+  padding: 0;
+  list-style-type: none;
+  color: #ffffff;
+  font-family: "Book Antiqua", Palatino, serif;
+  font-optical-sizing: auto;
+  letter-spacing: 0px;
+  word-spacing: 0px;
+  font-size: 24px;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.adminControlText {
+  text-align: center;
+  font-family: "Sedan SC", serif;
+  font-weight: 400;
+  font-style: normal;
+  color: white;
+  font-size: 36px;
+}
+
+.btn-EndpointMenuFilterItem {
+  color: rgb(231, 230, 229);
+  background: rgb(53, 55, 56);
+  width: auto;
+  text-wrap: nowrap;
+  text-decoration: none;
+  font-weight: bolder;
+  font-size: 14px;
+}
+
+.btn-EndpointMenuFilterItem:hover {
+  color: rgb(0, 0, 120);
+  background: rgb(0, 128, 0);
+}
+
+.btn-EndpointMenuFilterItemActive {
+  color: darkgray !important;
+  background: rgb(0, 64, 96);
+  border: 1px solid black !important;
+}
+
+.btn-EndpointMenuFilterItemActive:hover {
+  background: rgb(5, 108, 159) !important;
+  color: rgb(255, 255, 255) !important;
+}
+
+.btn-APIMenuFilterItem {
+  color: rgb(231, 230, 229);
+  background: rgb(53, 55, 56);
+  width: auto;
+  text-wrap: nowrap;
+  text-decoration: none;
+  font-weight: bolder;
+  font-size: 14px;
+}
+
+.btn-APIMenuFilterItem:hover {
+  color: rgb(0, 0, 120);
+  background: rgb(0, 128, 0);
+}
+
+.btn-APIMenuFilterItemActive {
+  color: darkgray !important;
+  background: rgb(0, 64, 96);
+  border: 1px solid black !important;
+}
+
+.btn-APIMenuFilterItemActive:hover {
+  background: rgb(5, 108, 159) !important;
+  color: rgb(255, 255, 255) !important;
+}
+
+.btn-linkAdminMini {
+  color: rgb(231, 230, 229);
+  background: rgb(53, 55, 56);
+  width: 65px;
+  text-wrap: nowrap;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-decoration: none;
+  font-weight: bolder;
+  font-size: 14px;
+}
+
+.btn-linkAdminMini:hover,
+.btn-linkAdminMini:focus {
+  color: rgb(0, 0, 120);
+  background: rgb(0, 128, 0);
+}
+
+.btn-linkAdmin {
+  color: rgb(231, 230, 229);
+  background: rgb(53, 55, 56);
+  width: 100px;
+  text-wrap: nowrap;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-decoration: none;
+  font-weight: bolder;
+  font-size: 24px;
+}
+
+.btn-linkAdmin:hover,
+.btn-linkAdmin:focus {
+  color: rgb(0, 0, 120);
+  background: rgb(0, 128, 0);
+}
+
+.adminControlsTitleText {
+  padding: 0;
+  list-style-type: none;
+  color: #ffffff;
+  font-family: "Jaro", sans-serif;
+  font-optical-sizing: auto;
+  letter-spacing: -1px;
+  word-spacing: -2px;
+  font-size: 64px;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "BNCE" 0,
+    "INFM" 100,
+    "SPAC" 0;
+}
+
+
+.adminProxyList {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  list-style-type: none;
+  color: #ffffff;
+  font-family: "Book Antiqua", Palatino, serif;
+  font-optical-sizing: auto;
+  letter-spacing: 0px;
+  word-spacing: 0px;
+  font-size: 20px;
+  font-style: normal;
+}
+
+.adminProxyListLink {
+  text-align: center;
+  padding: 0;
+  list-style-type: none;
+  text-wrap: pretty;
+  margin: auto;
+  width: 250px;
+  max-width: 250px;
+}
+
+
+.adminAPIEndpointList {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  list-style-type: none;
+  color: #ffffff;
+  font-family: "Book Antiqua", Palatino, serif;
+  font-optical-sizing: auto;
+  letter-spacing: 0px;
+  word-spacing: 0px;
+  font-size: 20px;
+  font-style: normal;
+}
+
+.adminAPIEndpointListLink {
+  text-align: center;
+  padding: 0;
+  list-style-type: none;
+  text-wrap: pretty;
+  margin: auto;
+  width: 250px;
+  max-width: 250px;
+}
+
+.adminAPIEndpointFull {
+  text-align: center;
+  padding: 0;
+  list-style-type: none;
+  text-wrap: pretty;
+  margin: auto;
+  width: 85%;
+  max-width: 85%;
+}
+
+.fluidTextBottom {
+  text-wrap: pretty;
+  text-overflow: balance;
+  font-size: 14px;
+  padding: 0;
+  margin: 0;
+}
+
+.fluidLongTextFlex {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-wrap: pretty;
+  word-break: break-all;
+  font-size: 14px;
+  padding: 0;
+  margin: 0;
+}
+
+.fluidLongTextEndpointFooter {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-wrap: stable;
+  word-break: normal;
+  font-size: 16px;
+  padding: 0;
+  margin: 0;
+}
+
+.adminLargeTable {
+  overflow-x: auto !important;
+  text-wrap: nowrap !important;
+  text-overflow: clip !important;
+  table-layout: fixed;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 14px;
+  padding: 0;
+  margin: 0;
+}
+
+.adminLargeTableTextItem {
+  min-width: 150px;
+  text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-wrap: balance;
+  word-break: break-all;
+  font-size: 14px;
+  padding: 0;
+  margin: 0;
+}
+
+.btn-TableButtonItem {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: rgb(231, 230, 229);
+  background: rgb(53, 55, 56);
+  width: auto;
+  text-wrap: nowrap;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-decoration: none;
+  font-weight: bolder;
+  font-size: 16px;
+}
+
+.btn-TableButtonItem:hover,
+.btn-TableButtonItem:focus {
+  color: rgb(255, 255, 255);
+  background: rgb(4, 189, 4);
+}
+
+.queryPageSelectField {
+  text-align: center !important;
+  align-items: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-wrap: nowrap;
+  word-break: keep-all;
+  font-size: 24px;
+  padding: 0;
+  margin: 0;
+}
+
+.lastAccessTimeText {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  padding: 0 !important;
+  margin: 0 !important;
+  list-style-type: none;
+  color: #ffffff;
+  font-family: "Book Antiqua", Palatino, serif;
+  font-optical-sizing: auto;
+  letter-spacing: 0px;
+  word-spacing: 0px;
+  font-size: 24px;
+  font-style: normal;
+}
+
+
+.btn-EndpointTabItem {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: rgb(231, 230, 229);
+  background: rgb(53, 55, 56);
+  width: auto;
+  text-wrap: nowrap;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-decoration: none;
+  font-weight: bolder;
+  font-size: 16px;
+}
+
+.btn-EndpointTabItem:hover,
+.btn-EndpointTabItem:focus {
+  color: rgb(255, 255, 255);
+  background: rgb(13, 166, 133);
+}
+
+.btn-EndpointActiveTabItem {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: darkgray !important;
+  background: rgb(0, 64, 96);
+  border: 1px solid black !important;
+  margin-left: -1px !important;
+  margin-right: -1px !important;
+  width: auto;
+  text-wrap: nowrap;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-decoration: none;
+  font-weight: bolder;
+  font-size: 16px;
+}
+
+.btn-EndpointActiveTabItem:hover,
+.btn-EndpointActiveTabItem:focus {
+  background: rgb(1, 21, 31) !important;
+  color: darkgray !important;
+  border: 1px solid darkgray !important;
+}
+
+.btn-EndpointDisabledTabItem {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  width: auto;
+  text-wrap: nowrap;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-decoration: none;
+  font-weight: bolder;
+  font-size: 16px !important;
+}
+
+.APIKeyAutoCheckbox {
+  font-family: "Book Antiqua", Palatino, serif;
+  font-optical-sizing: auto;
+  color: darkgray !important;
+  width: auto;
+  margin: auto;
+  font-size: 25px;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.extraDocumentationBody {
+  width: 100%;
+  margin: auto;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-wrap: wrap;
+  font-size: 16px;
+  padding: 0;
+  margin: 0;
+}
+
+.extraDocumentationBodyOnDelete {
+  width: 100%;
+  resize: vertical;
+  margin: auto;
+  background-color: #000000;
+  height: 480px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-wrap: wrap;
+  font-size: 16px;
+  padding: 0;
+  margin: 0;
+}
+
+.manualQueryFormTextBody {
+  width: 100%;
+  margin: auto;
+  color: black;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-wrap: wrap;
+  font-size: 16px;
+  padding: 0;
+  margin: 0;
+}
+
+.manualQueryFormText {
+  text-align: center !important;
+  align-items: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-wrap: pretty;
+  word-break: keep-all;
+  font-size: 18px;
+  padding: 0;
+  margin: 0;
+}
+
+.adminDashButton {
+  text-align: center;
+  font-family: "Sedan SC", serif;
+  font-weight: 400;
+  font-style: normal;
+  color: white;
+  font-size: 36px;
+}
+
+.adminDashButton:hover,
+.adminDashButton:focus {
+  color: darkslateblue !important;
+  background-color:darkgoldenrod !important;
+}
+
+.page-item:hover,
+.page-item:focus{
+    cursor: pointer !important;
+}

@@ -1,0 +1,148 @@
+{% extends 'general/base.html' %}
+
+{% block title %}
+{{ super() }}
+{% endblock %}
+
+{% block header %}
+{{ super() }}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alumni+Sans:ital,wght@0,100..900;1,100..900&family=Shantell+Sans:wght,INFM@300,100&display=swap"
+      rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+{{ super() }}
+<nav
+     class="navbar navbar-expand-lg navbar-light bg-light ml-lg-5 my-lg-3 mr-3 mx-lg-5 pl-4 rounded-lg-inverse-pill newlyLaunched">
+    <div class="container-fluid">
+        <button class="navbar-toggler order-0" type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle Navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand order-0 d-flex align-items-baseline"
+           href="{{ url_for('general.home') }}">
+            <img class="order-3 order-lg-1 align-self-start align-self-lg-end"
+                 style="max-height:48px;"
+                 src="{{ url_for('general.static', filename='assets/search-2911/search-2911.svg') }}"
+                 alt="Jobs Search Icon" />
+            <span class="order-1 order-lg-1"
+                  id="logoTextMainFont">Jobs</span><span
+                  class="order-2 order-lg-2"
+                  id="logoTextSecondaryFont">.is-very.fun</span>
+        </a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item navbar-dark dropdown">
+                    <a class="nav-link text-dark dropdown-toggle" href=""
+                       id="navbarDropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false" data-bs-toggle="dropdown"
+                       data-bs-display="static" type="button"
+                       data-bs-target="#navbarSupportedContent"
+                       aria-controls="navbarSupportedContent"
+                       aria-label="User Menu">
+                        {% if user %}
+                        Signed in as {{user}}
+                        {% else %}
+                        Not signed in
+                        {% endif %}
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-xl-start"
+                         aria-labelledby="navbarDropdown">
+                        {% if user %}
+                        {%
+                        with user_dashboard =
+                        url_for('user.user_dashboard')
+                        %}
+                        <a class="dropdown-item"
+                           href="{{user_dashboard}}"><span>Dashboard</span></a>
+                        {% endwith %}
+                        <div class="dropdown-divider"></div>
+                        {%
+                        with logout_link = url_for('user.logout',
+                        _external=False)
+                        %}
+                        <a class="dropdown-item"
+                           href="{{logout_link}}"><span>Log out</span></a>
+                        {% endwith %}
+                        {% else %}
+                        {%
+                        with google_link = url_for('sso_google.sso_google',
+                        _external=True)
+                        %}
+                        {%
+                        with github_link = url_for('sso_github.sso_github',
+                        _external=True)
+                        %}
+                        {%
+                        with email_link = url_for('user.register')
+                        %}
+                        {%
+                        with login = url_for('user.login')
+                        %}
+<!--                        <a class="dropdown-item"-->
+<!--                           href="{{google_link}}"><span>Sign in with-->
+<!--                                Google</span></a>-->
+                        <a class="dropdown-item"
+                           href="{{github_link}}"><span>Sign in with
+                                GitHub</span></a>
+                        <a class="dropdown-item"
+                           href="{{email_link}}"><span>Register with
+                                Email</span></a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{login}}"><span>Login
+                                with
+                                User/Email</span></a>
+                        {% endwith %}
+                        {% endwith %}
+                        {% endwith %}
+                        {% endwith %}
+                        {% endif %}
+                    </div>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link text-secondary"
+                       href="{{url_for('general.jobs')}}"><span
+                              id="navBarLinkDefault">Jobs</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-secondary"
+                       href="{{url_for('general.companies')}}"><span
+                              id="navBarLinkDefault">Companies</span></a>
+                </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link text-secondary"
+                       href="{{url_for('general.updates')}}"><span
+                              id="navBarLinkDefault">Updates</span></a>
+                </li> -->
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="messageContainer">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="flashed_msgs">
+        <!-- <dt>Status Message</dt> -->
+        {% for category, message in messages %}
+        <div class="ml-lg-5 my-lg-3 mr-3 mx-lg-5 pl-4 rounded-lg-inverse-pill alertTest alert alert-{{ category }} fade show"
+             role="alert">
+            <strong>{{ message }}</strong>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+</div>
+{% endblock %}
+
+{% block javascript %}
+{{ super() }}
+{% endblock %}

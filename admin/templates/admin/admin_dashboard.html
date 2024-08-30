@@ -1,0 +1,118 @@
+{% extends 'admin/admin_navigation.html' %}
+
+{% block title %}
+Admin Dashboard | {{ super() }}
+{% endblock %}
+
+{% block header %}
+{{ super() }}
+{% endblock %}
+
+{% block body %}
+{{ super() }}
+
+<div class="container bg-none">
+    <div
+         class="d-flex mx-auto mx-md-5 mt-md-3 justify-content-center align-items-center text-nowrap">
+        <p class="adminControlsTitleText">Admin Dashboard</p>
+    </div>
+    <ul class="adminControlList">
+        <li class="adminControlText">
+            Proxy List
+           <br/>
+            {% with proxy_list = url_for('admin.admin_proxy_list') %}
+           <button class="btn-linkAdmin rounded placeholder-wave"
+                   onclick="location.href='{{proxy_list}}'">Go
+           </button>
+            {% endwith %}
+       </li>
+       <li class="adminControlText">
+           <hr class="mediumDivider mx-auto" style="color:white;" />
+            API List
+           <br/>
+           {% with api_list = url_for('admin.admin_api_list') %}
+          <button class="btn-linkAdmin rounded placeholder-wave"
+                  onclick="location.href='{{api_list}}'">Go
+          </button>
+           {% endwith %}
+       </li>
+       <li class="adminControlText">
+           <hr class="mediumDivider mx-auto" style="color:white;" />
+            API Endpoints
+           <br/>
+           {% with api_endpoints = url_for('admin.admin_api_endpoints') %}
+          <button class="btn-linkAdmin rounded placeholder-wave"
+                  onclick="location.href='{{api_endpoints}}'">Go
+          </button>
+           {% endwith %}
+       </li>
+       <li class="adminControlText">
+           <hr class="mediumDivider mx-auto" style="color:white;" />
+            Mongo Storage
+           <br/>
+           {% with mongo_storage = url_for('admin.admin_mongo_storage') %}
+          <button class="btn-linkAdmin rounded placeholder-wave"
+                  onclick="location.href='{{mongo_storage}}'">Go
+          </button>
+           {% endwith %}
+       </li>
+       <li class="adminControlText">
+           <hr class="mediumDivider mx-auto" style="color:white;" />
+            Scrape Storage
+           <br/>
+           {% with scrape_storage = url_for('admin.admin_mongo_scrape_storage') %}
+          <button class="btn-linkAdmin rounded placeholder-wave"
+                  onclick="location.href='{{scrape_storage}}'">Go
+          </button>
+           {% endwith %}
+       </li>
+       <li class="adminControlText">
+           <hr class="mediumDivider mx-auto" style="color:white;" />
+            Manual Query
+           <br/>
+           {% with manual_query = url_for('admin_query.admin_query') %}
+          <button class="btn-linkAdmin rounded placeholder-wave"
+                  onclick="location.href='{{manual_query}}'">Go
+          </button>
+           {% endwith %}
+       </li>
+       <li class="adminControlText">
+           <hr class="mediumDivider mx-auto" style="color:white;" />
+            Manual Scrape
+           <br/>
+           {% with manual_scrape_query = url_for('admin_query.admin_scrape') %}
+          <button class="btn-linkAdmin rounded placeholder-wave"
+                  onclick="location.href='{{manual_scrape_query}}'">Go
+          </button>
+           {% endwith %}
+       </li>
+       <li class="adminControlText">
+           <hr class="mediumDivider mx-auto" style="color:white;" />
+            Cached Queries
+           <br/>
+           <button class="btn-linkAdmin rounded placeholder-wave">Go</button>
+       </li>
+       <li class="adminControlText">
+           <hr class="mediumDivider mx-auto" style="color:white;" />
+            Database Routines
+           <br/>
+           {% with database_routines = url_for(
+                'admin_query.admin_database_routines') %}
+          <button class="btn-linkAdmin rounded placeholder-wave"
+                  onclick="location.href='{{database_routines}}'">Go
+          </button>
+           {% endwith %}
+       </li>
+       <li class="adminControlText">
+           <hr class="mediumDivider mx-auto" style="color:white;" />
+            Statistics
+           <br/>
+           <button class="btn-linkAdmin rounded placeholder-wave">Go</button>
+       </li>
+    </ul>
+</div>
+{% endblock %}
+
+{% block javascript %}
+{{ super() }}
+{% endblock %}

@@ -1,0 +1,112 @@
+{% extends 'admin/admin_navigation.html' %}
+
+{% block title %}
+{{ super() }}
+{% endblock %}
+
+{% block header %}
+{{ super() }}
+{% endblock %}
+
+{% block body %}
+{{ super() }}
+
+<div class="container-fluid bg-none">
+    <div
+         class="d-flex mx-auto mx-md-5 mt-md-3 justify-content-center align-items-center text-nowrap">
+        <p class="adminControlsTitleText">Proxy List</p>
+    </div>
+    <hr class="mediumDivider mx-auto" style="color:white;" />
+    <div class="adminProxyList mx-auto mx-lg-3 mx-xl-5">
+        <div class="row row-cols-auto g-2 g-lg-3 g-xl-4 g-xxl-5">
+            {% if proxies %}
+            {% for i in proxies %}
+            <!-- <div class="col-auto">
+                <div class="adminProxyListLink figure rounded bg-dark p-0 p-lg-1 p-xl-2 p-xxl-3">
+                    ID: 1<br />
+                    255.255.255.255:65535<br />
+                    <hr class="mx-5" style="color:white;" />
+                    Requests: 150<br />
+                    Failed Requests: 25<br />
+                    Proxy Type: Residential
+                    <br/>
+                    {% with proxy_list = url_for('admin.admin_proxy_list') %}
+                    <button class="btn-linkAdmin rounded placeholder-wave"
+                            onclick="location.href='{{proxy_list}}'">Disable
+                    </button>
+                    <button class="btn-linkAdmin rounded placeholder-wave"
+                            onclick="location.href='{{proxy_list}}'">Test
+                    </button>
+                    {% endwith %}
+                </div>
+            </div>
+            <div class="col-auto">
+                <div class="adminProxyListLink figure rounded bg-dark p-0 p-lg-1 p-xl-2 p-xxl-3">
+                    ID: 2<br />
+                    255.255.255.255:65535<br />
+                    <hr class="mx-5" style="color:white;" />
+                    Requests: 150<br />
+                    Failed Requests: 25<br />
+                    Proxy Type: Residential
+                </div>
+            </div>
+            <div class="col-auto">
+                <div class="adminProxyListLink figure rounded bg-dark p-0 p-lg-1 p-xl-2 p-xxl-3">
+                    ID: 3<br />
+                    255.255.255.255:65535<br />
+                    <hr class="mx-5" style="color:white;" />
+                    Requests: 150<br />
+                    Failed Requests: 25<br />
+                    Proxy Type: Residential
+                </div>
+            </div>
+            <div class="col-auto">
+                <div class="adminProxyListLink figure rounded bg-dark p-0 p-lg-1 p-xl-2 p-xxl-3">
+                    ID: 4<br />
+                    255.255.255.255:65535<br />
+                    <hr class="mx-5" style="color:white;" />
+                    Requests: 150<br />
+                    Failed Requests: 25<br />
+                    Proxy Type: Residential
+                </div>
+            </div>
+            <div class="col-auto">
+                <div class="adminProxyListLink figure rounded bg-dark p-0 p-lg-1 p-xl-2 p-xxl-3">
+                    ID: 5<br />
+                    255.255.255.255:65535<br />
+                    <hr class="mx-5" style="color:white;" />
+                    Requests: 150<br />
+                    Failed Requests: 25<br />
+                    Proxy Type: Residential
+                </div>
+            </div>
+            <div class="col-auto">
+                <div class="adminProxyListLink figure rounded bg-dark p-0 p-lg-1 p-xl-2 p-xxl-3">
+                    ID: 6<br />
+                    255.255.255.255:65535<br />
+                    <hr class="mx-5" style="color:white;" />
+                    Requests: 150<br />
+                    Failed Requests: 25<br />
+                    Proxy Type: Residential
+                </div>
+            </div>
+            <div class="col-auto">
+                <div class="adminProxyListLink figure rounded bg-dark p-0 p-lg-1 p-xl-2 p-xxl-3">
+                    ID: 7<br />
+                    255.255.255.255:65535<br />
+                    <hr class="mx-5" style="color:white;" />
+                    Requests: 150<br />
+                    Failed Requests: 25<br />
+                    Proxy Type: Residential
+                </div>
+            </div> -->
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+{{ super() }}
+{% endblock %}

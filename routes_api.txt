@@ -1,0 +1,122 @@
+# Get Jobs Endpoint
+/get_jobs
+/get_jobs/
+/get_jobs/<int:page_number>
+/get_jobs/<int:page_number>/
+
+
+# Get Companies Endpoint
+/get_companies
+/get_companies/
+/get_companies/<int:page_number>
+/get_companies/<int:page_number>/
+
+# Search Companies
+/search_companies
+/search_companies/
+/search_companies/<search_query>
+/search_companies/<search_query>/
+/search_companies/<search_query>/<int:page_number>
+/search_companies/<search_query>/<int:page_number>/
+
+# Search Jobs (By Keyword)
+/search_jobs_k
+/search_jobs_k/
+/search_jobs_k/<search_query>
+/search_jobs_k/<search_query>/
+/search_jobs_k/<search_query>/<int:page_number>
+/search_jobs_k/<search_query>/<int:page_number>/
+
+# Search Jobs (By Location)
+/search_jobs_l
+/search_jobs_l/
+/search_jobs_l/<location_query>
+/search_jobs_l/<location_query>/
+/search_jobs_l/<location_query>/<int:page_number>
+/search_jobs_l/<location_query>/<int:page_number>/
+
+# Search Jobs (By Location and Distance)
+/search_jobs_ld
+/search_jobs_ld/
+/search_jobs_ld/<location_query>
+/search_jobs_ld/<location_query>/
+/search_jobs_ld/<location_query>/<int:distance>
+/search_jobs_ld/<location_query>/<int:distance>/
+/search_jobs_ld/<location_query>/<int:distance>/<int:page_number>
+/search_jobs_ld/<location_query>/<int:distance>/<int:page_number>/
+
+# Search Jobs (By Keyword and Location)
+/search_jobs_kl
+/search_jobs_kl/
+/search_jobs_kl/<search_query>
+/search_jobs_kl/<search_query>/
+/search_jobs_kl/<search_query>/<location_query>
+/search_jobs_kl/<search_query>/<location_query>/
+/search_jobs_kl/<search_query>/<location_query>/<int:page_number>
+/search_jobs_kl/<search_query>/<location_query>/<int:page_number>/
+
+# Search Jobs (By Keyword, Location, and Distance)
+/search_jobs_kld
+/search_jobs_kld/
+/search_jobs_kld/<search_query>
+/search_jobs_kld/<search_query>/
+/search_jobs_kld/<search_query>/<location_query>
+/search_jobs_kld/<search_query>/<location_query>/
+/search_jobs_kld/<search_query>/<location_query>/<int:page_number>
+/search_jobs_kld/<search_query>/<location_query>/<int:page_number>/
+
+# Get Company Jobs (By ID)
+/get_company_jobs
+/get_company_jobs/
+/get_company_jobs/<int:company_id>
+/get_company_jobs/<int:company_id>/
+/get_company_jobs/<int:company_id>/<int:page_number>
+/get_company_jobs/<int:company_id>/<int:page_number>/
+
+# Search Company Jobs with Company ID (By Keyword)
+/search_company_jobs_k
+/search_company_jobs_k/
+/search_company_jobs_k/<int:company_id>
+/search_company_jobs_k/<int:company_id>/
+/search_company_jobs_k/<int:company_id>/<search_query>
+/search_company_jobs_k/<int:company_id>/<search_query>/
+/search_company_jobs_k/<int:company_id>/<search_query>/<int:page_number>
+/search_company_jobs_k/<int:company_id>/<search_query>/<int:page_number>/
+
+# Search Company Jobs with Company ID (By Location)
+/search_company_jobs_l
+/search_company_jobs_l/
+/search_company_jobs_l/<int:company_id>
+/search_company_jobs_l/<int:company_id>/
+/search_company_jobs_l/<int:company_id>/<location_query>
+/search_company_jobs_l/<int:company_id>/<location_query>/
+
+# Search Company Jobs with Company ID (By Location and Distance)
+/search_company_jobs_ld
+/search_company_jobs_ld/
+/search_company_jobs_ld/<int:company_id>
+/search_company_jobs_ld/<int:company_id>/
+/search_company_jobs_ld/<int:company_id>/<location_query>
+/search_company_jobs_ld/<int:company_id>/<location_query>/
+/search_company_jobs_ld/<int:company_id>/<location_query>/<int:page_number>
+/search_company_jobs_ld/<int:company_id>/<location_query>/<int:page_number>/
+
+# Search Company Jobs with Company ID (By Keyword and Location)
+/search_company_jobs_kl
+/search_company_jobs_kl/
+/search_company_jobs_kl/<int:company_id>
+/search_company_jobs_kl/<int:company_id>/
+/search_company_jobs_kl/<int:company_id>/<search_query>
+/search_company_jobs_kl/<int:company_id>/<search_query>/
+/search_company_jobs_kl/<int:company_id>/<search_query>/<int:page_number>
+/search_company_jobs_kl/<int:company_id>/<search_query>/<int:page_number>/
+
+# Search Company Jobs with Company ID (By Keyword, Location, and Distance)
+/search_company_jobs_kld
+/search_company_jobs_kld/
+/search_company_jobs_kld/<int:company_id>
+/search_company_jobs_kld/<int:company_id>/
+/search_company_jobs_kld/<int:company_id>/<search_query>
+/search_company_jobs_kld/<int:company_id>/<search_query>/
+/search_company_jobs_kld/<int:company_id>/<search_query>/<int:page_number>
+/search_company_jobs_kld/<int:company_id>/<search_query>/<int:page_number>/

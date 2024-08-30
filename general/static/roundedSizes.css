@@ -1,0 +1,222 @@
+@media (min-width: 576px) {
+  .rounded-sm-pill {
+    border-radius: var(--bs-border-radius-pill) !important;
+  }
+
+  .rounded-md-pill {
+    border-radius: var(--bs-border-radius-pill) !important;
+  }
+
+  .rounded-lg-pill {
+    border-radius: var(--bs-border-radius-pill) !important;
+  }
+
+  .rounded-xl-pill {
+    border-radius: var(--bs-border-radius-pill) !important;
+  }
+
+  .rounded-xxl-pill {
+    border-radius: var(--bs-border-radius-pill) !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .rounded-sm-pill {
+    border-radius: initial !important;
+  }
+
+  .rounded-md-pill {
+    border-radius: var(--bs-border-radius-pill) !important;
+  }
+
+  .rounded-lg-pill {
+    border-radius: var(--bs-border-radius-pill) !important;
+  }
+
+  .rounded-xl-pill {
+    border-radius: var(--bs-border-radius-pill) !important;
+  }
+
+  .rounded-xxl-pill {
+    border-radius: var(--bs-border-radius-pill) !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .rounded-sm-pill {
+    border-radius: initial !important;
+  }
+
+  .rounded-md-pill {
+    border-radius: initial !important;
+  }
+
+  .rounded-lg-pill {
+    border-radius: var(--bs-border-radius-pill) !important;
+  }
+
+  .rounded-xl-pill {
+    border-radius: var(--bs-border-radius-pill) !important;
+  }
+
+  .rounded-xxl-pill {
+    border-radius: var(--bs-border-radius-pill) !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .rounded-sm-pill {
+    border-radius: initial !important;
+  }
+
+  .rounded-md-pill {
+    border-radius: initial !important;
+  }
+
+  .rounded-lg-pill {
+    border-radius: initial !important;
+  }
+
+  .rounded-xl-pill {
+    border-radius: var(--bs-border-radius-pill) !important;
+  }
+
+  .rounded-xxl-pill {
+    border-radius: var(--bs-border-radius-pill) !important;
+  }
+}
+
+@media (min-width: 1400px) {
+  .rounded-sm-pill {
+    border-radius: initial !important;
+  }
+
+  .rounded-md-pill {
+    border-radius: initial !important;
+  }
+
+  .rounded-lg-pill {
+    border-radius: initial !important;
+  }
+
+  .rounded-xl-pill {
+    border-radius: initial !important;
+  }
+
+  .rounded-xxl-pill {
+    border-radius: var(--bs-border-radius-pill) !important;
+  }
+}
+
+
+
+
+@media (min-width: 576px) {
+  .rounded-sm-inverse-pill {
+    border-radius: var(--bs-border-radius-pill) !important;
+  }
+
+  .rounded-md-inverse-pill {
+    border-radius: initial !important;
+  }
+
+  .rounded-lg-inverse-pill {
+    border-radius: initial !important;
+  }
+
+  .rounded-xl-inverse-pill {
+    border-radius: initial !important;
+  }
+
+  .rounded-xxl-inverse-pill {
+    border-radius: initial !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .rounded-sm-inverse-pill {
+    border-radius: var(--bs-border-radius-pill) !important;
+  }
+
+  .rounded-md-inverse-pill {
+    border-radius: var(--bs-border-radius-pill) !important;
+  }
+
+  .rounded-lg-inverse-pill {
+    border-radius: initial !important;
+  }
+
+  .rounded-xl-inverse-pill {
+    border-radius: initial !important;
+  }
+
+  .rounded-xxl-inverse-pill {
+    border-radius: initial !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .rounded-sm-inverse-pill {
+    border-radius: var(--bs-border-radius-pill) !important;
+  }
+
+  .rounded-md-inverse-pill {
+    border-radius: var(--bs-border-radius-pill) !important;
+  }
+
+  .rounded-lg-inverse-pill {
+    border-radius: var(--bs-border-radius-pill) !important;
+  }
+
+  .rounded-xl-inverse-pill {
+    border-radius: initial !important;
+  }
+
+  .rounded-xxl-inverse-pill {
+    border-radius: initial !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .rounded-sm-inverse-pill {
+    border-radius: var(--bs-border-radius-pill) !important;
+  }
+
+  .rounded-md-inverse-pill {
+    border-radius: var(--bs-border-radius-pill) !important;
+  }
+
+  .rounded-lg-inverse-pill {
+    border-radius: var(--bs-border-radius-pill) !important;
+  }
+
+  .rounded-xl-inverse-pill {
+    border-radius: var(--bs-border-radius-pill) !important;
+  }
+
+  .rounded-xxl-inverse-pill {
+    border-radius: initial !important;
+  }
+}
+
+@media (min-width: 1400px) {
+  .rounded-sm-inverse-pill {
+    border-radius: var(--bs-border-radius-pill) !important;
+  }
+
+  .rounded-md-inverse-pill {
+    border-radius: var(--bs-border-radius-pill) !important;
+  }
+
+  .rounded-lg-inverse-pill {
+    border-radius: var(--bs-border-radius-pill) !important;
+  }
+
+  .rounded-xl-inverse-pill {
+    border-radius: var(--bs-border-radius-pill) !important;
+  }
+
+  .rounded-xxl-inverse-pill {
+    border-radius: initial !important;
+  }
+}
