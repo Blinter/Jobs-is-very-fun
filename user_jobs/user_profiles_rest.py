@@ -229,8 +229,10 @@ def user_delete_profile_id(existing_id):
     if not session.get('user_id', False):
         return make_response('', int(ResponseCodesGeneric.FORBIDDEN))
 
-    # Check if Profile created has content.
-    if existing_id is None:
+    # Check if Profile ID value provided has content.
+    if (existing_id is None or
+            not isinstance(existing_id, int) or
+            int(existing_id) < 0):
         return make_response('', int(ResponseCodesGeneric.BAD_REQUEST))
 
     # Database methods are enclosed in a try-except block.
@@ -264,6 +266,12 @@ def user_delete_profile_id(existing_id):
         )).scalar():
             db.session.close()
             return make_response('', int(ResponseCodesGeneric.FORBIDDEN))
+
+        # Remove the profile from the session if it is set as the active
+        # Profile.
+        if (session.get('profile_id') is not None and
+                session.get('profile_id') == int(existing_id)):
+            session.pop('profile_id', None)
 
         # Delete the profile
         db.session.delete(

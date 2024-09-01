@@ -133,9 +133,11 @@ def companies():
     "/jobs"
 )
 def jobs():
+    print(str(session.get('profile_id')))
     return render_template(
         "general/jobs_board.html",
-        user=get_authenticated_user_name()
+        user=get_authenticated_user_name(),
+        profile=session.get('profile_id') is not None,
     )
 
 

@@ -399,7 +399,7 @@ function displayProfiles(data) {
                 //Replace the text with a text input box
                 generateEditProfileControls($(newProfile), profileData)
             })
-        })(profile); //Pass profile variable and call right away        
+        })(profile); //Pass profile variable and call right away
 
         $(newProfile).append($(editButton));
         $(newProfile).append(" ");
@@ -713,8 +713,8 @@ function generateEditProfileControlsFromUserDash(event) {
                 });
 
                 return;
-                //Server reports no change in profile name.
 
+            //Server reports no change in profile name.
             } else if (exception.response.status === 304) {
                 $(profileEditInputText)
                     .css({
@@ -1014,11 +1014,53 @@ function generateEditProfileControls(parent, profile) {
             .addClass("btn-link rounded")
             .append("View");
 
+        // New
+        // console.log(profile);
         const newActivateButton = profile.active ?
-            $("<button class='btn-link-ActivatedProfile rounded' id=''>")
+            $("<button class='btn-link-ActivatedProfile rounded' data-id='" + profile.id.toString() + "'>")
                 .append("Deactivate") :
-            $("<button class='btn-link-DeactivatedProfile rounded'>")
+            $("<button class='btn-link-DeactivatedProfile rounded' data-id='" + profile.id.toString() + "'>")
                 .append("Activate");
+
+        //(IIFE) Invoked function expression to pass profile data
+        (function (tempProfileData) {
+            $(newActivateButton).on("click", event => {
+                //Send an axios request to the server and check for a successful response
+                const activateToggle = $(event.target).hasClass("btn-link-DeactivatedProfile");
+                toggleProfile(
+                    tempProfileData.name,
+                    tempProfileData.id != null ?
+                        tempProfileData.id :
+                        +$(event.target).attr("data-id"),
+                    activateToggle)
+                    .then(r => {
+                        // console.log(r);
+                        if (r != null &&
+                            r.status === 205) {
+                            if (activateToggle) {
+                                //Deactivate other activated profiles first,
+                                //skip if it's the current click target.
+                                $("button.btn-link-ActivatedProfile").each((i, v) => {
+                                    if ($(v) !== $(event.target)) {
+                                        $(v)
+                                            .attr({ 'class': 'btn-link-DeactivatedProfile rounded' })
+                                            .text('Activate');
+                                    }
+                                });
+                                $(event.target)
+                                    .attr({ 'class': 'btn-link-ActivatedProfile rounded' })
+                                    .text('Deactivate');
+                            } else {
+                                $(event.target)
+                                    .attr({ 'class': 'btn-link-DeactivatedProfile rounded' })
+                                    .text('Activate');
+                            }
+                        } else {
+                            console.error("Problem changing status on profile");
+                        }
+                    });
+            })
+        })(profile); //Pass profile variable
 
         const newEditButton = $("<button>")
             .addClass("btn-link-edit rounded")
@@ -1091,11 +1133,55 @@ function generateEditProfileControls(parent, profile) {
             .addClass("btn-link rounded")
             .append("View");
 
+        // New
+        // console.log(profile);
         const activateButton = profile.active ?
-            $("<button class='btn-link-ActivatedProfile rounded' id=''>")
+            $("<button class='btn-link-ActivatedProfile rounded' data-id='" + profile.id.toString() + "'>")
                 .append("Deactivate") :
-            $("<button class='btn-link-DeactivatedProfile rounded'>")
+            $("<button class='btn-link-DeactivatedProfile rounded' data-id='" + profile.id.toString() + "'>")
                 .append("Activate");
+
+        //(IIFE) Invoked function expression to pass profile data
+        (function (tempProfileData) {
+            $(activateButton).on("click", event => {
+                //Send an axios request to the server and check for a successful response
+                const activateToggle = $(event.target).hasClass("btn-link-DeactivatedProfile");
+                toggleProfile(
+                    tempProfileData.name,
+                    tempProfileData.id != null ?
+                        tempProfileData.id :
+                        +$(event.target).attr("data-id"),
+                    activateToggle)
+                    .then(r => {
+                        // console.log(r);
+                        if (r != null &&
+                            r.status === 205) {
+                            if (activateToggle) {
+                                //Deactivate other activated profiles first,
+                                //skip if it's the current click target.
+                                $("button.btn-link-ActivatedProfile").each((i, v) => {
+                                    if ($(v) !== $(event.target)) {
+                                        $(v)
+                                            .attr({ 'class': 'btn-link-DeactivatedProfile rounded' })
+                                            .text('Activate');
+                                    }
+                                });
+                                $(event.target)
+                                    .attr({ 'class': 'btn-link-ActivatedProfile rounded' })
+                                    .text('Deactivate');
+                            } else {
+                                $(event.target)
+                                    .attr({ 'class': 'btn-link-DeactivatedProfile rounded' })
+                                    .text('Activate');
+                            }
+                        } else {
+                            console.error("Problem changing status on profile");
+                        }
+                    });
+            })
+        })(profile); //Pass profile variable
+
+
 
         const editButton = $("<button>")
             .addClass("btn-link-edit rounded")

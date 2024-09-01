@@ -368,8 +368,8 @@ body {
 }
 
 .btn-link-ActivatedProfile {
-  color: rgb(231, 230, 229);
-  background: rgb(12, 139, 44);
+  color: rgb(2, 2, 78);
+  background: rgb(255, 98, 8);
   width: 135px;
   text-wrap: nowrap;
   margin-top: 5px;
@@ -381,8 +381,8 @@ body {
 
 .btn-link-ActivatedProfile:hover,
 .btn-link-ActivatedProfile:focus {
-  color: rgb(2, 2, 78);
-  background: rgb(255, 98, 8);
+  color: rgb(231, 230, 229);
+  background: rgb(12, 139, 44);
 }
 
 .btn-link-DeactivatedProfile {
@@ -397,8 +397,7 @@ body {
   font-weight: bolder;
 }
 
-.btn-link-DeactivatedProfile:hover,
-.btn-link-DeactivatedProfile:focus {
+.btn-link-DeactivatedProfile:hover {
   color: rgb(0, 0, 120);
   background: rgb(0, 128, 0);
 }
@@ -413,8 +412,7 @@ body {
   font-weight: 400;
 }
 
-.btnAction:hover,
-.btnAction:focus {
+.btnAction:hover {
   color: gray;
   background: cyan;
 }
