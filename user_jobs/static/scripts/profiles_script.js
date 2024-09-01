@@ -2426,10 +2426,24 @@ function updateSavedCompanyOnMap(companyId, oldListName, newListName, newOrder, 
     return selected_company;
 }
 
+
+/**
+ * Helper function to split a key into alpha and numeric parts
+ * Used primarily for improving the list sorting method
+ * for Saved Jobs and Saved Companies to be more consistent.
+ * @param {string} key - Input string (which may contain possible alphanumeric characters)
+ * @returns {?string}
+ */
+function splitKey(key) {
+    const match = key.match(/^([a-zA-Z]+)(\d*)$/);
+    return match ? [match[1], match[2]] : [key, ''];
+}
+
 /**
  * Sorts SavedJobs Map alphabetically,
  * ordering each list name by respective order values,
  * and sending null or empty list names (freshly added) jobs to the back of the array.
+ * Handles cases where alpha-numeric strings are the same but contains numbers.
  * @returns {void}
  */
 function sortSavedJobs() {
@@ -2448,7 +2462,27 @@ function sortSavedJobs() {
             return -1;
         }
 
-        return a[0].localeCompare(b[0])
+        // Split the key into alpha and numeric parts
+        const [alphaA, numA] = splitKey(a);
+        const [alphaB, numB] = splitKey(b);
+
+        // Compare alpha parts first
+        const alphaCompare = alphaA.localeCompare(alphaB);
+        if (alphaCompare !== 0) {
+            return alphaCompare;
+        }
+
+        // If alpha parts are equal, compare numeric parts
+        if (numA && numB) {
+            return parseInt(numA) - parseInt(numB);
+        } else if (numA) {
+            return -1; // Keys with numbers should come after those without
+        } else if (numB) {
+            return 1;
+        }
+
+        // If both keys don't have numbers, maintain original order
+        return 0;
     }));
 
     //Sort Object order by order column as well.
@@ -2490,7 +2524,31 @@ function sortSavedCompanies() {
             return -1;
         }
 
-        return a[0].localeCompare(b[0])
+        // Split the key into alpha and numeric parts
+        const [alphaA, numA] = splitKey(a);
+        const [alphaB, numB] = splitKey(b);
+
+        // Compare alpha parts first
+        const alphaCompare = alphaA.localeCompare(alphaB);
+
+        if (alphaCompare !== 0) {
+            return alphaCompare;
+        }
+
+        // If alpha parts are equal, compare numeric parts
+        if (numA && numB) {
+            return parseInt(numA) - parseInt(numB);
+
+        } else if (numA) {
+            return -1; // Keys with numbers should come after those without
+
+        } else if (numB) {
+
+            return 1;
+        }
+
+        // If both keys don't have numbers, maintain original order
+        return 0;
     }));
 
     //Sort Object order by order column as well.
