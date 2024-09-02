@@ -105,6 +105,12 @@ restricted_sites = [
     # Site does not exist
     # Subdomain included
     #'dfyemio1vslq8.cloudfront.net',
+
+    # Site requires Mapbox GL
+    'chilisjobs.com',
+
+    # Site does not load provided links from API's properly
+    'gamecompanies.com',
 ]
 
 faulty_sites = [
@@ -174,6 +180,11 @@ faulty_sites = [
     # 0 Length
     "https://skyebackpackers.com/job-listing/job/set-designer-at-cornerstone-te"
     "chnologies-american-fork-ut-WmVha2huNkw2MTZYQnhnbktyV2hiTjdn",
+
+    # Not reachable
+    "https://www.bp.com/en/global/corporate/careers/jobs-at-bp/Principal-Biolog"
+    "ist-RQ079850.html?utm_campaign=google_jobs_apply&utm_source=google_jobs_ap"
+    "ply&utm_medium=organic"
 ]
 
 
@@ -626,7 +637,7 @@ with app.app_context():
             # print("len missing: " + str(len(missing_urls_unique)))
 
             list_of_urls = []
-            if (isinstance(missing_urls_unique, list)
+            if (isinstance(missing_urls_unique, set)
                     and len(missing_urls_unique) != 0):
                 seen = set()
                 for tup in list_of_urls_temp:
