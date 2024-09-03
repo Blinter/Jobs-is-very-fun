@@ -12,26 +12,26 @@ class QueryAPI(FlaskForm):
     Proxy ID Query to use
     API Key
     """
-    API = SelectField("API", [
+    api = SelectField("API", [
         validators.InputRequired(message='API cannot be empty'),
         ])
 
     # Since Endpoints are loaded by the admin through client-side REST,
     # skip on form validation for these fields.
-    Endpoint = SelectField("Endpoint", choices=[], validate_choice=False)
+    endpoint = SelectField("Endpoint", choices=[], validate_choice=False)
 
-    Proxy = SelectField("Proxy", [
+    proxy = SelectField("Proxy", [
         # validators.InputRequired(message='Proxy cannot be empty'),
         validators.optional(),
         ])
 
     # Since API Keys are loaded by the admin through client-side REST, skip on
     # form validation for these fields.
-    APIKey = SelectField("API Key", choices=[], validate_choice=False)
+    api_key = SelectField("API Key", choices=[], validate_choice=False)
 
-    APIKeyAuto = BooleanField("Automatic API Key", [
+    api_key_auto = BooleanField("Automatic API Key", [
         # validators.InputRequired(message='Proxy cannot be empty'),
         validators.optional(),
         ])
 
-    SubmitButton = SubmitField("Query")
+    submit_button = SubmitField("Query")

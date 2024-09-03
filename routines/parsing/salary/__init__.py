@@ -3257,7 +3257,7 @@ def get_job_salaries(
                     hourly_salary = False
 
                     # DEBUGGING
-                    # print("key " + str(i) + ": " + result[i], flush=True)
+                    print("key " + str(i) + ": " + result[i], flush=True)
                     # Both USD and CAD in salary
                     if ("USD" in result[i] and
                             "CAD" in result[i]):
@@ -3268,6 +3268,10 @@ def get_job_salaries(
                             result[i] = result[i][:result[i].find("CAD")-3]
                         # raise ValueError("Debug")
                         # print("key " + str(i) + ": " + result[i], flush=True)
+
+                    # fix for million
+                    if " million" in result[i].lower():
+                        result[i] = result[i].replace(" million", "000000")
 
                     if 'per hour' in result[i].lower():
                         result[i] = result[i][:len('per hour') +
@@ -3649,6 +3653,15 @@ def get_job_salaries(
                             .replace('base', '')
                             .replace('Base', '')
                             .replace('BASE', '')
+                            .strip()
+                        )
+
+                    if ', flexible' in result[i].lower():
+                        result[i] = (
+                            result[i]
+                            .replace(', flexible', '')
+                            .replace(', Flexible', '')
+                            .replace(', FLEXIBLE', '')
                             .strip()
                         )
 

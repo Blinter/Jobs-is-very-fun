@@ -82,10 +82,10 @@ def admin_query():
 
     form = QueryAPI()
 
-    form.Proxy.choices = [(str(i.id), str(i.proxy_address))
+    form.proxy.choices = [(str(i.id), str(i.proxy_address))
                           for i in proxy_get_proxies_base_last_used()]
 
-    form.API.choices = [(str(i.id), str(i.nice_name))
+    form.api.choices = [(str(i.id), str(i.nice_name))
                         for i in (api_get_list_base())]
 
     # Admin will retrieve API key from REST
@@ -95,11 +95,11 @@ def admin_query():
     if request.method == "POST":
 
         # Automatic proxy selection
-        selected_proxy = form.Proxy.data
-        selected_api_key = form.APIKey.data
-        selected_api_key_auto = form.APIKeyAuto.data
-        selected_api = form.API.data
-        selected_endpoint = form.Endpoint.data
+        selected_proxy = form.proxy.data
+        selected_api_key = form.api_key.data
+        selected_api_key_auto = form.api_key_auto.data
+        selected_api = form.api.data
+        selected_endpoint = form.endpoint.data
 
         unique_suffix = '-prmBdyKey'
         current_active_tab = request.form.get('currentActiveTab')
@@ -138,11 +138,11 @@ def admin_query():
 
             'api_key_auto': selected_api_key_auto,
 
-            'api': form.API.data
-            if form.API.data is not None else None,
+            'api': form.api.data
+            if form.api.data is not None else None,
 
-            'endpoint': form.Endpoint.data
-            if form.Endpoint.data is not None else None,
+            'endpoint': form.endpoint.data
+            if form.endpoint.data is not None else None,
 
             'input_json': new_dict
             if new_dict is not None else None,
@@ -274,14 +274,14 @@ def admin_scrape():
 
         # Save all settings here in case the CSRF token needs a refresh.
         session['saved_scrape_settings'] = {
-            'url': form.URL.data
-            if form.URL.data is not None else None,
+            'url': form.url.data
+            if form.url.data is not None else None,
         }
 
         if form.validate_on_submit():
             new_mongo_scrape_row = MongoScrapeStorage(
                 time=datetime.now(),
-                url=form.URL.data,
+                url=form.url.data,
             )
 
             if mongo_storage_add(new_mongo_scrape_row) is not None:
@@ -357,14 +357,14 @@ def admin_database_routines():
 
         # Save all settings here in case the CSRF token needs a refresh.
         session['saved_scrape_settings'] = {
-            'url': form.URL.data
-            if form.URL.data is not None else None,
+            'url': form.url.data
+            if form.url.data is not None else None,
         }
 
         if form.validate_on_submit():
             new_mongo_scrape_row = MongoScrapeStorage(
                 time=datetime.now(),
-                url=form.URL.data,
+                url=form.url.data,
             )
 
             if mongo_storage_add(new_mongo_scrape_row) is not None:

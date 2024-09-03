@@ -10,8 +10,8 @@ class Scrape(FlaskForm):
 
     Automatic proxy selection
     """
-    URL = StringField("URL",
-                      validators=[validators.input_required()]
-                      )
-
-    SubmitButton = SubmitField("Scrape")
+    url = StringField("URL", validators=[
+        validators.input_required(),
+        validators.URL(message="Valid URL required.")
+    ])
+    submit_button = SubmitField("Scrape")
