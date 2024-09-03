@@ -651,12 +651,18 @@ def convert_bytes_to_dict_raw(data: str, quiet=True):
                 continue
 
             if i is not None and isinstance(i, dict):
+                # Must have some sort of data associated
+                if len(i.keys()) == 0:
+                    continue
+
                 for j in [j for j in i.keys()]:
                     if i[str(j)] is not None:
                         i[str(j)] = ' '.join(str(i.get(str(j))).split())
 
                 # Clean up data here
                 new_dict_from_list[str(new_id)] = i
+                # print("Test: (" + str(len(i.keys())) + ")" +
+                #       str(new_dict_from_list[str(new_id)]))
 
         return new_dict_from_list
 

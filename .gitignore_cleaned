@@ -159,6 +159,12 @@ models/mariadb/unused/__pycache__/
 models/postgres/__pycache__/
 models/postgres/locations/__pycache__/
 
+routines/handler_process_jobs_private.py
++routines/handler_process_jobs.py
+
+routines/handler_process_companies_private.py
++routines/handler_process_companies.py
+
 routines/__pycache__/
 routines/auto/__pycache__/
 routines/auto/debug/__pycache__/

@@ -452,7 +452,11 @@ def get_times(
                 )
 
                 for i in dict_new.keys():
-                    result[i] = convert_str_to_datetime_from_iso(result[i])
+                    try:
+                        result[i] = convert_str_to_datetime_from_iso(result[i])
+                    except ValueError as e:
+                        print(str(e) + " - defaulting to query time")
+                        result[i] = None
 
                     result[i] = ({
                         'posted_time_utc': result[i]

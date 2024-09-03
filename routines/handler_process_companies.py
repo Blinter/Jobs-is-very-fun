@@ -6,7 +6,7 @@ from time import sleep
 
 from secrets_jobs.credentials import path_to_base
 
-current_checkpoint = "Wed, 28 Aug 2024 14:35:55.107000 UTC"
+current_checkpoint = "earliest"
 restart_timer = 7 * 60
 
 

@@ -1115,6 +1115,13 @@ def get_job_salaries(
                             )
 
                         else:
+                            # print("trace: " + result[i][0] +
+                            #       " wage: " + str(wage_multiplier))
+                            if ',' in result[i][0]:
+                                result[i][0] = (result[i][0]
+                                                .replace(',', '')
+                                                .strip())
+
                             result[i][0] = decimal.Decimal(
                                 decimal.Decimal(
                                     result[i][0].strip()
@@ -2823,9 +2830,7 @@ def get_job_salaries(
                             .replace("CA$", "CAD ")
                             .strip()
                         )
-
-                    print(result[i], flush=True)
-
+                    # print(result[i], flush=True)
                     salary_currency = None
                     monthly_salary = False
                     weekly_salary = False
@@ -3257,7 +3262,7 @@ def get_job_salaries(
                     hourly_salary = False
 
                     # DEBUGGING
-                    print("key " + str(i) + ": " + result[i], flush=True)
+                    # print("key " + str(i) + ": " + result[i], flush=True)
                     # Both USD and CAD in salary
                     if ("USD" in result[i] and
                             "CAD" in result[i]):
@@ -4024,7 +4029,7 @@ def get_job_salaries(
                                         .strip()
                                     )
 
-                                    print(result[i][j], flush=True)
+                                    # print(result[i][j], flush=True)
                                     result[i][j] = convert_str_to_int(
                                         Decimal(
                                             result[i][j].strip()
@@ -4040,7 +4045,7 @@ def get_job_salaries(
                                     )
                         else:
                             if 'k' in result[i].lower():
-                                print(result[i])
+                                # print(result[i])
                                 result[i] = (result[i]
                                              .replace("K", "")
                                              .replace("k", "")

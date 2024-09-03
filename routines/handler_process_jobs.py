@@ -8,7 +8,7 @@ from secrets_jobs.credentials import path_to_base
 
 restart_timer = 90
 
-current_checkpoint = "Mon, 02 Sep 2024 18:45:31.968000 UTC"
+current_checkpoint = "earliest"
 
 
 def jobs_process_routine(new_date=current_checkpoint):
