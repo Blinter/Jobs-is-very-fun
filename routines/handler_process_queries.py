@@ -4,7 +4,8 @@ import sys
 from time import sleep
 
 import requests.exceptions
-from urllib3.exceptions import ProtocolError
+import urllib3
+from urllib3.exceptions import ProtocolError, ConnectionError, TimeoutError
 from secrets_jobs.credentials import path_to_base
 
 
@@ -51,6 +52,10 @@ def queries_routine():
                         )
                     )
 
+            except ConnectionError as e:
+                print(str(e))
+                print("API closed connection. Retrying")
+
             except ChildProcessError as e:
                 e_str = str(e)
 
@@ -65,14 +70,6 @@ def queries_routine():
                 else:
                     print("UNHANDLED ERROR")
                     raise e
-
-            except urllib3.exceptions.ProtocolError as e:
-                print(str(e))
-                print("API closed connection. Retrying")
-
-            except requests.exceptions.ConnectionError as e:
-                print(str(e))
-                print("API closed connection. Retrying")
 
     except KeyError as e:
         e_str = str(e)

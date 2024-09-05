@@ -12,7 +12,8 @@ from requests.auth import HTTPBasicAuth
 from sqlalchemy import and_, or_, asc
 from sqlalchemy.orm import load_only
 from sqlalchemy.exc import IntegrityError, OperationalError, SQLAlchemyError
-
+import urllib3
+from urllib3.exceptions import ProtocolError, ConnectionError, TimeoutError
 from app import create_app, db
 from extensions_api_keys import calculate_next
 from extensions_mongo import fs_upload
@@ -835,6 +836,12 @@ with app.app_context():
             print(final_query_status, flush=True)
 
         raise ChildProcessError("Parsing Completed")
+
+    except urllib3.exceptions.ProtocolError as e:
+        print(str(e))
+
+    except requests.exceptions.ConnectionError as e:
+        print(str(e))
 
     # Database exception errors
     # Catch integrity constraints, such as unique violations or foreign key

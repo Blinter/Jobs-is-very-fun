@@ -159,7 +159,7 @@ args = parser.parse_args()
 # print("Date Argument: " +
 #       (args.date if args.date is not None else 'None'))
 
-progress_timestamp = "Wed, 21 Aug 2024 07:35:26.288000 UTC"
+progress_timestamp = "earliest"
 
 if (args.date is not None and
         isinstance(args.date, str) and
