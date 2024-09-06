@@ -850,7 +850,6 @@ def get_job_salaries(
                         dict_new=dict_new
                     )
                 )
-
                 # Convert to list
                 for i in result.keys():
                     # print(str(i) + " " + str(result[i]), flush=True)
@@ -933,250 +932,28 @@ def get_job_salaries(
                             len(result[i]) == 0):
                         result[i] = {}
                         continue
+                    try:
+                        if not isinstance(result[i], list):
+                            raise ValueError("Not a list - " +
+                                             str(result[i]) +
+                                             " debug key :" + str(i))
 
-                    if not isinstance(result[i], list):
-                        raise ValueError("Not a list - " +
-                                         str(result[i]) +
-                                         " debug key :" + str(i))
-
-                    elif len(result[i]) == 1:
-                        current_currency = '?'
-                        # Currency parsing
-                        if "$" in result[i][0]:
-                            result[i][0] = (
-                                result[i][0]
-                                .replace("$", "")
-                                .strip()
-                            )
-                            current_currency = "USD"
-
-                        wage_multiplier = 1
-
-                        if " + bonus, stock" in result[i][0].lower():
-                            result[i][0] = (
-                                result[i][0]
-                                .replace(" + Bonus, Stock", "")
-                                .replace(" + Bonus, stock", "")
-                                .replace(" + bonus, Stock", "")
-                                .replace(" + bonus, stock", "")
-                                .strip()
-                            )
-
-                        if " + bonus" in result[i][0].lower():
-                            result[i][0] = (
-                                result[i][0]
-                                .replace(" + Bonus", "")
-                                .replace(" + bonus", "")
-                                .strip()
-                            )
-
-                        if " + profit sharing" in result[i][0].lower():
-                            result[i][0] = (
-                                result[i][0]
-                                .replace(" + Profit Sharing", "")
-                                .replace(" + Profit sharing", "")
-                                .replace(" + profit Sharing", "")
-                                .replace(" + profit sharing", "")
-                                .strip()
-                            )
-
-                        if ", stock options" in result[i][0].lower():
-                            result[i][0] = (
-                                result[i][0]
-                                .replace(", Stock Options", "")
-                                .replace(", Stock options", "")
-                                .replace(", stock Options", "")
-                                .replace(", stock options", "")
-                                .strip()
-                            )
-
-                        if ", sign" in result[i][0].lower():
-                            result[i][0] = (
-                                result[i][0]
-                                .replace(", Sign", "")
-                                .replace(", sign", "")
-                                .strip()
-                            )
-
-                        if "+ stock options" in result[i][0].lower():
-                            result[i][0] = (
-                                result[i][0]
-                                .replace("+ Stock Options", "")
-                                .replace("+ Stock options", "")
-                                .replace("+ stock Options", "")
-                                .replace("+ stock options", "")
-                                .strip()
-                            )
-
-                        if ", profit sharing" in result[i][0].lower():
-                            result[i][0] = (
-                                result[i][0]
-                                .replace(", Profit Sharing", "")
-                                .replace(", Profit sharing", "")
-                                .replace(", profit Sharing", "")
-                                .replace(", profit sharing", "")
-                                .strip()
-                            )
-
-                        if ", commission" in result[i][0].lower():
-                            result[i][0] = (
-                                result[i][0]
-                                .replace(", Commission", "")
-                                .replace(", commission", "")
-                                .strip()
-                            )
-
-                        # Parse hourly wage
-                        if "/hr" in result[i][0]:
-                            result[i][0] = (
-                                result[i][0]
-                                .replace("/hr", "")
-                                .strip()
-                            )
-
-                            # 40 hours * 52 weeks (US Based)
-                            wage_multiplier = 2080
-
-                        elif "/yr" in result[i][0]:
-                            result[i][0] = (
-                                result[i][0]
-                                .replace("/yr", "")
-                                .strip()
-                            )
+                        elif len(result[i]) == 1:
+                            current_currency = '?'
+                            # Currency parsing
+                            if "$" in result[i][0]:
+                                result[i][0] = (
+                                    result[i][0]
+                                    .replace("$", "")
+                                    .strip()
+                                )
+                                current_currency = "USD"
 
                             wage_multiplier = 1
 
-                        maximum_found = False
-                        if 'up to' in result[i][0].lower():
-                            result[i][0] = (
-                                result[i][0][
-                                    result[i][0].lower().find('up to') +
-                                    len('up to'):]
-                            )
-
-                            maximum_found = True
-
-                        if ("from" in result[i][0] or
-                                "From" in result[i][0]):
-                            result[i][0] = (
-                                result[i][0]
-                                .replace("from", "")
-                                .replace("From", "")
-                                .strip()
-                            )
-
-                        if ("starting at" in result[i][0] or
-                                "Starting at" in result[i][0]):
-                            result[i][0] = (
-                                result[i][0]
-                                .replace("starting at", "")
-                                .replace("Starting at", "")
-                                .strip()
-                            )
-
-                        # Parse K to Integer
-                        if "K" in result[i][0]:
-                            # print(str(result[i][0]), flush=True)
-                            result[i][0] = (
-                                result[i][0]
-                                .replace("K", "")
-                                .strip()
-                            )
-
-                            # Convert to number
-                            result[i][0] = decimal.Decimal(
-                                convert_str_to_int(
-                                    result[i][0].strip()
-                                    if isinstance(result[i][0], str)
-                                    else result[i][0]
-                                ) *
-                                wage_multiplier *
-                                1000
-                            )
-
-                        # Parse M to Integer
-                        elif "M" in result[i][0]:
-                            # print(str(result[i][0]), flush=True)
-                            result[i][0] = (
-                                result[i][0]
-                                .replace("M", "")
-                                .strip()
-                            )
-
-                            # Convert to number
-                            result[i][0] = decimal.Decimal(
-                                decimal.Decimal(
-                                    result[i][0].strip()
-                                    if isinstance(result[i][0], str)
-                                    else result[i][0]
-                                ) *
-                                wage_multiplier *
-                                1000000
-                            )
-
-                        else:
-                            # print("trace: " + result[i][0] +
-                            #       " wage: " + str(wage_multiplier))
-                            if ',' in result[i][0]:
-                                result[i][0] = (result[i][0]
-                                                .replace(',', '')
-                                                .strip())
-
-                            result[i][0] = decimal.Decimal(
-                                decimal.Decimal(
-                                    result[i][0].strip()
-                                    if isinstance(result[i][0], str)
-                                    else result[i][0]
-                                ) *
-                                wage_multiplier
-                            )
-
-                        result[i] = {
-                            'currency': current_currency,
-
-                            'min_salary': convert_str_to_int(
-                                result[i][0].strip()
-                                if isinstance(result[i][0], str)
-                                else result[i][0]
-                            ) if not maximum_found else 0,
-
-                            'max_salary': convert_str_to_int(
-                                result[i][0].strip()
-                                if isinstance(result[i][0], str)
-                                else result[i][0]
-                            ) if maximum_found else convert_str_to_int(
-                                result[i][0].strip()
-                                if isinstance(result[i][0], str)
-                                else result[i][0]
-                            ),
-                        }
-
-                    elif len(result[i]) == 2:
-                        current_currency = '?'
-
-                        # Currency parsing
-                        if ("$" in result[i][0] and
-                                "$" in result[i][1]):
-                            result[i][0] = (
-                                result[i][0]
-                                .replace("$", "")
-                                .strip()
-                            )
-
-                            result[i][1] = (
-                                result[i][1]
-                                .replace("$", "")
-                                .strip()
-                            )
-
-                            current_currency = "USD"
-
-                        wage_multiplier = 1
-
-                        for j in range(len(result[i])):
-                            if " + bonus, stock" in result[i][j].lower():
-                                result[i][j] = (
-                                    result[i][j]
+                            if " + bonus, stock" in result[i][0].lower():
+                                result[i][0] = (
+                                    result[i][0]
                                     .replace(" + Bonus, Stock", "")
                                     .replace(" + Bonus, stock", "")
                                     .replace(" + bonus, Stock", "")
@@ -1184,17 +961,17 @@ def get_job_salaries(
                                     .strip()
                                 )
 
-                            if " + bonus" in result[i][j].lower():
-                                result[i][j] = (
-                                    result[i][j]
+                            if " + bonus" in result[i][0].lower():
+                                result[i][0] = (
+                                    result[i][0]
                                     .replace(" + Bonus", "")
                                     .replace(" + bonus", "")
                                     .strip()
                                 )
 
-                            if " + profit sharing" in result[i][j].lower():
-                                result[i][j] = (
-                                    result[i][j]
+                            if " + profit sharing" in result[i][0].lower():
+                                result[i][0] = (
+                                    result[i][0]
                                     .replace(" + Profit Sharing", "")
                                     .replace(" + Profit sharing", "")
                                     .replace(" + profit Sharing", "")
@@ -1202,9 +979,9 @@ def get_job_salaries(
                                     .strip()
                                 )
 
-                            if ", stock options" in result[i][j].lower():
-                                result[i][j] = (
-                                    result[i][j]
+                            if ", stock options" in result[i][0].lower():
+                                result[i][0] = (
+                                    result[i][0]
                                     .replace(", Stock Options", "")
                                     .replace(", Stock options", "")
                                     .replace(", stock Options", "")
@@ -1212,17 +989,17 @@ def get_job_salaries(
                                     .strip()
                                 )
 
-                            if ", sign" in result[i][j].lower():
-                                result[i][j] = (
-                                    result[i][j]
+                            if ", sign" in result[i][0].lower():
+                                result[i][0] = (
+                                    result[i][0]
                                     .replace(", Sign", "")
                                     .replace(", sign", "")
                                     .strip()
                                 )
 
-                            if "+ stock options" in result[i][j].lower():
-                                result[i][j] = (
-                                    result[i][j]
+                            if "+ stock options" in result[i][0].lower():
+                                result[i][0] = (
+                                    result[i][0]
                                     .replace("+ Stock Options", "")
                                     .replace("+ Stock options", "")
                                     .replace("+ stock Options", "")
@@ -1230,9 +1007,9 @@ def get_job_salaries(
                                     .strip()
                                 )
 
-                            if ", profit sharing" in result[i][j].lower():
-                                result[i][j] = (
-                                    result[i][j]
+                            if ", profit sharing" in result[i][0].lower():
+                                result[i][0] = (
+                                    result[i][0]
                                     .replace(", Profit Sharing", "")
                                     .replace(", Profit sharing", "")
                                     .replace(", profit Sharing", "")
@@ -1240,184 +1017,410 @@ def get_job_salaries(
                                     .strip()
                                 )
 
-                            if ", commission" in result[i][j].lower():
-                                result[i][j] = (
-                                    result[i][j]
+                            if ", commission" in result[i][0].lower():
+                                result[i][0] = (
+                                    result[i][0]
                                     .replace(", Commission", "")
                                     .replace(", commission", "")
                                     .strip()
                                 )
 
-                        if ("/yr" in result[i][0] and
-                                "/yr" in result[i][1]):
+                            # Parse hourly wage
+                            if "/hr" in result[i][0]:
+                                result[i][0] = (
+                                    result[i][0]
+                                    .replace("/hr", "")
+                                    .strip()
+                                )
 
-                            result[i][0] = (
-                                result[i][0]
-                                .replace("/yr", "")
-                                .strip()
-                            )
-                            result[i][1] = (
-                                result[i][1]
-                                .replace("/yr", "")
-                                .strip()
-                            )
+                                # 40 hours * 52 weeks (US Based)
+                                wage_multiplier = 2080
+
+                            elif "/yr" in result[i][0]:
+                                result[i][0] = (
+                                    result[i][0]
+                                    .replace("/yr", "")
+                                    .strip()
+                                )
+
+                                wage_multiplier = 1
+
+                            maximum_found = False
+                            if 'up to' in result[i][0].lower():
+                                result[i][0] = (
+                                    result[i][0][
+                                        result[i][0].lower().find('up to') +
+                                        len('up to'):]
+                                )
+
+                                maximum_found = True
+
+                            if ("from" in result[i][0] or
+                                    "From" in result[i][0]):
+                                result[i][0] = (
+                                    result[i][0]
+                                    .replace("from", "")
+                                    .replace("From", "")
+                                    .strip()
+                                )
+
+                            if ("starting at" in result[i][0] or
+                                    "Starting at" in result[i][0]):
+                                result[i][0] = (
+                                    result[i][0]
+                                    .replace("starting at", "")
+                                    .replace("Starting at", "")
+                                    .strip()
+                                )
+
+                            # Parse K to Integer
+                            if "K" in result[i][0]:
+                                # print(str(result[i][0]), flush=True)
+                                result[i][0] = (
+                                    result[i][0]
+                                    .replace("K", "")
+                                    .strip()
+                                )
+
+                                # Convert to number
+                                result[i][0] = decimal.Decimal(
+                                    convert_str_to_int(
+                                        result[i][0].strip()
+                                        if isinstance(result[i][0], str)
+                                        else result[i][0]
+                                    ) *
+                                    wage_multiplier *
+                                    1000
+                                )
+
+                            # Parse M to Integer
+                            elif "M" in result[i][0]:
+                                # print(str(result[i][0]), flush=True)
+                                result[i][0] = (
+                                    result[i][0]
+                                    .replace("M", "")
+                                    .strip()
+                                )
+
+                                # Convert to number
+                                result[i][0] = decimal.Decimal(
+                                    decimal.Decimal(
+                                        result[i][0].strip()
+                                        if isinstance(result[i][0], str)
+                                        else result[i][0]
+                                    ) *
+                                    wage_multiplier *
+                                    1000000
+                                )
+
+                            else:
+                                # print("trace: " + result[i][0] +
+                                #       " wage: " + str(wage_multiplier))
+                                if ',' in result[i][0]:
+                                    result[i][0] = (result[i][0]
+                                                    .replace(',', '')
+                                                    .strip())
+
+                                result[i][0] = decimal.Decimal(
+                                    decimal.Decimal(
+                                        result[i][0].strip()
+                                        if isinstance(result[i][0], str)
+                                        else result[i][0]
+                                    ) *
+                                    wage_multiplier
+                                )
+
+                            result[i] = {
+                                'currency': current_currency,
+
+                                'min_salary': convert_str_to_int(
+                                    result[i][0].strip()
+                                    if isinstance(result[i][0], str)
+                                    else result[i][0]
+                                ) if not maximum_found else 0,
+
+                                'max_salary': convert_str_to_int(
+                                    result[i][0].strip()
+                                    if isinstance(result[i][0], str)
+                                    else result[i][0]
+                                ) if maximum_found else convert_str_to_int(
+                                    result[i][0].strip()
+                                    if isinstance(result[i][0], str)
+                                    else result[i][0]
+                                ),
+                            }
+
+                        elif len(result[i]) == 2:
+                            current_currency = '?'
+
+                            # Currency parsing
+                            if ("$" in result[i][0] and
+                                    "$" in result[i][1]):
+                                result[i][0] = (
+                                    result[i][0]
+                                    .replace("$", "")
+                                    .strip()
+                                )
+
+                                result[i][1] = (
+                                    result[i][1]
+                                    .replace("$", "")
+                                    .strip()
+                                )
+
+                                current_currency = "USD"
+
                             wage_multiplier = 1
 
-                        elif ('/hr' in result[i][0] and
-                              '/hr' in result[i][1]):
-                            result[i][0] = (
-                                result[i][0]
-                                .replace("/hr", "")
-                                .strip()
-                            )
-                            result[i][1] = (
-                                result[i][1]
-                                .replace("/hr", "")
-                                .strip()
-                            )
-                            wage_multiplier = 2080
+                            for j in range(len(result[i])):
+                                if " + bonus, stock" in result[i][j].lower():
+                                    result[i][j] = (
+                                        result[i][j]
+                                        .replace(" + Bonus, Stock", "")
+                                        .replace(" + Bonus, stock", "")
+                                        .replace(" + bonus, Stock", "")
+                                        .replace(" + bonus, stock", "")
+                                        .strip()
+                                    )
 
-                        # Extra string cleanup
-                        if "+" in result[i][0]:
-                            result[i][0] = result[i][0][:(
-                                result[i][0].find("+"))].strip()
+                                if " + bonus" in result[i][j].lower():
+                                    result[i][j] = (
+                                        result[i][j]
+                                        .replace(" + Bonus", "")
+                                        .replace(" + bonus", "")
+                                        .strip()
+                                    )
 
-                        if "+" in result[i][1]:
-                            result[i][1] = result[i][1][:(
-                                result[i][1].find("+"))].strip()
+                                if " + profit sharing" in result[i][j].lower():
+                                    result[i][j] = (
+                                        result[i][j]
+                                        .replace(" + Profit Sharing", "")
+                                        .replace(" + Profit sharing", "")
+                                        .replace(" + profit Sharing", "")
+                                        .replace(" + profit sharing", "")
+                                        .strip()
+                                    )
 
-                        if "from" in result[i][0].lower():
-                            result[i][0] = (
-                                result[i][0]
-                                .replace("from", "")
-                                .replace("From", "")
-                                .strip()
-                            )
+                                if ", stock options" in result[i][j].lower():
+                                    result[i][j] = (
+                                        result[i][j]
+                                        .replace(", Stock Options", "")
+                                        .replace(", Stock options", "")
+                                        .replace(", stock Options", "")
+                                        .replace(", stock options", "")
+                                        .strip()
+                                    )
 
-                        # Parse From to Integer
-                        if "to" in result[i][1].lower():
-                            result[i][1] = (
-                                result[i][1]
-                                .replace("to", "")
-                                .replace("To", "")
-                                .strip()
-                            )
+                                if ", sign" in result[i][j].lower():
+                                    result[i][j] = (
+                                        result[i][j]
+                                        .replace(", Sign", "")
+                                        .replace(", sign", "")
+                                        .strip()
+                                    )
 
-                        # Parse K to Integer
-                        if "K" in result[i][0]:
-                            result[i][0] = (
-                                result[i][0]
-                                .replace("K", "")
-                                .strip()
-                            )
+                                if "+ stock options" in result[i][j].lower():
+                                    result[i][j] = (
+                                        result[i][j]
+                                        .replace("+ Stock Options", "")
+                                        .replace("+ Stock options", "")
+                                        .replace("+ stock Options", "")
+                                        .replace("+ stock options", "")
+                                        .strip()
+                                    )
 
-                            # Convert to number
-                            result[i][0] = convert_str_to_int(
-                                Decimal(
-                                    result[i][0].strip()
-                                    if isinstance(result[i][0], str)
-                                    else result[i][0]
-                                ) * 1000)
+                                if ", profit sharing" in result[i][j].lower():
+                                    result[i][j] = (
+                                        result[i][j]
+                                        .replace(", Profit Sharing", "")
+                                        .replace(", Profit sharing", "")
+                                        .replace(", profit Sharing", "")
+                                        .replace(", profit sharing", "")
+                                        .strip()
+                                    )
 
-                        # Parse M to Integer
-                        elif "M" in result[i][0]:
-                            result[i][0] = (
-                                result[i][0]
-                                .replace("M", "")
-                                .strip()
-                            )
+                                if ", commission" in result[i][j].lower():
+                                    result[i][j] = (
+                                        result[i][j]
+                                        .replace(", Commission", "")
+                                        .replace(", commission", "")
+                                        .strip()
+                                    )
 
-                            # Convert to number
-                            result[i][0] = convert_str_to_int(
-                                Decimal(
-                                    result[i][0].strip()
-                                    if isinstance(result[i][0], str)
-                                    else result[i][0]
-                                ) * 1000000)
+                            if ("/yr" in result[i][0] and
+                                    "/yr" in result[i][1]):
 
-                        else:
-                            # Convert to number
-                            # print(result[i][0])
-
-                            # Strip comma from number
-                            result[i][0] = result[i][0].replace(',', '').strip()
-
-                            result[i][0] = convert_str_to_int(
-                                Decimal(
-                                    result[i][0].strip()
-                                    if isinstance(result[i][0], str)
-                                    else result[i][0]
+                                result[i][0] = (
+                                    result[i][0]
+                                    .replace("/yr", "")
+                                    .strip()
                                 )
-                            )
-
-                        # Parse K to Integer
-                        if "K" in result[i][1]:
-                            result[i][1] = (
-                                result[i][1]
-                                .replace("K", "")
-                                .strip()
-                            )
-
-                            # Convert to number
-                            result[i][1] = convert_str_to_int(
-                                Decimal(
-                                    result[i][1].strip()
-                                    if isinstance(result[i][1], str)
-                                    else result[i][1]
-                                ) * 1000)
-
-                        # Parse K to Integer
-                        elif "M" in result[i][1]:
-                            result[i][1] = (
-                                result[i][1]
-                                .replace("M", "")
-                                .strip()
-                            )
-
-                            # Convert to number
-                            result[i][1] = convert_str_to_int(
-                                Decimal(
-                                    result[i][1].strip()
-                                    if isinstance(result[i][1], str)
-                                    else result[i][1]
-                                ) * 1000000)
-
-                        else:
-                            # Convert to number
-                            # Strip comma from number
-                            result[i][1] = result[i][1].replace(',', '').strip()
-                            result[i][1] = convert_str_to_int(
-                                result[i][1].strip()
-                                if isinstance(result[i][1], str)
-                                else result[i][1]
-                            )
-
-                        result[i] = {
-                            'currency': current_currency,
-
-                            'min_salary': convert_str_to_int(
-                                Decimal(
-                                    result[i][0]
-                                    if isinstance(result[i][0], str)
-                                    else result[i][0]
-                                ) * wage_multiplier),
-
-                            'max_salary': convert_str_to_int(
-                                Decimal(
+                                result[i][1] = (
                                     result[i][1]
+                                    .replace("/yr", "")
+                                    .strip()
+                                )
+                                wage_multiplier = 1
+
+                            elif ('/hr' in result[i][0] and
+                                  '/hr' in result[i][1]):
+                                result[i][0] = (
+                                    result[i][0]
+                                    .replace("/hr", "")
+                                    .strip()
+                                )
+                                result[i][1] = (
+                                    result[i][1]
+                                    .replace("/hr", "")
+                                    .strip()
+                                )
+                                wage_multiplier = 2080
+
+                            # Extra string cleanup
+                            if "+" in result[i][0]:
+                                result[i][0] = result[i][0][:(
+                                    result[i][0].find("+"))].strip()
+
+                            if "+" in result[i][1]:
+                                result[i][1] = result[i][1][:(
+                                    result[i][1].find("+"))].strip()
+
+                            if "from" in result[i][0].lower():
+                                result[i][0] = (
+                                    result[i][0]
+                                    .replace("from", "")
+                                    .replace("From", "")
+                                    .strip()
+                                )
+
+                            # Parse From to Integer
+                            if "to" in result[i][1].lower():
+                                result[i][1] = (
+                                    result[i][1]
+                                    .replace("to", "")
+                                    .replace("To", "")
+                                    .strip()
+                                )
+
+                            # Parse K to Integer
+                            if "K" in result[i][0]:
+                                result[i][0] = (
+                                    result[i][0]
+                                    .replace("K", "")
+                                    .strip()
+                                )
+
+                                # Convert to number
+                                result[i][0] = convert_str_to_int(
+                                    Decimal(
+                                        result[i][0].strip()
+                                        if isinstance(result[i][0], str)
+                                        else result[i][0]
+                                    ) * 1000)
+
+                            # Parse M to Integer
+                            elif "M" in result[i][0]:
+                                result[i][0] = (
+                                    result[i][0]
+                                    .replace("M", "")
+                                    .strip()
+                                )
+
+                                # Convert to number
+                                result[i][0] = convert_str_to_int(
+                                    Decimal(
+                                        result[i][0].strip()
+                                        if isinstance(result[i][0], str)
+                                        else result[i][0]
+                                    ) * 1000000)
+
+                            else:
+                                # Convert to number
+                                # print(result[i][0])
+
+                                # Strip comma from number
+                                result[i][0] = result[i][0].replace(',', '').strip()
+
+                                result[i][0] = convert_str_to_int(
+                                    Decimal(
+                                        result[i][0].strip()
+                                        if isinstance(result[i][0], str)
+                                        else result[i][0]
+                                    )
+                                )
+
+                            # Parse K to Integer
+                            if "K" in result[i][1]:
+                                result[i][1] = (
+                                    result[i][1]
+                                    .replace("K", "")
+                                    .strip()
+                                )
+
+                                # Convert to number
+                                result[i][1] = convert_str_to_int(
+                                    Decimal(
+                                        result[i][1].strip()
+                                        if isinstance(result[i][1], str)
+                                        else result[i][1]
+                                    ) * 1000)
+
+                            # Parse K to Integer
+                            elif "M" in result[i][1]:
+                                result[i][1] = (
+                                    result[i][1]
+                                    .replace("M", "")
+                                    .strip()
+                                )
+
+                                # Convert to number
+                                result[i][1] = convert_str_to_int(
+                                    Decimal(
+                                        result[i][1].strip()
+                                        if isinstance(result[i][1], str)
+                                        else result[i][1]
+                                    ) * 1000000)
+
+                            else:
+                                # Convert to number
+                                # Strip comma from number
+                                result[i][1] = result[i][1].replace(',', '').strip()
+                                result[i][1] = convert_str_to_int(
+                                    result[i][1].strip()
                                     if isinstance(result[i][1], str)
                                     else result[i][1]
-                                ) * wage_multiplier)
-                            if result[i][1] != 0
-                            else convert_str_to_int(
-                                Decimal(
-                                    result[i][0]
-                                    if isinstance(result[i][0], str)
-                                    else result[i][0]
-                                ) * wage_multiplier)
-                            if result[i][0] != 0
-                            else 0,
-                        }
+                                )
+
+                            result[i] = {
+                                'currency': current_currency,
+
+                                'min_salary': convert_str_to_int(
+                                    Decimal(
+                                        result[i][0]
+                                        if isinstance(result[i][0], str)
+                                        else result[i][0]
+                                    ) * wage_multiplier),
+
+                                'max_salary': convert_str_to_int(
+                                    Decimal(
+                                        result[i][1]
+                                        if isinstance(result[i][1], str)
+                                        else result[i][1]
+                                    ) * wage_multiplier)
+                                if result[i][1] != 0
+                                else convert_str_to_int(
+                                    Decimal(
+                                        result[i][0]
+                                        if isinstance(result[i][0], str)
+                                        else result[i][0]
+                                    ) * wage_multiplier)
+                                if result[i][0] != 0
+                                else 0,
+                            }
+                    except Exception as e:
+                        print("Failed to parse salary: " + str(e))
+                        result[i] = {}
+                        continue
 
                 return result
 
@@ -3255,842 +3258,731 @@ def get_job_salaries(
                         result[i] = {}
                         continue
 
-                    salary_currency = None
-                    monthly_salary = False
-                    weekly_salary = False
-                    daily_salary = False
-                    hourly_salary = False
+                    try:
+                        salary_currency = None
+                        monthly_salary = False
+                        weekly_salary = False
+                        daily_salary = False
+                        hourly_salary = False
 
-                    # DEBUGGING
-                    # print("key " + str(i) + ": " + result[i], flush=True)
-                    # Both USD and CAD in salary
-                    if ("USD" in result[i] and
-                            "CAD" in result[i]):
-                        # Attempt to keep USD:
-                        if result[i].find("USD") > result[i].find("CAD"):
-                            result[i] = result[i][result[i].find("USD"):]
-                        else:
-                            result[i] = result[i][:result[i].find("CAD")-3]
-                        # raise ValueError("Debug")
+                        # DEBUGGING
                         # print("key " + str(i) + ": " + result[i], flush=True)
+                        # Both USD and CAD in salary
+                        if ("USD" in result[i] and
+                                "CAD" in result[i]):
+                            # Attempt to keep USD:
+                            if result[i].find("USD") > result[i].find("CAD"):
+                                result[i] = result[i][result[i].find("USD"):]
+                            else:
+                                result[i] = result[i][:result[i].find("CAD")-3]
+                            # raise ValueError("Debug")
+                            # print("key " + str(i) + ": " + result[i], flush=True)
 
-                    # fix for million
-                    if " million" in result[i].lower():
-                        result[i] = result[i].replace(" million", "000000")
+                        # fix for million
+                        if " million" in result[i].lower():
+                            result[i] = result[i].replace(" million", "000000")
 
-                    if 'per hour' in result[i].lower():
-                        result[i] = result[i][:len('per hour') +
-                                              result[i].find('per hour')]
+                        if 'per hour' in result[i].lower():
+                            result[i] = result[i][:len('per hour') +
+                                                  result[i].find('per hour')]
 
-                    if ('year' in result[i].lower() or
-                            'per-year-salary' in result[i].lower() or
-                            'per annum' in result[i].lower() or
-                            'per year' in result[i].lower() or
-                            'per yr' in result[i].lower() or
-                            'annually' in result[i].lower() or
-                            'annual' in result[i].lower() or
-                            'annum' in result[i].lower() or
-                            'Yr' in result[i].lower() or
-                            'yr' in result[i].lower() or
-                            '+per' in result[i].lower() or
-                            '＋per' in result[i].lower() or
-                            '➕per' in result[i].lower() or
-                            '+per' in result[i].lower()):
-                        result[i] = (
-                            result[i]
-                            .replace('per-year-salary', '')
-                            .replace('Per-year-salary', '')
-                            .replace('Per-Year-salary', '')
-                            .replace('Per-Year-Salary', '')
-
-                            .replace('per year', '')
-                            .replace('per Year', '')
-                            .replace('Per Year', '')
-
-                            .replace('per annum', '')
-                            .replace('Per annum', '')
-                            .replace('Per Annum', '')
-                            .replace('PER Annum', '')
-                            .replace('PER ANNUM', '')
-
-                            .replace('per yr', '')
-                            .replace('Per yr', '')
-                            .replace('Per Yr', '')
-                            .replace('Per YR', '')
-                            .replace('PER YR', '')
-
-                            .replace('annum', '')
-                            .replace('Annum', '')
-
-                            .replace('annually', '')
-                            .replace('Annually', '')
-                            .replace('ANNUALLY', '')
-
-                            .replace('annual', '')
-                            .replace('Annual', '')
-                            .replace('ANNUAL', '')
-
-                            .replace('yearly', '')
-                            .replace('Yearly', '')
-                            .replace('YEARLY', '')
-
-                            .replace('/year', '')
-                            .replace('/Year', '')
-                            .replace('/YEAR', '')
-
-                            .replace('a year', '')
-                            .replace('A year', '')
-                            .replace('A Year', '')
-                            .replace('A YEAR', '')
-
-                            .replace('year', '')
-                            .replace('Year', '')
-                            .replace('YEAR', '')
-
-                            .replace('+per', '')
-                            .replace('+Per', '')
-                            .replace('+PER', '')
-
-                            .replace('+per', '')
-                            .replace('+Per', '')
-                            .replace('+PER', '')
-
-                            .replace('＋per', '')
-                            .replace('＋Per', '')
-                            .replace('＋PER', '')
-
-                            .replace('➕per', '')
-                            .replace('➕Per', '')
-                            .replace('➕PER', '')
-
-                            .replace('yr', '')
-                            .replace('Yr', '')
-                            .replace('YR', '')
-                            .strip()
-                        )
-
-                    elif 'month' in result[i].lower():
-                        monthly_salary = True
-                        result[i] = (
-                            result[i]
-                            .replace('per month', '')
-                            .replace('/month', '')
-                            .replace('monthly', '')
-                            .replace('month', '')
-                            .strip()
-                        )
-
-                    elif 'week' in result[i].lower():
-                        weekly_salary = True
-                        result[i] = (
-                            result[i]
-                            .replace('per week', '')
-                            .replace('/week', '')
-                            .replace('weekly', '')
-                            .replace('week', '')
-                            .strip()
-                        )
-
-                    elif ('day' in result[i].lower() or
-                          'daily' in result[i].lower()):
-                        daily_salary = True
-                        result[i] = (
-                            result[i]
-                            .replace('per day', '')
-                            .replace('/day', '')
-                            .replace('day', '')
-                            .replace('/daily', '')
-                            .replace('daily', '')
-                            .strip()
-                        )
-
-                    elif ('hour' in result[i].lower() or
-                          'hr' in result[i].lower()):
-                        hourly_salary = True
-                        result[i] = (
-                            result[i]
-                            .replace('an hour', '')
-                            .replace('An hour', '')
-                            .replace('An Hour', '')
-                            .replace('per hour', '')
-                            .replace('Per hour', '')
-                            .replace('Per Hour', '')
-                            .replace('per Hour', '')
-                            .replace('/hour', '')
-                            .replace('/Hour', '')
-                            .replace('hourly', '')
-                            .replace('Hourly', '')
-                            .replace('hour', '')
-                            .replace('Hour', '')
-                            .replace('hr', '')
-                            .replace('Hr', '')
-                            .strip()
-                        )
-
-                    if '(' in result[i].lower():
-                        result[i] = (
-                            result[i]
-                            .replace('(', '')
-                            .strip()
-                        )
-
-                    if ')' in result[i].lower():
-                        result[i] = (
-                            result[i]
-                            .replace(')', '')
-                            .strip()
-                        )
-
-                    # Catch exception on value separated by a comma
-                    if ',' in result[i].lower():
-                        result[i] = (
-                            result[i]
-                            .replace(',', '')
-                            .strip()
-                        )
-
-                    if '/-' in result[i].lower():
-                        result[i] = (
-                            result[i]
-                            .replace('/-', '')
-                            .strip()
-                        )
-
-                    if 'stock equity' in result[i].lower():
-                        result[i] = (
-                            result[i]
-                            .replace('Stock Equity', '')
-                            .replace('stock equity', '')
-                            .strip()
-                        )
-
-                    if 'between' in result[i].lower():
-                        result[i] = (
-                            result[i]
-                            .replace('Between', '')
-                            .replace('between', '')
-                            .strip()
-                        )
-
-                    if 'per period' in result[i].lower():
-                        result[i] = (
-                            result[i]
-                            .replace('Per Period', '')
-                            .replace('Per period', '')
-                            .replace('per Period', '')
-                            .replace('per period', '')
-                            .replace('PER PERIOD', '')
-                            .strip()
-                        )
-
-                    if 'minimum salary of' in result[i].lower():
-                        result[i] = (
-                            result[i]
-                            .replace('minimum salary of', '')
-
-                            .replace('Minimum salary of', '')
-                            .replace('minimum Salary of', '')
-                            .replace('minimum salary Of', '')
-
-                            .replace('Minimum Salary of', '')
-                            .replace('minimum Salary Of', '')
-                            .replace('Minimum salary Of', '')
-
-                            .replace('Minimum Salary Of', '')
-                            .replace('MINIMUM SALARY OF', '')
-                            .strip()
-                        )
-
-                    if 'starting at' in result[i].lower():
-                        result[i] = (
-                            result[i]
-                            .replace('Starting At', '')
-                            .replace('Starting at', '')
-                            .replace('starting At', '')
-                            .replace('starting at', '')
-                            .replace('STARTING AT', '')
-                            .strip()
-                        )
-
-                    if 'from' in result[i].lower():
-                        result[i] = (
-                            result[i]
-                            .replace('from', '')
-                            .replace('From', '')
-                            .replace('FROM', '')
-                            .strip()
-                        )
-
-                    if 'up to' in result[i].lower():
-                        result[i] = (
-                            result[i]
-                            .replace('Up to', '')
-                            .replace('up to', '')
-                            .replace('Up To', '')
-                            .strip()
-                        )
-
-                    if 'payment' in result[i].lower():
-                        result[i] = (
-                            result[i]
-                            .replace('payment', '')
-                            .replace('Payment', '')
-                            .replace('PAYMENT', '')
-                            .strip()
-                        )
-
-                    if 'pay' in result[i].lower():
-                        result[i] = (
-                            result[i]
-                            .replace('pay', '')
-                            .replace('Pay', '')
-                            .replace('PAY', '')
-                            .strip()
-                        )
-
-                    if 'maximum' in result[i].lower():
-                        result[i] = (
-                            result[i]
-                            .replace('maximum', '')
-                            .replace('Maximum', '')
-                            .replace('MAXIMUM', '')
-                            .strip()
-                        )
-
-                    if 'associate product manager:' in result[i].lower():
-                        result[i] = (
-                            result[i]
-                            .replace('associate product manager:', '')
-                            .replace('associate product Manager:', '')
-                            .replace('associate Product Manager:', '')
-                            .replace('Associate Product Manager:', '')
-                            .strip()
-                        )
-
-                    if 'associate software engineer:' in result[i].lower():
-                        result[i] = (
-                            result[i]
-                            .replace('associate software engineer:', '')
-                            .replace('associate software Engineer:', '')
-                            .replace('associate Software Engineer:', '')
-                            .replace('Associate Software Engineer:', '')
-                            .strip()
-                        )
-
-                    if 'associate product designer:' in result[i].lower():
-                        result[i] = (
-                            result[i]
-                            .replace('associate product designer:', '')
-                            .replace('associate product Designer:', '')
-                            .replace('associate Product Designer:', '')
-                            .replace('Associate Product Designer:', '')
-                            .strip()
-                        )
-
-                    if 'up' in result[i].lower():
-                        result[i] = (
-                            result[i]
-                            .replace('Up', '')
-                            .replace('up', '')
-                            .strip()
-                        )
-
-                    if 'bonus' in result[i].lower():
-                        result[i] = (
-                            result[i]
-                            .replace('Bonus', '')
-                            .replace('bonus', '')
-                            .strip()
-                        )
-
-                    if 'net' in result[i].lower():
-                        result[i] = (
-                            result[i]
-                            .replace('net', '')
-                            .replace('Net', '')
-                            .strip()
-                        )
-
-                    if 'gross' in result[i].lower():
-                        result[i] = (
-                            result[i]
-                            .replace('Gross', '')
-                            .replace('gross', '')
-                            .strip()
-                        )
-
-                    if 'salary' in result[i].lower():
-                        result[i] = (
-                            result[i]
-                            .replace('salary', '')
-                            .replace('Salary', '')
-                            .strip()
-                        )
-
-                    if 'base ＋ equity' in result[i].lower():
-                        result[i] = (
-                            result[i]
-                            .replace('base ＋ equity', '')
-                            .replace('Base ＋ Equity', '')
-                            .strip()
-                        )
-
-                    if ' + equity + benefits' in result[i].lower():
-                        result[i] = (
-                            result[i]
-                            .replace(' + equity + benefits', '')
-                            .replace(' + Equity + benefits', '')
-                            .replace(' + Equity + Benefits', '')
-                            .strip()
-                        )
-
-                    if 'base + equity' in result[i].lower():
-                        result[i] = (
-                            result[i]
-                            .replace('base + equity', '')
-                            .replace('Base + Equity', '')
-                            .strip()
-                        )
-
-                    if 'base' in result[i].lower():
-                        result[i] = (
-                            result[i]
-                            .replace('base', '')
-                            .replace('Base', '')
-                            .replace('BASE', '')
-                            .strip()
-                        )
-
-                    if ', flexible' in result[i].lower():
-                        result[i] = (
-                            result[i]
-                            .replace(', flexible', '')
-                            .replace(', Flexible', '')
-                            .replace(', FLEXIBLE', '')
-                            .strip()
-                        )
-
-                    if '/' in result[i]:
-                        result[i] = (
-                            result[i]
-                            .replace('/', '')
-                            .strip()
-                        )
-
-                    if ('+' in result[i].lower() or
-                            '＋' in result[i].lower() or
-                            '➕' in result[i].lower()):
-                        result[i] = (
-                            result[i]
-                            .replace('+', '')
-                            .replace('＋', '')
-                            .replace('➕', '')
-                            .strip()
-                        )
-
-                    # Todo: add support for all currency symbols listed in
-                    # country database.
-                    three_letter_matches = (
-                        re.findall(r'\b['r'A-Z]{3}\b', result[i]))
-
-                    for j in range(len(three_letter_matches)):
-                        if len(three_letter_matches[j]) != 0:
-                            # print("SALARY CURRENCY: " +
-                            #       str(three_letter_matches[j]))
-                            salary_currency = three_letter_matches[j]
+                        if ('year' in result[i].lower() or
+                                'per-year-salary' in result[i].lower() or
+                                'per annum' in result[i].lower() or
+                                'per year' in result[i].lower() or
+                                'per yr' in result[i].lower() or
+                                'annually' in result[i].lower() or
+                                'annual' in result[i].lower() or
+                                'annum' in result[i].lower() or
+                                'Yr' in result[i].lower() or
+                                'yr' in result[i].lower() or
+                                '+per' in result[i].lower() or
+                                '＋per' in result[i].lower() or
+                                '➕per' in result[i].lower() or
+                                '+per' in result[i].lower()):
                             result[i] = (
                                 result[i]
-                                .replace(three_letter_matches[j], '')
-                                .replace("$", '')
-                                .replace("₱", '')
+                                .replace('per-year-salary', '')
+                                .replace('Per-year-salary', '')
+                                .replace('Per-Year-salary', '')
+                                .replace('Per-Year-Salary', '')
+
+                                .replace('per year', '')
+                                .replace('per Year', '')
+                                .replace('Per Year', '')
+
+                                .replace('per annum', '')
+                                .replace('Per annum', '')
+                                .replace('Per Annum', '')
+                                .replace('PER Annum', '')
+                                .replace('PER ANNUM', '')
+
+                                .replace('per yr', '')
+                                .replace('Per yr', '')
+                                .replace('Per Yr', '')
+                                .replace('Per YR', '')
+                                .replace('PER YR', '')
+
+                                .replace('annum', '')
+                                .replace('Annum', '')
+
+                                .replace('annually', '')
+                                .replace('Annually', '')
+                                .replace('ANNUALLY', '')
+
+                                .replace('annual', '')
+                                .replace('Annual', '')
+                                .replace('ANNUAL', '')
+
+                                .replace('yearly', '')
+                                .replace('Yearly', '')
+                                .replace('YEARLY', '')
+
+                                .replace('/year', '')
+                                .replace('/Year', '')
+                                .replace('/YEAR', '')
+
+                                .replace('a year', '')
+                                .replace('A year', '')
+                                .replace('A Year', '')
+                                .replace('A YEAR', '')
+
+                                .replace('year', '')
+                                .replace('Year', '')
+                                .replace('YEAR', '')
+
+                                .replace('+per', '')
+                                .replace('+Per', '')
+                                .replace('+PER', '')
+
+                                .replace('+per', '')
+                                .replace('+Per', '')
+                                .replace('+PER', '')
+
+                                .replace('＋per', '')
+                                .replace('＋Per', '')
+                                .replace('＋PER', '')
+
+                                .replace('➕per', '')
+                                .replace('➕Per', '')
+                                .replace('➕PER', '')
+
+                                .replace('yr', '')
+                                .replace('Yr', '')
+                                .replace('YR', '')
                                 .strip()
                             )
-                            # print("Found Currency: " + str(salary_currency),
-                            #       flush=True)
 
-                    # Secondary check
-                    if salary_currency is None:
-                        if '$' in result[i]:
-                            salary_currency = "USD"
-                            result[i] = result[i].replace("$", '').strip()
+                        elif 'month' in result[i].lower():
+                            monthly_salary = True
+                            result[i] = (
+                                result[i]
+                                .replace('per month', '')
+                                .replace('/month', '')
+                                .replace('monthly', '')
+                                .replace('month', '')
+                                .strip()
+                            )
 
-                        if 'PHP' in result[i] and '₱' in result[i]:
-                            salary_currency = "PHP"
-                            result[i] = (result[i]
-                                         .replace("₱", '')
-                                         .replace("₱", '')
-                                         .replace("PHP", '')
-                                         .strip())
+                        elif 'week' in result[i].lower():
+                            weekly_salary = True
+                            result[i] = (
+                                result[i]
+                                .replace('per week', '')
+                                .replace('/week', '')
+                                .replace('weekly', '')
+                                .replace('week', '')
+                                .strip()
+                            )
 
-                    # Dash 1
-                    if '-' in result[i]:
-                        result[i] = result[i].strip().split('-')
+                        elif ('day' in result[i].lower() or
+                              'daily' in result[i].lower()):
+                            daily_salary = True
+                            result[i] = (
+                                result[i]
+                                .replace('per day', '')
+                                .replace('/day', '')
+                                .replace('day', '')
+                                .replace('/daily', '')
+                                .replace('daily', '')
+                                .strip()
+                            )
 
-                        for j in range(min(2, len(result[i]))):
-                            result[i][j] = result[i][j].strip()
+                        elif ('hour' in result[i].lower() or
+                              'hr' in result[i].lower()):
+                            hourly_salary = True
+                            result[i] = (
+                                result[i]
+                                .replace('an hour', '')
+                                .replace('An hour', '')
+                                .replace('An Hour', '')
+                                .replace('per hour', '')
+                                .replace('Per hour', '')
+                                .replace('Per Hour', '')
+                                .replace('per Hour', '')
+                                .replace('/hour', '')
+                                .replace('/Hour', '')
+                                .replace('hourly', '')
+                                .replace('Hourly', '')
+                                .replace('hour', '')
+                                .replace('Hour', '')
+                                .replace('hr', '')
+                                .replace('Hr', '')
+                                .strip()
+                            )
 
-                            if ' ' in result[i][j]:
-                                result[i][j] = (
-                                    result[i][j].replace(' ', '').strip()
+                        if '(' in result[i].lower():
+                            result[i] = (
+                                result[i]
+                                .replace('(', '')
+                                .strip()
+                            )
+
+                        if ')' in result[i].lower():
+                            result[i] = (
+                                result[i]
+                                .replace(')', '')
+                                .strip()
+                            )
+
+                        # Catch exception on value separated by a comma
+                        if ',' in result[i].lower():
+                            result[i] = (
+                                result[i]
+                                .replace(',', '')
+                                .strip()
+                            )
+
+                        if '/-' in result[i].lower():
+                            result[i] = (
+                                result[i]
+                                .replace('/-', '')
+                                .strip()
+                            )
+
+                        if 'stock equity' in result[i].lower():
+                            result[i] = (
+                                result[i]
+                                .replace('Stock Equity', '')
+                                .replace('stock equity', '')
+                                .strip()
+                            )
+
+                        if 'between' in result[i].lower():
+                            result[i] = (
+                                result[i]
+                                .replace('Between', '')
+                                .replace('between', '')
+                                .strip()
+                            )
+
+                        if 'per period' in result[i].lower():
+                            result[i] = (
+                                result[i]
+                                .replace('Per Period', '')
+                                .replace('Per period', '')
+                                .replace('per Period', '')
+                                .replace('per period', '')
+                                .replace('PER PERIOD', '')
+                                .strip()
+                            )
+
+                        if 'minimum salary of' in result[i].lower():
+                            result[i] = (
+                                result[i]
+                                .replace('minimum salary of', '')
+
+                                .replace('Minimum salary of', '')
+                                .replace('minimum Salary of', '')
+                                .replace('minimum salary Of', '')
+
+                                .replace('Minimum Salary of', '')
+                                .replace('minimum Salary Of', '')
+                                .replace('Minimum salary Of', '')
+
+                                .replace('Minimum Salary Of', '')
+                                .replace('MINIMUM SALARY OF', '')
+                                .strip()
+                            )
+
+                        if 'starting at' in result[i].lower():
+                            result[i] = (
+                                result[i]
+                                .replace('Starting At', '')
+                                .replace('Starting at', '')
+                                .replace('starting At', '')
+                                .replace('starting at', '')
+                                .replace('STARTING AT', '')
+                                .strip()
+                            )
+
+                        if 'from' in result[i].lower():
+                            result[i] = (
+                                result[i]
+                                .replace('from', '')
+                                .replace('From', '')
+                                .replace('FROM', '')
+                                .strip()
+                            )
+
+                        if 'up to' in result[i].lower():
+                            result[i] = (
+                                result[i]
+                                .replace('Up to', '')
+                                .replace('up to', '')
+                                .replace('Up To', '')
+                                .strip()
+                            )
+
+                        if 'payment' in result[i].lower():
+                            result[i] = (
+                                result[i]
+                                .replace('payment', '')
+                                .replace('Payment', '')
+                                .replace('PAYMENT', '')
+                                .strip()
+                            )
+
+                        if 'pay' in result[i].lower():
+                            result[i] = (
+                                result[i]
+                                .replace('pay', '')
+                                .replace('Pay', '')
+                                .replace('PAY', '')
+                                .strip()
+                            )
+
+                        if 'maximum' in result[i].lower():
+                            result[i] = (
+                                result[i]
+                                .replace('maximum', '')
+                                .replace('Maximum', '')
+                                .replace('MAXIMUM', '')
+                                .strip()
+                            )
+
+                        if 'associate product manager:' in result[i].lower():
+                            result[i] = (
+                                result[i]
+                                .replace('associate product manager:', '')
+                                .replace('associate product Manager:', '')
+                                .replace('associate Product Manager:', '')
+                                .replace('Associate Product Manager:', '')
+                                .strip()
+                            )
+
+                        if 'associate software engineer:' in result[i].lower():
+                            result[i] = (
+                                result[i]
+                                .replace('associate software engineer:', '')
+                                .replace('associate software Engineer:', '')
+                                .replace('associate Software Engineer:', '')
+                                .replace('Associate Software Engineer:', '')
+                                .strip()
+                            )
+
+                        if 'associate product designer:' in result[i].lower():
+                            result[i] = (
+                                result[i]
+                                .replace('associate product designer:', '')
+                                .replace('associate product Designer:', '')
+                                .replace('associate Product Designer:', '')
+                                .replace('Associate Product Designer:', '')
+                                .strip()
+                            )
+
+                        if 'up' in result[i].lower():
+                            result[i] = (
+                                result[i]
+                                .replace('Up', '')
+                                .replace('up', '')
+                                .strip()
+                            )
+
+                        if 'bonus' in result[i].lower():
+                            result[i] = (
+                                result[i]
+                                .replace('Bonus', '')
+                                .replace('bonus', '')
+                                .strip()
+                            )
+
+                        if 'net' in result[i].lower():
+                            result[i] = (
+                                result[i]
+                                .replace('net', '')
+                                .replace('Net', '')
+                                .strip()
+                            )
+
+                        if 'gross' in result[i].lower():
+                            result[i] = (
+                                result[i]
+                                .replace('Gross', '')
+                                .replace('gross', '')
+                                .strip()
+                            )
+
+                        if 'salary' in result[i].lower():
+                            result[i] = (
+                                result[i]
+                                .replace('salary', '')
+                                .replace('Salary', '')
+                                .strip()
+                            )
+
+                        if 'base ＋ equity' in result[i].lower():
+                            result[i] = (
+                                result[i]
+                                .replace('base ＋ equity', '')
+                                .replace('Base ＋ Equity', '')
+                                .strip()
+                            )
+
+                        if ' + equity + benefits' in result[i].lower():
+                            result[i] = (
+                                result[i]
+                                .replace(' + equity + benefits', '')
+                                .replace(' + Equity + benefits', '')
+                                .replace(' + Equity + Benefits', '')
+                                .strip()
+                            )
+
+                        if 'base + equity' in result[i].lower():
+                            result[i] = (
+                                result[i]
+                                .replace('base + equity', '')
+                                .replace('Base + Equity', '')
+                                .strip()
+                            )
+
+                        if 'base' in result[i].lower():
+                            result[i] = (
+                                result[i]
+                                .replace('base', '')
+                                .replace('Base', '')
+                                .replace('BASE', '')
+                                .strip()
+                            )
+
+                        if ', flexible' in result[i].lower():
+                            result[i] = (
+                                result[i]
+                                .replace(', flexible', '')
+                                .replace(', Flexible', '')
+                                .replace(', FLEXIBLE', '')
+                                .strip()
+                            )
+
+                        if '/' in result[i]:
+                            result[i] = (
+                                result[i]
+                                .replace('/', '')
+                                .strip()
+                            )
+
+                        if ('+' in result[i].lower() or
+                                '＋' in result[i].lower() or
+                                '➕' in result[i].lower()):
+                            result[i] = (
+                                result[i]
+                                .replace('+', '')
+                                .replace('＋', '')
+                                .replace('➕', '')
+                                .strip()
+                            )
+
+                        # Todo: add support for all currency symbols listed in
+                        # country database.
+                        three_letter_matches = (
+                            re.findall(r'\b['r'A-Z]{3}\b', result[i]))
+
+                        for j in range(len(three_letter_matches)):
+                            if len(three_letter_matches[j]) != 0:
+                                # print("SALARY CURRENCY: " +
+                                #       str(three_letter_matches[j]))
+                                salary_currency = three_letter_matches[j]
+                                result[i] = (
+                                    result[i]
+                                    .replace(three_letter_matches[j], '')
+                                    .replace("$", '')
+                                    .replace("₱", '')
+                                    .strip()
                                 )
+                                # print("Found Currency: " + str(salary_currency),
+                                #       flush=True)
 
-                            if ',' in result[i][j]:
-                                result[i][j] = (
-                                    result[i][j].replace(',', '').strip()
-                                )
-                    # Hyphen
-                    if '‐' in result[i]:
-                        result[i] = result[i].strip().split('‐')
+                        # Secondary check
+                        if salary_currency is None:
+                            if '$' in result[i]:
+                                salary_currency = "USD"
+                                result[i] = result[i].replace("$", '').strip()
 
-                        for j in range(min(2, len(result[i]))):
-                            result[i][j] = result[i][j].strip()
+                            if 'PHP' in result[i] and '₱' in result[i]:
+                                salary_currency = "PHP"
+                                result[i] = (result[i]
+                                             .replace("₱", '')
+                                             .replace("₱", '')
+                                             .replace("PHP", '')
+                                             .strip())
 
-                            if ' ' in result[i][j]:
-                                result[i][j] = (
-                                    result[i][j].replace(' ', '').strip()
-                                )
+                        # Dash 1
+                        if '-' in result[i]:
+                            result[i] = result[i].strip().split('-')
 
-                            if ',' in result[i][j]:
-                                result[i][j] = (
-                                    result[i][j].replace(',', '').strip()
-                                )
-
-                    # Non-Breaking Hyphen
-                    if '‑' in result[i]:
-                        result[i] = result[i].strip().split('‑')
-
-                        for j in range(min(2, len(result[i]))):
-                            result[i][j] = result[i][j].strip()
-
-                            if ' ' in result[i][j]:
-                                result[i][j] = (
-                                    result[i][j].replace(' ', '').strip()
-                                )
-
-                            if ',' in result[i][j]:
-                                result[i][j] = (
-                                    result[i][j].replace(',', '').strip()
-                                )
-
-                    # Figure Dash
-                    if '‒' in result[i]:
-                        result[i] = result[i].strip().split('‒')
-
-                        for j in range(min(2, len(result[i]))):
-                            result[i][j] = result[i][j].strip()
-
-                            if ' ' in result[i][j]:
-                                result[i][j] = (
-                                    result[i][j].replace(' ', '').strip()
-                                )
-
-                            if ',' in result[i][j]:
-                                result[i][j] = (
-                                    result[i][j].replace(',', '').strip()
-                                )
-
-                    # En Dash
-                    if '–' in result[i]:
-                        result[i] = result[i].strip().split('–')
-
-                        for j in range(min(2, len(result[i]))):
-                            result[i][j] = result[i][j].strip()
-
-                            if ' ' in result[i][j]:
-                                result[i][j] = (
-                                    result[i][j].replace(' ', '').strip()
-                                )
-
-                            if ',' in result[i][j]:
-                                result[i][j] = (
-                                    result[i][j].replace(',', '').strip()
-                                )
-
-                    # Em Dash
-                    if '—' in result[i]:
-                        result[i] = result[i].strip().split('—')
-
-                        for j in range(min(2, len(result[i]))):
-                            result[i][j] = result[i][j].strip()
-
-                            if ' ' in result[i][j]:
-                                result[i][j] = (
-                                    result[i][j].replace(' ', '').strip()
-                                )
-
-                            if ',' in result[i][j]:
-                                result[i][j] = (
-                                    result[i][j].replace(',', '').strip()
-                                )
-
-                    # Horizontal Bar
-                    if '―' in result[i]:
-                        result[i] = result[i].strip().split('―')
-
-                        for j in range(min(2, len(result[i]))):
-                            result[i][j] = result[i][j].strip()
-
-                            if ' ' in result[i][j]:
-                                result[i][j] = (
-                                    result[i][j].replace(' ', '').strip()
-                                )
-
-                            if ',' in result[i][j]:
-                                result[i][j] = (
-                                    result[i][j].replace(',', '').strip()
-                                )
-
-                    if '~' in result[i]:
-                        result[i] = result[i].strip().split('~')
-
-                        for j in range(min(2, len(result[i]))):
-                            result[i][j] = result[i][j].strip()
-
-                            if ' ' in result[i][j]:
-                                result[i][j] = (
-                                    result[i][j].replace(' ', '').strip()
-                                )
-
-                            if ',' in result[i][j]:
-                                result[i][j] = (
-                                    result[i][j].replace(',', '').strip()
-                                )
-
-                    if ' to ' in result[i]:
-                        result[i] = result[i].strip().split(' to ')
-
-                        for j in range(max(2, len(result[i]))):
-                            result[i][j] = result[i][j].strip()
-
-                            if ' ' in result[i][j]:
-                                result[i][j] = (
-                                    result[i][j].replace(' ', '').strip()
-                                )
-
-                            if ',' in result[i][j]:
-                                result[i][j] = (
-                                    result[i][j].replace(',', '').strip()
-                                )
-
-                    if ' and ' in result[i]:
-                        result[i] = result[i].strip().split(' and ')
-
-                        for j in range(min(2, len(result[i]))):
-                            result[i][j] = result[i][j].strip()
-
-                            if ' ' in result[i][j]:
-                                result[i][j] = (
-                                    result[i][j].replace(' ', '').strip()
-                                )
-
-                            if ',' in result[i][j]:
-                                result[i][j] = (
-                                    result[i][j].replace(',', '').strip()
-                                )
-
-                    # Malformed Salary range
-                    # Comma and space in between salary ranges
-                    # xxx.00, xxxx
-                    if '.00, ' in result[i]:
-                        result[i] = [
-                            result[i][:result[i].find('.00 ') + 3] +
-                            result[i][result[i].find('.00 ') + 4:].strip()
-                        ]
-
-                        for j in range(min(2, len(result[i]))):
-                            result[i][j] = result[i][j].strip()
-
-                            if ' ' in result[i][j]:
-                                result[i][j] = (
-                                    result[i][j].replace(' ', '').strip()
-                                )
-
-                            if ',' in result[i][j]:
-                                result[i][j] = (
-                                    result[i][j].replace(',', '').strip()
-                                )
-
-                    if monthly_salary:
-                        if isinstance(result[i], list):
                             for j in range(min(2, len(result[i]))):
-                                result[i][j] = convert_str_to_int(
-                                    Decimal(
-                                        result[i][j].strip()
-                                        if isinstance(result[i][j], str)
-                                        else result[i][j]
-                                    ) * 12)
+                                result[i][j] = result[i][j].strip()
 
-                        else:
-                            result[i] = convert_str_to_int(
-                                Decimal(
-                                    result[i].strip()
-                                    if isinstance(result[i], str)
-                                    else result[i]
-                                ) * 12)
+                                if ' ' in result[i][j]:
+                                    result[i][j] = (
+                                        result[i][j].replace(' ', '').strip()
+                                    )
 
-                    elif weekly_salary:
-                        if isinstance(result[i], list):
+                                if ',' in result[i][j]:
+                                    result[i][j] = (
+                                        result[i][j].replace(',', '').strip()
+                                    )
+                        # Hyphen
+                        if '‐' in result[i]:
+                            result[i] = result[i].strip().split('‐')
+
                             for j in range(min(2, len(result[i]))):
-                                result[i][j] = convert_str_to_int(
-                                    Decimal(
-                                        result[i][j].strip()
-                                        if isinstance(result[i][j], str)
-                                        else result[i][j]
-                                    ) * 52)
+                                result[i][j] = result[i][j].strip()
 
-                        else:
-                            result[i] = convert_str_to_int(
-                                Decimal(
-                                    result[i].strip()
-                                    if isinstance(result[i], str)
-                                    else result[i]
-                                ) * 52)
+                                if ' ' in result[i][j]:
+                                    result[i][j] = (
+                                        result[i][j].replace(' ', '').strip()
+                                    )
 
-                    elif daily_salary:
-                        if isinstance(result[i], list):
+                                if ',' in result[i][j]:
+                                    result[i][j] = (
+                                        result[i][j].replace(',', '').strip()
+                                    )
+
+                        # Non-Breaking Hyphen
+                        if '‑' in result[i]:
+                            result[i] = result[i].strip().split('‑')
+
                             for j in range(min(2, len(result[i]))):
-                                result[i][j] = convert_str_to_int(
-                                    Decimal(
-                                        result[i][j].strip()
-                                        if isinstance(result[i][j], str)
-                                        else result[i][j]
-                                    ) * 5 * 52
-                                )
+                                result[i][j] = result[i][j].strip()
 
-                        else:
-                            result[i] = convert_str_to_int(
-                                Decimal(
-                                    result[i].strip()
-                                    if isinstance(result[i], str)
-                                    else result[i]
-                                ) * 5 * 52)
+                                if ' ' in result[i][j]:
+                                    result[i][j] = (
+                                        result[i][j].replace(' ', '').strip()
+                                    )
 
-                    elif hourly_salary:
-                        if isinstance(result[i], list):
+                                if ',' in result[i][j]:
+                                    result[i][j] = (
+                                        result[i][j].replace(',', '').strip()
+                                    )
+
+                        # Figure Dash
+                        if '‒' in result[i]:
+                            result[i] = result[i].strip().split('‒')
+
                             for j in range(min(2, len(result[i]))):
-                                # print("trace " + result[i][j], flush=True)
-                                result[i][j] = convert_str_to_int(
-                                    Decimal(
-                                        result[i][j].strip()
-                                        if isinstance(result[i][j], str)
-                                        else result[i][j]
-                                    ) * 2080)
+                                result[i][j] = result[i][j].strip()
 
-                        else:
-                            # print("trace " + result[i], flush=True)
+                                if ' ' in result[i][j]:
+                                    result[i][j] = (
+                                        result[i][j].replace(' ', '').strip()
+                                    )
 
-                            # Locate space
-                            while result[i].startswith(" "):
-                                result[i] = result[i][1:]
+                                if ',' in result[i][j]:
+                                    result[i][j] = (
+                                        result[i][j].replace(',', '').strip()
+                                    )
 
-                            while result[i].endswith(" "):
-                                result[i] = result[i][:-1]
+                        # En Dash
+                        if '–' in result[i]:
+                            result[i] = result[i].strip().split('–')
 
-                            if " " in result[i]:
-                                result[i] = result[i].strip().split(' ')
+                            for j in range(min(2, len(result[i]))):
+                                result[i][j] = result[i][j].strip()
+
+                                if ' ' in result[i][j]:
+                                    result[i][j] = (
+                                        result[i][j].replace(' ', '').strip()
+                                    )
+
+                                if ',' in result[i][j]:
+                                    result[i][j] = (
+                                        result[i][j].replace(',', '').strip()
+                                    )
+
+                        # Em Dash
+                        if '—' in result[i]:
+                            result[i] = result[i].strip().split('—')
+
+                            for j in range(min(2, len(result[i]))):
+                                result[i][j] = result[i][j].strip()
+
+                                if ' ' in result[i][j]:
+                                    result[i][j] = (
+                                        result[i][j].replace(' ', '').strip()
+                                    )
+
+                                if ',' in result[i][j]:
+                                    result[i][j] = (
+                                        result[i][j].replace(',', '').strip()
+                                    )
+
+                        # Horizontal Bar
+                        if '―' in result[i]:
+                            result[i] = result[i].strip().split('―')
+
+                            for j in range(min(2, len(result[i]))):
+                                result[i][j] = result[i][j].strip()
+
+                                if ' ' in result[i][j]:
+                                    result[i][j] = (
+                                        result[i][j].replace(' ', '').strip()
+                                    )
+
+                                if ',' in result[i][j]:
+                                    result[i][j] = (
+                                        result[i][j].replace(',', '').strip()
+                                    )
+
+                        if '~' in result[i]:
+                            result[i] = result[i].strip().split('~')
+
+                            for j in range(min(2, len(result[i]))):
+                                result[i][j] = result[i][j].strip()
+
+                                if ' ' in result[i][j]:
+                                    result[i][j] = (
+                                        result[i][j].replace(' ', '').strip()
+                                    )
+
+                                if ',' in result[i][j]:
+                                    result[i][j] = (
+                                        result[i][j].replace(',', '').strip()
+                                    )
+
+                        if ' to ' in result[i]:
+                            result[i] = result[i].strip().split(' to ')
+
+                            for j in range(max(2, len(result[i]))):
+                                result[i][j] = result[i][j].strip()
+
+                                if ' ' in result[i][j]:
+                                    result[i][j] = (
+                                        result[i][j].replace(' ', '').strip()
+                                    )
+
+                                if ',' in result[i][j]:
+                                    result[i][j] = (
+                                        result[i][j].replace(',', '').strip()
+                                    )
+
+                        if ' and ' in result[i]:
+                            result[i] = result[i].strip().split(' and ')
+
+                            for j in range(min(2, len(result[i]))):
+                                result[i][j] = result[i][j].strip()
+
+                                if ' ' in result[i][j]:
+                                    result[i][j] = (
+                                        result[i][j].replace(' ', '').strip()
+                                    )
+
+                                if ',' in result[i][j]:
+                                    result[i][j] = (
+                                        result[i][j].replace(',', '').strip()
+                                    )
+
+                        # Malformed Salary range
+                        # Comma and space in between salary ranges
+                        # xxx.00, xxxx
+                        if '.00, ' in result[i]:
+                            result[i] = [
+                                result[i][:result[i].find('.00 ') + 3] +
+                                result[i][result[i].find('.00 ') + 4:].strip()
+                            ]
+
+                            for j in range(min(2, len(result[i]))):
+                                result[i][j] = result[i][j].strip()
+
+                                if ' ' in result[i][j]:
+                                    result[i][j] = (
+                                        result[i][j].replace(' ', '').strip()
+                                    )
+
+                                if ',' in result[i][j]:
+                                    result[i][j] = (
+                                        result[i][j].replace(',', '').strip()
+                                    )
+
+                        if monthly_salary:
+                            if isinstance(result[i], list):
                                 for j in range(min(2, len(result[i]))):
-                                    result[i][j] = result[i][j].strip()
-
-                                    if ' ' in result[i][j]:
-                                        result[i][j] = (
-                                            result[i][j].replace(
-                                                ' ', '').strip()
-                                        )
-
-                                    if ',' in result[i][j]:
-                                        result[i][j] = (
-                                            result[i][j].replace(
-                                                ',', '').strip()
-                                        )
-
                                     result[i][j] = convert_str_to_int(
                                         Decimal(
                                             result[i][j].strip()
                                             if isinstance(result[i][j], str)
                                             else result[i][j]
-                                        ) * 2080)
+                                        ) * 12)
+
                             else:
                                 result[i] = convert_str_to_int(
                                     Decimal(
                                         result[i].strip()
                                         if isinstance(result[i], str)
                                         else result[i]
-                                    ) * 2080)
+                                    ) * 12)
 
-                    else:
-                        if isinstance(result[i], list):
-                            for j in range(min(2, len(result[i]))):
-                                if ('K' in result[i][j] or
-                                        'k' in result[i][j]):
-                                    result[i][j] = (
-                                        result[i][j]
-                                        .replace("K", "")
-                                        .replace("k", "")
-                                        .strip()
-                                    )
-
-                                    # print(result[i][j], flush=True)
+                        elif weekly_salary:
+                            if isinstance(result[i], list):
+                                for j in range(min(2, len(result[i]))):
                                     result[i][j] = convert_str_to_int(
                                         Decimal(
                                             result[i][j].strip()
                                             if isinstance(result[i][j], str)
                                             else result[i][j]
-                                        ) * 1000)
-
-                                else:
-                                    result[i][j] = convert_str_to_int(
-                                        result[i][j].strip()
-                                        if isinstance(result[i][j], str)
-                                        else result[i][j]
-                                    )
-                        else:
-                            if 'k' in result[i].lower():
-                                # print(result[i])
-                                result[i] = (result[i]
-                                             .replace("K", "")
-                                             .replace("k", "")
-                                             )
-
-                                try:
-
-                                    result[i] = convert_str_to_int(
-                                        Decimal(
-                                            result[i].strip()
-                                            if isinstance(result[i], str)
-                                            else result[i]
-                                        ) * 1000)
-                                # except Exception:
-                                #     raise
-
-                                except InvalidOperation:
-                                    # Try splitting using space
-                                    if ' ' in result[i]:
-                                        result[i] = (result[i]
-                                                     .strip()
-                                                     .split(' '))
-
-                                        for j in range(min(2, len(result[i]))):
-                                            result[i][j] = result[i][j].strip()
-
-                                            if ' ' in result[i][j]:
-                                                result[i][j] = (
-                                                    result[i][j].replace(
-                                                        ' ', '').strip())
-
-                                            if ',' in result[i][j]:
-                                                result[i][j] = (
-                                                    result[i][j].replace(
-                                                        ',', '').strip())
-
-                                            result[i][j] = convert_str_to_int(
-                                                Decimal(
-                                                    result[i][j].strip()
-                                                    if isinstance(
-                                                        result[i][j], str)
-                                                    else result[i][j]
-                                                ) * 1000)
+                                        ) * 52)
 
                             else:
+                                result[i] = convert_str_to_int(
+                                    Decimal(
+                                        result[i].strip()
+                                        if isinstance(result[i], str)
+                                        else result[i]
+                                    ) * 52)
+
+                        elif daily_salary:
+                            if isinstance(result[i], list):
+                                for j in range(min(2, len(result[i]))):
+                                    result[i][j] = convert_str_to_int(
+                                        Decimal(
+                                            result[i][j].strip()
+                                            if isinstance(result[i][j], str)
+                                            else result[i][j]
+                                        ) * 5 * 52
+                                    )
+
+                            else:
+                                result[i] = convert_str_to_int(
+                                    Decimal(
+                                        result[i].strip()
+                                        if isinstance(result[i], str)
+                                        else result[i]
+                                    ) * 5 * 52)
+
+                        elif hourly_salary:
+                            if isinstance(result[i], list):
+                                for j in range(min(2, len(result[i]))):
+                                    # print("trace " + result[i][j], flush=True)
+                                    result[i][j] = convert_str_to_int(
+                                        Decimal(
+                                            result[i][j].strip()
+                                            if isinstance(result[i][j], str)
+                                            else result[i][j]
+                                        ) * 2080)
+
+                            else:
+                                # print("trace " + result[i], flush=True)
+
                                 # Locate space
                                 while result[i].startswith(" "):
                                     result[i] = result[i][1:]
@@ -4114,13 +4006,132 @@ def get_job_salaries(
                                                 result[i][j].replace(
                                                     ',', '').strip()
                                             )
-                                    if isinstance(result[i], list):
-                                        for j in range(min(2, len(result[i]))):
-                                            result[i][j] = convert_str_to_int(
+
+                                        result[i][j] = convert_str_to_int(
+                                            Decimal(
                                                 result[i][j].strip()
                                                 if isinstance(result[i][j], str)
                                                 else result[i][j]
+                                            ) * 2080)
+                                else:
+                                    result[i] = convert_str_to_int(
+                                        Decimal(
+                                            result[i].strip()
+                                            if isinstance(result[i], str)
+                                            else result[i]
+                                        ) * 2080)
+
+                        else:
+                            if isinstance(result[i], list):
+                                for j in range(min(2, len(result[i]))):
+                                    if ('K' in result[i][j] or
+                                            'k' in result[i][j]):
+                                        result[i][j] = (
+                                            result[i][j]
+                                            .replace("K", "")
+                                            .replace("k", "")
+                                            .strip()
+                                        )
+
+                                        # print(result[i][j], flush=True)
+                                        result[i][j] = convert_str_to_int(
+                                            Decimal(
+                                                result[i][j].strip()
+                                                if isinstance(result[i][j], str)
+                                                else result[i][j]
+                                            ) * 1000)
+
+                                    else:
+                                        result[i][j] = convert_str_to_int(
+                                            result[i][j].strip()
+                                            if isinstance(result[i][j], str)
+                                            else result[i][j]
+                                        )
+                            else:
+                                if 'k' in result[i].lower():
+                                    # print(result[i])
+                                    result[i] = (result[i]
+                                                 .replace("K", "")
+                                                 .replace("k", "")
+                                                 )
+
+                                    try:
+
+                                        result[i] = convert_str_to_int(
+                                            Decimal(
+                                                result[i].strip()
+                                                if isinstance(result[i], str)
+                                                else result[i]
+                                            ) * 1000)
+                                    # except Exception:
+                                    #     raise
+
+                                    except InvalidOperation:
+                                        # Try splitting using space
+                                        if ' ' in result[i]:
+                                            result[i] = (result[i]
+                                                         .strip()
+                                                         .split(' '))
+
+                                            for j in range(min(2, len(result[i]))):
+                                                result[i][j] = result[i][j].strip()
+
+                                                if ' ' in result[i][j]:
+                                                    result[i][j] = (
+                                                        result[i][j].replace(
+                                                            ' ', '').strip())
+
+                                                if ',' in result[i][j]:
+                                                    result[i][j] = (
+                                                        result[i][j].replace(
+                                                            ',', '').strip())
+
+                                                result[i][j] = convert_str_to_int(
+                                                    Decimal(
+                                                        result[i][j].strip()
+                                                        if isinstance(
+                                                            result[i][j], str)
+                                                        else result[i][j]
+                                                    ) * 1000)
+
+                                else:
+                                    # Locate space
+                                    while result[i].startswith(" "):
+                                        result[i] = result[i][1:]
+
+                                    while result[i].endswith(" "):
+                                        result[i] = result[i][:-1]
+
+                                    if " " in result[i]:
+                                        result[i] = result[i].strip().split(' ')
+                                        for j in range(min(2, len(result[i]))):
+                                            result[i][j] = result[i][j].strip()
+
+                                            if ' ' in result[i][j]:
+                                                result[i][j] = (
+                                                    result[i][j].replace(
+                                                        ' ', '').strip()
+                                                )
+
+                                            if ',' in result[i][j]:
+                                                result[i][j] = (
+                                                    result[i][j].replace(
+                                                        ',', '').strip()
+                                                )
+                                        if isinstance(result[i], list):
+                                            for j in range(min(2, len(result[i]))):
+                                                result[i][j] = convert_str_to_int(
+                                                    result[i][j].strip()
+                                                    if isinstance(result[i][j], str)
+                                                    else result[i][j]
+                                                )
+                                        else:
+                                            result[i] = convert_str_to_int(
+                                                result[i].strip()
+                                                if isinstance(result[i], str)
+                                                else result[i]
                                             )
+
                                     else:
                                         result[i] = convert_str_to_int(
                                             result[i].strip()
@@ -4128,52 +4139,50 @@ def get_job_salaries(
                                             else result[i]
                                         )
 
-                                else:
-                                    result[i] = convert_str_to_int(
-                                        result[i].strip()
-                                        if isinstance(result[i], str)
-                                        else result[i]
-                                    )
+                        new_dict = {
+                            'currency': salary_currency,
 
-                    new_dict = {
-                        'currency': salary_currency,
+                            'min_salary': (
+                                convert_str_to_int(
+                                    result[i][0]
+                                    if (isinstance(result[i], list) and
+                                        len(result[i]) != 0)
+                                    else 0
+                                )
+                            ),
 
-                        'min_salary': (
-                            convert_str_to_int(
-                                result[i][0]
-                                if (isinstance(result[i], list) and
-                                    len(result[i]) != 0)
-                                else 0
-                            )
-                        ),
+                            'max_salary': (
+                                convert_str_to_int(
+                                    result[i][1]
+                                    if (isinstance(result[i], list) and
+                                        len(result[i]) > 1)
+                                    else result[i][0]
 
-                        'max_salary': (
-                            convert_str_to_int(
-                                result[i][1]
-                                if (isinstance(result[i], list) and
-                                    len(result[i]) > 1)
-                                else result[i][0]
+                                    if (isinstance(result[i], list) and
+                                        len(result[i]) == 0)
+                                    else 0
+                                )
+                            ),
+                        }
 
-                                if (isinstance(result[i], list) and
-                                    len(result[i]) == 0)
-                                else 0
-                            )
-                        ),
-                    }
+                        if (new_dict.get('min_salary', None) is not None and
+                                isinstance(new_dict.get('min_salary'), int) and
+                                new_dict.get('min_salary', 0) > 2147483647):
+                            print("Parsing Errors (Min Salary)")
+                            new_dict['min_salary'] = 0
 
-                    if (new_dict.get('min_salary', None) is not None and
-                            isinstance(new_dict.get('min_salary'), int) and
-                            new_dict.get('min_salary', 0) > 2147483647):
-                        print("Parsing Errors (Min Salary)")
-                        new_dict['min_salary'] = 0
+                        if (new_dict.get('max_salary', None) is not None and
+                                isinstance(new_dict.get('max_salary'), int) and
+                                new_dict.get('max_salary', 0) > 2147483647):
+                            print("Parsing Errors (Max Salary)")
+                            new_dict['max_salary'] = 0
 
-                    if (new_dict.get('max_salary', None) is not None and
-                            isinstance(new_dict.get('max_salary'), int) and
-                            new_dict.get('max_salary', 0) > 2147483647):
-                        print("Parsing Errors (Max Salary)")
-                        new_dict['max_salary'] = 0
-
-                    result[i] = new_dict
+                        result[i] = new_dict
+                    except Exception as e:
+                        print("Debug Stack: " + str(result[i]))
+                        print("Parsing Error: " + str(e))
+                        result[i] = {}
+                        continue
                     # print("Final: " + str(result[i]), flush=True)
                 return result
 
