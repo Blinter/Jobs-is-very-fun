@@ -243,6 +243,12 @@ with app.app_context():
                 .read().decode()
             )
 
+            # Fix for special error code
+            if ('code' in new_dict.keys() and
+                    'message' in new_dict.keys() and
+                    new_dict.get('code') == "57014"):
+                continue
+
             # Fix for key
             if (query.url == "https://glassdoor.p.rapidapi.com"
                              "/job/" and
@@ -260,6 +266,8 @@ with app.app_context():
 
             # Key Debug Error
             # not_found = False
+
+            # Check for other non-error code
 
             for i in new_dict.keys():
                 if "error" in i.lower():

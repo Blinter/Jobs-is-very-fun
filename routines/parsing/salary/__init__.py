@@ -3112,6 +3112,19 @@ def get_job_salaries(
                     elif daily_salary:
                         if isinstance(result[i], list):
                             for j in range(len(result[i])):
+                                if 'K' in result[i][j]:
+                                    result[i][j] = (
+                                        result[i][j]
+                                        .replace("K", "")
+                                        .strip()
+                                    )
+                                    result[i][j] = convert_str_to_int(
+                                        Decimal(
+                                            result[i][j].strip()
+                                            if isinstance(result[i][j], str)
+                                            else result[i][j]
+                                        ) * 1000
+                                    )
                                 result[i][j] = convert_str_to_int(
                                     Decimal(
                                         result[i][j].strip()

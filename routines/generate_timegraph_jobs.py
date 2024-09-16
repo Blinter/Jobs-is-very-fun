@@ -181,7 +181,7 @@ else:
 # raise ValueError(progress_timestamp)
 
 
-with app.app_context():
+with (app.app_context()):
     # Performance check
     import time
     start_time = time.time()
@@ -196,9 +196,28 @@ with app.app_context():
             # date_filter=None,
             database_app=db
         )
+
+        # Enable debug parse for an ID
+        # debug_test_parse_id = 2385
+        debug_test_parse_id = -1
+
+        if debug_test_parse_id != -1:
+            print("Debugging specified ID and stopping. " +
+                  str(debug_test_parse_id))
+
         new_new_jobs = {}
         earliest_day = datetime.min
         for query in processed_queries:
+            # Debug Test Parsing
+            if (debug_test_parse_id != -1 and
+                    query.id != debug_test_parse_id):
+                continue
+
+            print("ID: " + str(query.id) + " " +
+                  "URL: " + query.url + " (" +
+                  query.endpoint_nice_name +
+                  ")", flush=True)
+
             import datetime
             new_jobs = {}
             if earliest_day == datetime.datetime.min:
@@ -228,12 +247,23 @@ with app.app_context():
                 .read().decode()
             )
 
+            # Fix for special error code
+            if ('code' in new_dict.keys() and
+                    'message' in new_dict.keys() and
+                    new_dict.get('code') == "57014"):
+                continue
+
+            if not new_dict:
+                continue
+
             names: dict = get_job_titles(
                 api_url=query.url,
                 nice_name=query.endpoint_nice_name,
                 dict_new=new_dict,
                 input_json=query.input_json,
             )
+            if not names:
+                print("Empty Job Titles")
 
             apply_links: dict = get_apply_link(
                 api_url=query.url,
@@ -241,6 +271,8 @@ with app.app_context():
                 dict_new=new_dict,
                 input_json=query.input_json,
             )
+            if not apply_links:
+                print("Empty Apply Links")
 
             times: dict = get_times(
                 api_url=query.url,
@@ -249,11 +281,8 @@ with app.app_context():
                 input_json=query.input_json,
                 query_time=query.query_time
             )
-
-            # print("ID: " + str(query.id) + " " +
-            #       "URL: " + query.url + " (" +
-            #       query.endpoint_nice_name +
-            #       ")", flush=True)
+            if not times:
+                print("Empty Times")
 
             # Add names to dictionary
             for i in names.keys():
@@ -345,6 +374,10 @@ with app.app_context():
                      new_jobs[i].get('times').get('expiration_time_utc')
                      .replace(tzinfo=pytz.UTC).date())
                 )
+
+            if (debug_test_parse_id != -1 and
+                    query.id == debug_test_parse_id):
+                raise ReferenceError("Debug Test Parse")
 
         counted_jobs = []
 

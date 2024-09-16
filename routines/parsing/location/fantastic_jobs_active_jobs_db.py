@@ -73,6 +73,9 @@ def fantastic_jobs_active_jobs_db_get_jobs_text(dict_new):
                     .replace('''""Field""''', '''"Field"''')
                     # hard fix
                     .replace('''Land O" Lakes''', '''Land O' Lakes''')
+                    .replace('''River"s Edge''', '''River's Edge''')
+                    .replace('''Peter"s Lane''', '''Peter's Lane''')
+                    .replace('''Nicoletta"s''', '''Nicoletta's''')
                 )
 
                 detailed_location = json.loads(detailed_location)[0]

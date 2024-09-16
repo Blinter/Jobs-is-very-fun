@@ -37,7 +37,16 @@ def get_times(
     expiration_time_utc: Expiration Time (or 1 Month ahead)
 
     """
+    if not dict_new:
+        return {}
     query_time = query_time.replace(tzinfo=pytz.UTC)
+
+    # Fix for special error code
+    if ('code' in dict_new.keys() and
+            'message' in dict_new.keys() and
+            dict_new.get('code') == "57014"):
+        return {}
+
     match api_url:
 
         # APIJobs | Job Searching API
@@ -452,21 +461,25 @@ def get_times(
                 )
 
                 for i in dict_new.keys():
-                    try:
-                        result[i] = convert_str_to_datetime_from_iso(result[i])
-                    except ValueError as e:
-                        print(str(e) + " - defaulting to query time")
-                        result[i] = None
+                    if isinstance(dict_new[i], dict):
+                        try:
+                            result[i] = convert_str_to_datetime_from_iso(
+                                result[i])
+                        except ValueError as e:
+                            print(str(e) + " - defaulting to query time")
+                            result[i] = None
 
-                    result[i] = ({
-                        'posted_time_utc': result[i]
-                        if result[i] is not None else
-                        query_time,
+                        result[i] = {
+                            'posted_time_utc': result[i]
+                            if result[i] is not None else
+                            query_time,
 
-                        'expiration_time_utc': result[i] + timedelta(days=30)
-                        if result[i] is not None else
-                        query_time + timedelta(days=30),
-                    })
+                            'expiration_time_utc': (
+                                result[i] + timedelta(days=30)
+                                if result[i] is not None else
+                                query_time + timedelta(days=30)
+                            ),
+                        }
 
                 return result
 
@@ -1516,6 +1529,9 @@ def get_times(
                     )
                 )
 
+                if not result:
+                    return {}
+
                 for i in result.keys():
                     try:
                         result[i] = (ast.literal_eval(result[i])[0]
@@ -1540,11 +1556,11 @@ def get_times(
                 for i in dict_new.keys():
                     result[i] = ({
                         'posted_time_utc': result[i]
-                        if result[i] is not None else
-                        query_time,
+                        if result[i] is not None
+                        else query_time,
                         'expiration_time_utc': result[i] + timedelta(days=30)
-                        if result[i] is not None else
-                        query_time + timedelta(days=30),
+                        if result[i] is not None
+                        else query_time + timedelta(days=30),
                     })
                     # print(str(result[i]), flush=True)
 
@@ -1857,9 +1873,13 @@ def get_times(
                         dict_new=dict_new
                     )
                 )
+                if not result:
+                    return {}
 
                 for i in dict_new.keys():
-                    if (result[i] is not None and
+                    if (isinstance(result, dict) and
+                            i in result.keys() and
+                            result[i] is not None and
                             isinstance(result[i], str) and
                             len(result[i]) != 0):
                         result[i] = convert_str_to_datetime_y_m_d_h_m_s_f(
@@ -1867,11 +1887,11 @@ def get_times(
 
                     result[i] = ({
                         'posted_time_utc': result[i]
-                        if result[i] is not None else
-                        query_time,
+                        if result[i] is not None
+                        else query_time,
                         'expiration_time_utc': result[i] + timedelta(days=30)
-                        if result[i] is not None else
-                        query_time + timedelta(days=30),
+                        if result[i] is not None
+                        else query_time + timedelta(days=30),
                     })
 
                 return result

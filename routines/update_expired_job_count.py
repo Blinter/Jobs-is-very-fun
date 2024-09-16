@@ -36,7 +36,8 @@ with app.app_context():
                 db.session.commit()
             current_expired = (
                 sum(1 for job in current_company.listed_jobs
-                    if (job.expiration_time_utc
+                    if (job.expiration_time_utc is not None and
+                        job.expiration_time_utc
                         .replace(tzinfo=pytz.UTC) <=
                         current_utc_time)))
             current_company.expired_listed_job_count = current_expired

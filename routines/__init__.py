@@ -100,13 +100,19 @@ def extract_value_from_dict(key_name: str, dict_new: dict):
         if ('error' in dict_new.keys() and
                 dict_new.get('error') is not None):
             return {}
+        if ('code' in dict_new.keys() and
+                len(dict_new.keys()) == 1):
+            return {}
         # "{'error': " <-
         # if "{'error': " == str(dict_new).lower()[:len("{'error': ")]:
         #     return {}
 
         new_dict = {}
         for i in dict_new.keys():
-            # print(str(i), flush=True)
+            if (not isinstance(dict_new[i], dict) or
+                    key_name not in dict_new[i].keys()):
+                continue
+            # print(str(i) + " " + str(dict_new[i]), flush=True)
             new_dict[str(i)] = dict_new[i].get(key_name, None)
         return new_dict
     except Exception as e:
