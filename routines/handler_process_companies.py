@@ -55,7 +55,7 @@ def companies_process_routine(new_date=current_checkpoint):
                 e_str = str(e)
 
                 if "Parsing Completed" in e_str:
-                    print("Queries routine processed. "
+                    print("Companies routine processed. "
                           "\nSleeping 7 minutes and running again.")
                     sleep(restart_timer)
 

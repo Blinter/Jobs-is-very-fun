@@ -76,6 +76,8 @@ def fantastic_jobs_active_jobs_db_get_jobs_text(dict_new):
                     .replace('''River"s Edge''', '''River's Edge''')
                     .replace('''Peter"s Lane''', '''Peter's Lane''')
                     .replace('''Nicoletta"s''', '''Nicoletta's''')
+                    .replace('''Joseph"s Candler Drive''',
+                             '''Joseph's Candler Drive''')
                 )
 
                 detailed_location = json.loads(detailed_location)[0]

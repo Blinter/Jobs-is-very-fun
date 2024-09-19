@@ -181,7 +181,7 @@ else:
 # raise ValueError(progress_timestamp)
 
 
-with (app.app_context()):
+with app.app_context():
     # Performance check
     import time
     start_time = time.time()
@@ -213,10 +213,10 @@ with (app.app_context()):
                     query.id != debug_test_parse_id):
                 continue
 
-            print("ID: " + str(query.id) + " " +
-                  "URL: " + query.url + " (" +
-                  query.endpoint_nice_name +
-                  ")", flush=True)
+            # print("ID: " + str(query.id) + " " +
+            #       "URL: " + query.url + " (" +
+            #       query.endpoint_nice_name +
+            #       ")", flush=True)
 
             import datetime
             new_jobs = {}
@@ -262,8 +262,8 @@ with (app.app_context()):
                 dict_new=new_dict,
                 input_json=query.input_json,
             )
-            if not names:
-                print("Empty Job Titles")
+            # if not names:
+            #     print("Empty Job Titles")
 
             apply_links: dict = get_apply_link(
                 api_url=query.url,
@@ -271,8 +271,8 @@ with (app.app_context()):
                 dict_new=new_dict,
                 input_json=query.input_json,
             )
-            if not apply_links:
-                print("Empty Apply Links")
+            # if not apply_links:
+            #     print("Empty Apply Links")
 
             times: dict = get_times(
                 api_url=query.url,
@@ -281,8 +281,8 @@ with (app.app_context()):
                 input_json=query.input_json,
                 query_time=query.query_time
             )
-            if not times:
-                print("Empty Times")
+            # if not times:
+            #     print("Empty Times")
 
             # Add names to dictionary
             for i in names.keys():

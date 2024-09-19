@@ -558,6 +558,8 @@ def get_job_salaries(
                         result[i] = {}
                         continue
 
+                    # print(result[i])
+
                     hourly_salary = False
 
                     # Unknown character (Hyphenated fix)
@@ -585,16 +587,31 @@ def get_job_salaries(
                                 .strip()
                             )
 
-                        if 'hour' in result[i][0]:
+                        if 'hour' in result[i][0].lower():
                             hourly_salary = True
                             result[i][0] = (
                                 result[i][0]
                                 .replace('per hour', '')
+                                .replace('Per hour', '')
+                                .replace('Per Hour', '')
+                                .replace('PER HOUR', '')
                                 .replace('/hour', '')
+                                .replace('/Hour', '')
+                                .replace('/HOUR', '')
                                 .replace('hourly', '')
+                                .replace('Hourly', '')
+                                .replace('HOURLY', '')
                                 .replace('an hour', '')
+                                .replace('an Hour', '')
+                                .replace('An Hour', '')
+                                .replace('AN HOUR', '')
                                 .replace('a hour', '')
+                                .replace('a Hour', '')
+                                .replace('A Hour', '')
+                                .replace('A HOUR', '')
                                 .replace('hour', '')
+                                .replace('Hour', '')
+                                .replace('HOUR', '')
                                 .strip()
                             )
 
@@ -606,7 +623,7 @@ def get_job_salaries(
                                 .strip()
                             )
 
-                        if 'hour' in result[i][1]:
+                        if 'hour' in result[i][1].lower():
                             hourly_salary = True
                             result[i][1] = (
                                 result[i][1]
@@ -620,6 +637,14 @@ def get_job_salaries(
                                 .replace('hourly', '')
                                 .replace('Hourly', '')
                                 .replace('HOURLY', '')
+                                .replace('an hour', '')
+                                .replace('an Hour', '')
+                                .replace('An Hour', '')
+                                .replace('AN HOUR', '')
+                                .replace('a hour', '')
+                                .replace('a Hour', '')
+                                .replace('A Hour', '')
+                                .replace('A HOUR', '')
                                 .replace('hour', '')
                                 .replace('Hour', '')
                                 .replace('HOUR', '')
@@ -676,6 +701,8 @@ def get_job_salaries(
                                     if isinstance(result[i], str)
                                     else result[i]
                                 ) * 1000)
+
+                    # print(result[i])
 
                     result[i] = {
                         'currency': current_currency,
@@ -2833,7 +2860,9 @@ def get_job_salaries(
                             .replace("CA$", "CAD ")
                             .strip()
                         )
+
                     # print(result[i], flush=True)
+
                     salary_currency = None
                     monthly_salary = False
                     weekly_salary = False
@@ -2932,6 +2961,14 @@ def get_job_salaries(
                             result[i] = (
                                 result[i]
                                 .replace("$", '')
+                                .strip()
+                            )
+                        # Rupee
+                        if '₹' in result[i]:
+                            salary_currency = "INR"
+                            result[i] = (
+                                result[i]
+                                .replace("₹", '')
                                 .strip()
                             )
 
