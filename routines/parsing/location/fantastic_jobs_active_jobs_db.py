@@ -128,12 +128,16 @@ def fantastic_jobs_active_jobs_db_get_jobs_text(dict_new):
                     print("Attempt to fix failed - " +
                           str(detailed_location), flush=True)
                     print(str(e), flush=True)
-                    raise e
+                    # raise e
+                    print("Skipping!")
+                    detailed_location = {}
 
             except Exception as e:
                 print("Other Error", flush=True)
                 print(str(e), flush=True)
-                raise e
+                # raise e
+                print("Skipping!")
+                detailed_location = {}
 
             # print("Processed List: ", flush=True)
             # print(detailed_location, flush=True)
