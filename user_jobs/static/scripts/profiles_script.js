@@ -2150,7 +2150,7 @@ async function completeEditSavedCompany(event, cancelButton) {
 function quickRefreshSavedJobsDisplayData() {
     $("#profileJobsDashboard").empty();
 
-    savedJobs.keys().forEach((v, i) => {
+    Array.from(savedJobs.keys()).forEach((v, i) => {
         if (i != 0) {
             $("#profileJobsDashboard").append('<hr class="smallerDivider mx-auto" style="color:white;" />');
         }
@@ -2179,7 +2179,7 @@ function quickRefreshSavedJobsDisplayData() {
 function quickRefreshSavedCompaniesDisplayData() {
     $("#profileCompaniesDashboard").empty();
 
-    savedCompanies.keys().forEach((v, i) => {
+    Array.from(savedCompanies.keys()).forEach((v, i) => {
         if (i != 0) {
             $("#profileCompaniesDashboard").append('<hr class="smallerDivider mx-auto" style="color:white;" />');
         }
